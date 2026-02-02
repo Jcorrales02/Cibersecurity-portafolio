@@ -35,7 +35,7 @@ En esta tarea, analizará los usuarios y grupos creados previamente en IAM.
 
 3. Haga clic en **user-1**.
 
-📸 *Captura de pantalla:* /img/aws-iam-usuarios.png
+📸 *Captura de pantalla:* [img](img/aws-iam-usuarios.png)
 
 - En la pestaña **Permissions**, observe que `user-1` no tiene permisos.  
 - En **Grupos**, confirme que `user-1` no pertenece a ningún grupo.  
@@ -54,7 +54,7 @@ En esta tarea, analizará los usuarios y grupos creados previamente en IAM.
 2. Haga clic en **EC2-Support** → pestaña **Permisos**.  
    Este grupo tiene la política **AmazonEC2ReadOnlyAccess**, la cual permite listar y describir recursos de EC2, ELB, CloudWatch y Auto Scaling (solo lectura).
 
-📸 *Captura:* `/img/aws-iam-permisos.png`
+📸 *Captura:* [img](img/aws-iam-permisos.png)
 
 ---
 
@@ -122,7 +122,7 @@ Repita los mismos pasos anteriores seleccionando el grupo `EC2-Admin` y el usuar
 - Buscar servicio: **EC2**  
   - ❌ Recibe error “Access Denied”.
 
-📸 *Captura:* `/img/aws-iam-usuario1-prueba.png`
+📸 *Captura:* [img](img/aws-iam-usuario1-prueba.png)
 
 ---
 
@@ -136,7 +136,7 @@ Repita los mismos pasos anteriores seleccionando el grupo `EC2-Admin` y el usuar
 - Buscar servicio: **S3**  
   - ❌ Error `Access Denied`.
 
-📸 *Captura:* `/img/aws-iam-usuario2-prueba.png`
+📸 *Captura:* [img](img/aws-iam-usuario2-prueba.png)
 
 ---
 
@@ -148,13 +148,12 @@ Repita los mismos pasos anteriores seleccionando el grupo `EC2-Admin` y el usuar
   - ✅ Puede ver, iniciar y detener instancias EC2.  
   - Confirmar que la instancia entra en estado **stopping** correctamente.
 
-📸 *Captura:* `img/aws-iam-usuario3-prueba.png`
+📸 *Captura:* [img](img/aws-iam-usuario3-prueba.png)
 
 ---
 
 ## ✅ Conclusión
 
-¡Felicitaciones! 🎉  
 He aprendido a realizar correctamente lo siguiente:
 
 - Analizar usuarios y grupos de IAM creados previamente.  
