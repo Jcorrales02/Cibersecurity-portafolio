@@ -35,7 +35,7 @@ En esta tarea, analizará los usuarios y grupos creados previamente en IAM.
 
 3. Haga clic en **user-1**.
 
-📸 *Captura de pantalla:* [img](img/aws-iam-usuarios.png)
+📸 *Captura de pantalla:* ![img](img/aws-iam-usuarios.png)
 
 - En la pestaña **Permissions**, observe que `user-1` no tiene permisos.  
 - En **Grupos**, confirme que `user-1` no pertenece a ningún grupo.  
