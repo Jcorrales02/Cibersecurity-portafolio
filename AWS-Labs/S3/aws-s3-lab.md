@@ -1,8 +1,8 @@
-# 🧠 AWS Lab 3 – Introduction to Amazon S3 (Simple Storage Service)
+# 🧠 AWS – Introduction to Amazon S3 (Simple Storage Service)
 
 ## 🎯 Objetivos
 
-Después de completar este laboratorio, podrás:
+Después de completar este caso, podrás:
 
 - Crear un bucket en Amazon S3.  
 - Agregar objetos a un bucket.  
@@ -35,7 +35,7 @@ Ejemplo: `reportbucket-743202968745`
 5. Selecciona **Crear bucket**.
 
 **📸 Captura:**  
-![Creación del bucket](img/s3-lab-bucket-created.png)
+![img](img/s3-lab-bucket-created.png)
 
 ---
 
@@ -47,7 +47,7 @@ Ejemplo: `reportbucket-743202968745`
 4. Haz clic en **Cargar**.
 
 **📸 Captura:**  
-![Archivo cargado](img/s3-lab-uploaded.png)
+![img](img/s3-lab-uploaded.png)
 
 ---
 
@@ -58,19 +58,19 @@ Ejemplo: `reportbucket-743202968745`
 3. Pégala en el navegador → muestra **Acceso denegado**.
 
 **📸 Captura:**  
-![Acceso denegado por defecto](img/s3-lab-access-denied.png)
+![img](img/s3-lab-access-denied.png)
 
 4. Vuelve al bucket y ve a **Permisos → Bloquear acceso público → Editar**.  
 5. Desactiva **Bloquear todo el acceso público** y guarda cambios.  
 6. Vuelve al objeto y selecciona **Acciones → Hacer público mediante ACL**.
 
 **📸 Captura:**  
-![Archivo público](img/s3-lab-public-2.png)
-![Archivo público](img/s3-lab-public-3.png)
+![img](img/s3-lab-public-2.png)
+![img](img/s3-lab-public-3.png)
 
 
 7. Refresca el enlace en el navegador — ahora deberías ver la imagen correctamente.
-![Archivo público](img/s3-lab-public-4.png)
+![img](img/s3-lab-public-4.png)
 
 ---
 
@@ -99,7 +99,7 @@ Resultado esperado:
     Resultado: Error (sin permisos aún).
 
 **📸 Captura:**  
-![Archivo público](img/s3-lab-.png)
+![img](img/s3-lab-.png)
 
 
 ## 💻 Tarea 5: Crear una Política de Bucket
@@ -147,7 +147,7 @@ Resultado esperado:
 Resultado esperado: Carga exitosa.
 
 **📸 Captura:**  
-![Archivo público](img/s3-lab.png)
+![img](img/s3-lab.png)
 
 
 
@@ -163,7 +163,7 @@ Resultado esperado: Carga exitosa.
 4. En la consola, selecciona Mostrar versiones para ver ambas versiones.
 
 📸 Captura:
-![Archivo público](img/s3-lab-public.png)
+![img](img/s3-lab-public.png)
 
 5. Elimina el objeto sample-file.txt.
 
