@@ -1,7 +1,7 @@
 # Introduction to AWS Key Management Service (KMS)
 
 ## 🎯 Objetivos
-Después de completar este laboratorio, sabrás cómo realizar lo siguiente:
+Después de completar este Caso, sabrás cómo realizar lo siguiente:
 
 - Crear una clave maestra de KMS (Key Management Service).  
 - Configurar AWS CloudTrail para almacenar registros en un bucket de S3.  
@@ -11,7 +11,7 @@ Después de completar este laboratorio, sabrás cómo realizar lo siguiente:
 
 ---
 
-## 🧠 Escenario del laboratorio
+## 🧠 Escenario del Caso
 Tu empresa desea mejorar la seguridad de los datos almacenados en Amazon S3. Para ello, se implementará cifrado administrado con AWS KMS y auditorías de CloudTrail.  
 Aprenderás a crear claves KMS, cifrar objetos en S3 y administrar permisos sobre dichas claves.
 
@@ -31,7 +31,8 @@ En esta tarea, crearás una **clave maestra (Customer Managed Key)** en AWS KMS 
 6. En **Definir permisos de uso**, selecciona el mismo usuario.  
 7. Revisa los parámetros y haz clic en **Finalizar**.
 
-📸 *Captura sugerida:* `img/kms-llave-creada.png`
+📸 *Captura sugerida:* 
+![img](img/kms-llave-creada.png)
 
 > **Nota:** Copia el **Key ID** (ID de clave) mostrado en la tabla. Lo usarás más adelante para revisar eventos en CloudTrail.
 
@@ -57,7 +58,8 @@ CloudTrail te permite registrar todas las acciones de API que se realizan en tu 
    - Tasa de error de la API  
 6. Revisa la configuración y selecciona **Crear un registro de seguimiento**.
 
-📸 *Captura sugerida:* `img/kms-mytrail.png`
+📸 *Captura sugerida:* 
+![img](img/kms-mytrail.png)
 
 > CloudTrail empezará a registrar actividad, incluyendo el uso de tu clave KMS.
 
@@ -78,7 +80,8 @@ En esta tarea, cargarás un archivo y lo cifrarás con tu clave KMS.
    - Luego elige **Elija entre sus claves de AWS KMS** → selecciona `myFirstKey`.
 8. Haz clic en **Cargar** → **Cerrar**.
 
-📸 *Captura sugerida:* `img/kms-archivo-cifrado.png`
+📸 *Captura sugerida:* 
+![img](img/kms-archivo-cifrado.png)
 
 > Anota la **marca de tiempo “Última modificación”**. La usarás para verificar los eventos de CloudTrail.
 
