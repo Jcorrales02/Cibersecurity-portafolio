@@ -31,7 +31,7 @@ En esta tarea, crearás una **clave maestra (Customer Managed Key)** en AWS KMS 
 6. En **Definir permisos de uso**, selecciona el mismo usuario.  
 7. Revisa los parámetros y haz clic en **Finalizar**.
 
-📸 *Captura sugerida:* 
+📸 *Captura:* 
 ![img](img/kms-llave-creada.png)
 
 > **Nota:** Copia el **Key ID** (ID de clave) mostrado en la tabla. Lo usarás más adelante para revisar eventos en CloudTrail.
@@ -58,7 +58,7 @@ CloudTrail te permite registrar todas las acciones de API que se realizan en tu 
    - Tasa de error de la API  
 6. Revisa la configuración y selecciona **Crear un registro de seguimiento**.
 
-📸 *Captura sugerida:* 
+📸 *Captura:* 
 ![img](img/kms-mytrail.png)
 
 > CloudTrail empezará a registrar actividad, incluyendo el uso de tu clave KMS.
@@ -80,7 +80,7 @@ En esta tarea, cargarás un archivo y lo cifrarás con tu clave KMS.
    - Luego elige **Elija entre sus claves de AWS KMS** → selecciona `myFirstKey`.
 8. Haz clic en **Cargar** → **Cerrar**.
 
-📸 *Captura sugerida:* 
+📸 *Captura:* 
 ![img](img/kms-archivo-cifrado.png)
 
 > Anota la **marca de tiempo “Última modificación”**. La usarás para verificar los eventos de CloudTrail.
