@@ -1,4 +1,4 @@
-# AWS Lab 2: Amazon EC2 – Lanzamiento y Gestión de una Instancia
+# AWS Case 2: Amazon EC2 – Lanzamiento y Gestión de una Instancia
 
 **Plataforma:** AWS Skill Builder Labs  
 **Fecha:** 2025-10-01  
@@ -7,8 +7,8 @@
 
 ---
 
-## 🎯 Objetivos del laboratorio
-Al finalizar este laboratorio, podrá realizar lo siguiente:
+## 🎯 Objetivos del caso
+Al finalizar este caso, podrá realizar lo siguiente:
 
 - Iniciar un servidor web con **protección contra terminación** habilitada.  
 - Supervisar la instancia de EC2.  
@@ -32,16 +32,12 @@ Al finalizar este laboratorio, podrá realizar lo siguiente:
    - Grupo de seguridad: `Web Server security group`.  
 7. Almacenamiento: volumen raíz por defecto de **8 GiB**.  
 8. Protección contra terminación: **habilitada**.  
-9. Datos de usuario (user data):  
+9. Datos de usuario (user data):
+    
+Captura
+![img](img/EC2-creada.png)
 
-![Instancia EC2 creada](img/EC2-creada.png)
 
-```bash
-#!/bin/bash
-dnf -y install httpd
-systemctl enable httpd
-systemctl start httpd
-echo '<html><h1>Hello From Your Web Server!</h1></html>' > /var/www/html/index.
 
 ## 📝 Tarea 2: Supervisar la instancia
 
@@ -64,7 +60,8 @@ El monitoreo es esencial para mantener el rendimiento, la disponibilidad y la fi
 
 4. Obtener una **captura de pantalla de la instancia** desde el menú de acciones.
 
-📷 ![System Log mostrando instalación de httpd](img/Captura-de-pantalla-instancia.png)
+📷
+![img](img/Captura-de-pantalla-instancia.png)
 
 ---
 
@@ -96,7 +93,7 @@ markdown
 Copiar código
 
 📷 **Captura:** navegador mostrando la página web desplegada desde Apache.
-![Página web desplegada en Apache](img/acceso-web.png)
+![img](img/acceso-web.png)
 
 ---
 
@@ -126,8 +123,8 @@ Copiar código
 3. **Estado de instancia → Iniciar instancia**.  
 
 📷 **Captura:** consola mostrando instancia en `t3.small` con volumen raíz de 10 GiB.
-![Cambio de tipo de instancia](img/cambio-tipo-instancia.png)
-![Cambio de tamaño de disco](img/cambio-tamaño-almacenamiento.png)
+![img](img/cambio-tipo-instancia.png)
+![img](img/cambio-tamaño-almacenamiento.png)
 
 ---
 
