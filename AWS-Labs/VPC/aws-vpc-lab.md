@@ -1,14 +1,10 @@
-# Laboratorio: Amazon Virtual Private Cloud (Amazon VPC)
+# Amazon Virtual Private Cloud (Amazon VPC)
 
-**Plataforma:** AWS Skill Builder – Builder Labs  
-**Fecha:** 2025-10-01  
-**Duración estimada:** ~60 minutos  
-**Nivel:** Básico / Introductorio  
 
 ---
 
 ## 📌 Información general  
-En este laboratorio se presenta **Amazon Virtual Private Cloud (Amazon VPC)**.  
+En este caso se presenta **Amazon Virtual Private Cloud (Amazon VPC)**.  
 Se utilizó el asistente de Amazon VPC para:  
 
 - Crear una VPC.  
@@ -47,8 +43,8 @@ Al finalizar este laboratorio, se pudo:
 - Se creó la VPC y copié el **ID de la VPC** para usarlo más adelante.  
 
 **Evidencias:**  
-- ![Creación de la VPC](img/Crear_VPC.png)  
-- ![VPC creada](img/VPC_creada.png)  
+- ![img](img/Crear_VPC.png)  
+- ![img](img/VPC_creada.png)  
 
 **Resultado:**  
 La VPC quedó lista con una subred pública y otra privada configuradas.  
@@ -60,7 +56,7 @@ La VPC quedó lista con una subred pública y otra privada configuradas.
 ### 1. Sus VPC  
 - Confirmé la creación de la VPC con nombre **lab-vpc**.  
 
-![VPCs](img/sus_VPC.png)  
+![img](img/sus_VPC.png)  
 
 ---
 
@@ -69,7 +65,7 @@ La VPC quedó lista con una subred pública y otra privada configuradas.
 
 📌 **Nota:** La puerta de enlace conecta la VPC con Internet, es redundante y altamente disponible.  
 
-![Puerta de enlace de Internet](img/puerta%20de%20enlace.png)  
+![img](img/puerta%20de%20enlace.png)  
 
 ---
 
@@ -80,21 +76,21 @@ La VPC quedó lista con una subred pública y otra privada configuradas.
   - 250 IPs disponibles (de 256).  
   - Se considera **pública** por su tabla de enrutamiento hacia la IGW.  
 
-![Subred pública](img/Subredes.png)  
+![img](img/Subredes.png)  
 
 ---
 
 ### 4. Tabla de enrutamiento  
 - Confirmé que la tabla de enrutamiento dirige el tráfico de la subred pública hacia la IGW.  
 
-![Tabla de enrutamiento](img/Tabla%20de%20Enrutameinto.png)  
+![img](img/Tabla%20de%20Enrutameinto.png)  
 
 ---
 
 ### 5. ACL de red  
 - Revisé las reglas predeterminadas de entrada y salida en la ACL asociada.  
 
-![ACL de red](img/ACLred.png)  
+![img](img/ACLred.png)  
 
 ---
 
@@ -104,7 +100,7 @@ La VPC quedó lista con una subred pública y otra privada configuradas.
 
 📌 **Nota:** Esto asegura que instancias en el mismo SG puedan comunicarse entre sí, bloqueando el resto del tráfico.  
 
-![Grupo de seguridad](img/Grupo%20de%20seguridad.png)  
+![img](img/Grupo%20de%20seguridad.png)  
 
 ---
 
@@ -113,17 +109,6 @@ La VPC quedó lista con una subred pública y otra privada configuradas.
 - Componentes principales configurados: IGW, NAT, tablas de enrutamiento, ACL y SG.  
 - Verificación realizada con capturas de consola.  
 
-![Resultado final](img/img-grafica.png)  
-
----
-
-## 📚 Evidencias adicionales  
-- **Prueba final completada:** 5/5 respuestas correctas ✔️  
-
----
-
-## 💭 Reflexión personal  
-Este laboratorio permitió comprender cómo se estructura una **VPC desde cero**, incluyendo conectividad a Internet y segmentación de subredes.  
-Es un paso clave para entender la arquitectura de redes en AWS y servirá de base para escenarios más avanzados de **seguridad en la nube**.  
+![img](img/img-grafica.png)  
 
 ---
