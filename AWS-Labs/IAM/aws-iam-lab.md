@@ -1,7 +1,7 @@
 # Introduction to AWS Identity and Access Management (IAM)
 
 ## Temas tratados
-En este laboratorio, se demostrará lo siguiente:
+En este caso, se demostrará lo siguiente:
 
 - Análisis de usuarios y grupos de IAM creados previamente.  
 - Inspección de políticas de IAM aplicadas a los grupos creados previamente.  
