@@ -35,7 +35,7 @@ En esta tarea, analizará los usuarios y grupos creados previamente en IAM.
 
 3. Haga clic en **user-1**.
 
-📸 *Captura de pantalla sugerida:* `/img/aws-iam-usuarios.png`
+📸 *Captura de pantalla:* /img/aws-iam-usuarios.png
 
 - En la pestaña **Permissions**, observe que `user-1` no tiene permisos.  
 - En **Grupos**, confirme que `user-1` no pertenece a ningún grupo.  
@@ -54,7 +54,7 @@ En esta tarea, analizará los usuarios y grupos creados previamente en IAM.
 2. Haga clic en **EC2-Support** → pestaña **Permisos**.  
    Este grupo tiene la política **AmazonEC2ReadOnlyAccess**, la cual permite listar y describir recursos de EC2, ELB, CloudWatch y Auto Scaling (solo lectura).
 
-📸 *Captura sugerida:* `/img/aws-iam-permisos.png`
+📸 *Captura:* `/img/aws-iam-permisos.png`
 
 ---
 
@@ -165,4 +165,3 @@ He aprendido a realizar correctamente lo siguiente:
 
 ---
 
-> **Tip profesional:** Documenta este laboratorio como parte de tu portafolio bajo la sección *"AWS Labs – Security & Access Management"*, destacando tu comprensión sobre IAM y políticas administradas.
