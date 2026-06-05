@@ -158,5 +158,4 @@ Results:
 ## Portfolio Case Study
 
 Full interactive documentation:
-
-[View Complete Case Study](TU_URL)
+https://jcorrales02.github.io/Jcorrales-Web/case-files/home-lab-soar-n8n.html
