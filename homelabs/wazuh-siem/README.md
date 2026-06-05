@@ -34,7 +34,7 @@ The objective was to achieve enterprise-style visibility using minimal resources
 ---
 
 ## Architecture
-<img src="/screenshot/estructura_homelab.png" alt="Texto alternativo" width="200" height="100">   
+![Homelab Architecture](screenshots/estructura_homelab.png)  
 
 
 ---
