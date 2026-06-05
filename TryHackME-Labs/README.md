@@ -1,53 +1,95 @@
-# 🚀 Roadmap de Ciberseguridad – José Corrales  
+# 🛡️ José Corrales | Cybersecurity Portfolio
 
-Bienvenido a mi portafolio y bitácora de aprendizaje en ciberseguridad.  
-Aquí documento mis prácticas, laboratorios y proyectos personales mientras curso mi Maestría en Ciberseguridad.  
-El objetivo es mostrar mi progreso, fortalecer mis conocimientos y compartir recursos útiles.  
+Welcome to my cybersecurity portfolio.
 
----
+This repository documents my hands-on learning journey in Security Operations (SOC), network analysis, security monitoring, incident investigation, and security automation.
 
-## 👨‍💻 Sobre mí  
-- 🎓 **Maestría en Ciberseguridad** – UMECIT (en curso - confeccionando Tesis para obtencion de titulo)  
-- 📡 **Licenciatura en Redes y Telecomunicaciones** – OTEIMA  
-- 📘 **Profesorado en Educación Media** – OTEIMA  
-- 🖥️ Experiencia en soporte técnico y redes  
-- 🌐 Página personal: [Mi Web en GitHub Pages](https://jcorrales002.github.io/portafolio)  
-- 🔗 LinkedIn: [linkedin.com/in/josecorrales](https://linkedin.com/in/josecorrales)  
+My focus is on building practical experience through homelabs, security investigations, Blue Team exercises, and automation projects while continuing my academic studies in cybersecurity.
 
 ---
 
-## 📂 Rutas de Aprendizaje  
-- ✅ Cisco Cybersecurity (carrera – módulo 6 de 9, en progreso)  
-- ✅ (ISC)² CC – Certificate of Completion (curso finaliado - sin certificacion)  
-- 🟡 TryHackMe – Ruta *Complete Beginner* (en progreso)  
-- 🟡 TryHackMe – Ruta *SOC Level 1* (pendiente)  
-- 🟡 HackTheBox – Starting Point (planeado)  
+## 👨‍💻 About Me
+
+* 🎓 Master's Degree in Cybersecurity (in progress)
+* 📡 Bachelor's Degree in Networks and Telecommunications
+* 🖥️ Background in technical support and networking
+* 🔍 Focused on Security Operations (SOC), Network Analysis, and Blue Team practices
+
+### Areas of Interest
+
+* Security Operations Center (SOC)
+* Network Traffic Analysis
+* Incident Investigation
+* Security Monitoring
+* SIEM Technologies
+* Security Automation
+* Blue Team Operations
 
 ---
 
-## 🛠️ Proyectos y Laboratorios  
-Aquí iré subiendo resúmenes y documentación de mis prácticas:  
-  
+## 🛠️ Featured Projects
 
-*(en construcción — iré actualizando conforme avance)*  
+### 🔹 SOAR Automation with n8n
 
----
+Design and implementation of automated security workflows using n8n to streamline security operations and incident response processes.
 
-## 📜 Certificados y Cursos  
-- (ISC)² CC – Certified in Cybersecurity (2023)  
-- Google/Coursera – IT Security: Defense Against the Digital Dark Arts  
-- Udemy – Hacking Ético y Ciberseguridad (Básico y Avanzado)  
-- Universidad de los Andes – Vulnerabilidades y Pruebas de Penetración  
-- Cisco Cybersecurity (en progreso)  
+### 🔹 Wazuh SIEM Homelab
 
----
+Deployment and configuration of a Wazuh environment for security monitoring, log analysis, and alert investigation.
 
-## 🎯 Objetivos a corto plazo  
-- Completar la ruta **Cisco Cybersecurity**.  
-- Finalizar **TryHackMe Complete Beginner** y documentar avances.  
-- Publicar al menos **1 laboratorio semanal** en este repositorio.  
-- Mejorar inglés técnico y participar en comunidades de ciberseguridad (OWASP, ISC²).  
+### 🔹 Network Traffic Analysis
+
+Hands-on investigations using Wireshark to analyze DNS, HTTP/HTTPS, TCP communications, and suspicious network activity.
 
 ---
 
-📌 *Este repositorio es parte de mi transición profesional desde soporte técnico y redes hacia un rol especializado en ciberseguridad.*  
+## 📂 Labs & Investigations
+
+This repository includes documentation and reports from:
+
+* Homelab projects
+* Let'sDefend investigations
+* CyberDefenders challenges
+* Network analysis exercises
+* Security monitoring activities
+
+Each case includes methodology, findings, evidence, and conclusions.
+
+---
+
+## 🎓 Education & Training
+
+### Academic Background
+
+* Master's Degree in Cybersecurity (in progress)
+* Bachelor's Degree in Networks and Telecommunications
+* Teaching Degree in Secondary Education
+
+### Additional Training
+
+* TryHackMe
+* CyberDefenders
+* Let'sDefend
+* Various cybersecurity and networking courses
+
+---
+
+## 🌐 Links
+
+* Portfolio Website: https://jcorrales02.github.io/Jcorrales-Web/
+* LinkedIn: www.linkedin.com/in/josecorralesg
+* GitHub: https://github.com/Jcorrales02/
+
+---
+
+## 🎯 Current Focus
+
+Currently developing practical skills in:
+
+* Network Traffic Analysis with Wireshark
+* Security Monitoring and Alert Analysis
+* Wazuh SIEM Operations
+* Security Automation with n8n
+* Incident Investigation and Reporting
+
+This repository will continue growing as new projects, investigations, and homelabs are completed.
