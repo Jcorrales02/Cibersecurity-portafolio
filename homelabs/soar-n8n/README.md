@@ -28,7 +28,7 @@ The workflow was designed to be source-agnostic, allowing it to process logs fro
 ## Architecture
 
 <p align="center">
-  <img src="images/workflow-overview.png" width="900">
+  <img src="screenshots/home-lab-n8n.png" width="900">
 </p>
 
 ### Workflow
@@ -49,7 +49,7 @@ AI Threat Analysis
 Slack Report Delivery
 ```
 
-The final workflow consists of 13 sequential nodes designed for stability and predictable execution. :contentReference[oaicite:2]{index=2}
+The final workflow consists of 13 sequential nodes designed for stability and predictable execution. 
 
 ---
 
@@ -90,15 +90,15 @@ The workflow automatically queries:
 - AbuseIPDB
 - VirusTotal
 
-and consolidates reputation data, detections, malicious engines, and related intelligence. :contentReference[oaicite:4]{index=4}
+and consolidates reputation data, detections, malicious engines, and related intelligence.
 
 ### MITRE ATT&CK Mapping
 
-The final AI analysis maps observed activity to relevant ATT&CK techniques and tactics while generating recommended response actions. :contentReference[oaicite:5]{index=5}
+The final AI analysis maps observed activity to relevant ATT&CK techniques and tactics while generating recommended response actions.
 
 ### Automated Reporting
 
-A professional incident report is delivered directly to Slack, eliminating manual formatting and accelerating analyst response. :contentReference[oaicite:6]{index=6}
+A professional incident report is delivered directly to Slack, eliminating manual formatting and accelerating analyst response.
 
 ---
 
@@ -125,7 +125,7 @@ Results:
 - Generated MITRE ATT&CK mappings
 - Produced automated incident report
 
-:contentReference[oaicite:7]{index=7}
+
 
 ---
 
