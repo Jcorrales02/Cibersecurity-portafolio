@@ -1,0 +1,566 @@
+{
+  "name": "prueba copy",
+  "nodes": [
+    {
+      "parameters": {
+        "trigger": [
+          "message"
+        ],
+        "watchWorkspace": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.slackTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1040,
+        -576
+      ],
+      "id": "61f9dcf1-d96a-4412-9c02-d3f9cd152f5e",
+      "name": "Slack Trigger",
+      "webhookId": "705ecfbe-0dce-4b3f-b858-026c74759290"
+    },
+    {
+      "parameters": {
+        "url": "https://api.abuseipdb.com/api/v2/check",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "ipAddress",
+              "value": "={{$json.ip_atacante}}"
+            },
+            {}
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Threat Intelligence API"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -176,
+        -576
+      ],
+      "id": "5f14a312-6002-4abd-81e3-042731e1ef1f",
+      "name": "AbuseIP",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.first();\nconst d = $('Code in JavaScript').first().json;\nconst abuseData = item.json;\n\nlet abuseip = null;\n\ntry {\n  if (!item.error && !abuseData.error) {\n    abuseip = {\n      ip: abuseData.data?.ipAddress || null,\n      puntaje_abuso: abuseData.data?.abuseConfidenceScore || null,\n      pais: abuseData.data?.countryCode || null,\n      dominio: abuseData.data?.domain || null,\n      total_reportes: abuseData.data?.totalReports || null,\n      ultimo_reporte: abuseData.data?.lastReportedAt || null,\n      isp: abuseData.data?.isp || null\n    };\n  }\n} catch (e) {\n  abuseip = null;\n}\n\nreturn {\n  json: {\n    ip_atacante: d.ip_atacante || null,\n    hash_archivo: d.hash_archivo || null,\n    archivo: d.archivo || null,\n    dominio: d.dominio || null,\n    ips: d.ips || [],\n    hashes: d.hashes || [],\n    emails: d.emails || [],\n    urls: d.urls || [],\n    dominios: d.dominios || [],\n    windows_paths: d.windows_paths || [],\n    file_names: d.file_names || [],\n    processes: d.processes || [],\n    powershell_commands: d.powershell_commands || [],\n    bash_commands: d.bash_commands || [],\n    users: d.users || [],\n    ports: d.ports || [],\n    cves: d.cves || [],\n    hostname: d.hostname || null,\n    ip_origen: d.ip_origen || null,\n    ip_destino: d.ip_destino || null,\n    raw_log: d.raw_log || null,\n    _tiene: d._tiene || {},\n    enriquecimiento: {\n      abuseip\n    }\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        96,
+        -576
+      ],
+      "id": "9d39bf99-32a3-42dc-aaa6-d85dc9fac996",
+      "name": "Normalise AbuseIP"
+    },
+    {
+      "parameters": {
+        "curlImport": "",
+        "httpVariantWarning": "",
+        "method": "GET",
+        "url": "=https://www.virustotal.com/api/v3/files/{{ $json.hash_archivo }}",
+        "": "",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "virusTotalApi",
+        "provideSslCertificates": false,
+        "sendQuery": false,
+        "sendHeaders": false,
+        "sendBody": false,
+        "options": {},
+        "infoMessage": ""
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -176,
+        -128
+      ],
+      "id": "200ad4fd-1cfe-46e7-9e32-e6f416c8e186",
+      "name": "VirusTotal HTTP Hashes",
+      "extendsCredential": "virusTotalApi",
+      "credentials": {
+        "virusTotalApi": {
+          "id": "OTqB1QmYLfbue4ft",
+          "name": "Threat Intelligence API"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "curlImport": "",
+        "httpVariantWarning": "",
+        "method": "GET",
+        "url": "=https://www.virustotal.com/api/v3/files/{{ $json.file_names }}",
+        "": "",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "virusTotalApi",
+        "provideSslCertificates": false,
+        "sendQuery": false,
+        "sendHeaders": false,
+        "sendBody": false,
+        "options": {},
+        "infoMessage": ""
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -176,
+        80
+      ],
+      "id": "d062599f-87a9-4cd5-90da-757dc42a4cc6",
+      "name": "VirusTotal HTTP archivos",
+      "extendsCredential": "virusTotalApi",
+      "retryOnFail": false,
+      "credentials": {
+        "virusTotalApi": {
+          "id": "OTqB1QmYLfbue4ft",
+          "name": "Threat Intelligence API"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "curlImport": "",
+        "httpVariantWarning": "",
+        "method": "GET",
+        "url": "=https://www.virustotal.com/api/v3/files/{{ $json.urls }}",
+        "": "",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "virusTotalApi",
+        "provideSslCertificates": false,
+        "sendQuery": false,
+        "sendHeaders": false,
+        "sendBody": false,
+        "options": {},
+        "infoMessage": ""
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -176,
+        304
+      ],
+      "id": "e6ef78e8-b2d6-4e16-a443-28ebff2e5ca0",
+      "name": "VirusTotal HTTP Dominios",
+      "extendsCredential": "virusTotalApi",
+      "credentials": {
+        "virusTotalApi": {
+          "id": "OTqB1QmYLfbue4ft",
+          "name": "Threat Intelligence API"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.first();\nconst d = $('Code in JavaScript').first().json;\nconst vtData = item.json;\n\nlet vt_archivo = null;\n\ntry {\n  if (!item.error && !vtData.error) {\n    const attrs = vtData.data?.attributes || {};\n    const stats = attrs.last_analysis_stats || {};\n    const results = attrs.last_analysis_results || {};\n\n    const malicioso = stats.malicious || 0;\n    const sospechoso = stats.suspicious || 0;\n    const inofensivo = stats.undetected || 0;\n    const inofensivo2 = stats.harmless || 0;\n    const timeout = stats.timeout || 0;\n    const total = malicioso + sospechoso + inofensivo + inofensivo2 + timeout;\n\n    const motores_maliciosos = Object.entries(results)\n      .filter(([_, v]) => v && v.category === 'malicious')\n      .map(([motor, v]) => ({ motor, resultado: v.result || null }));\n\n    vt_archivo = {\n      sha256: vtData.data?.id || null,\n      nombre: attrs.meaningful_name || null,\n      tipo: attrs.type_description || null,\n      malicioso,\n      sospechoso,\n      inofensivo: inofensivo + inofensivo2,\n      total_motores: total,\n      detecciones_resumen: `${malicioso}/${total}`,\n      motores_maliciosos,\n      fecha_analisis: attrs.last_analysis_date || null\n    };\n  }\n} catch (e) {\n  vt_archivo = null;\n}\n\nreturn {\n  json: {\n    ip_atacante: d.ip_atacante || null,\n    hash_archivo: d.hash_archivo || null,\n    archivo: d.archivo || null,\n    dominio: d.dominio || null,\n    ips: d.ips || [],\n    hashes: d.hashes || [],\n    emails: d.emails || [],\n    urls: d.urls || [],\n    dominios: d.dominios || [],\n    windows_paths: d.windows_paths || [],\n    file_names: d.file_names || [],\n    processes: d.processes || [],\n    powershell_commands: d.powershell_commands || [],\n    bash_commands: d.bash_commands || [],\n    users: d.users || [],\n    ports: d.ports || [],\n    cves: d.cves || [],\n    hostname: d.hostname || null,\n    ip_origen: d.ip_origen || null,\n    ip_destino: d.ip_destino || null,\n    raw_log: d.raw_log || null,\n    _tiene: d._tiene || {},\n    enriquecimiento: {\n      abuseip: $('Normalise AbuseIP').first().json?.enriquecimiento?.abuseip || null,\n      vt_ip: $('Normalizador VT IP').first().json?.enriquecimiento?.vt_ip || null,\n      vt_hash: $('Normalizador hashes').first().json?.enriquecimiento?.vt_hash || null,\n      vt_archivo\n    }\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        112,
+        80
+      ],
+      "id": "c98d7b58-a223-40cd-a501-ee7bb7efba2e",
+      "name": "Normalizador Archivos"
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.first();\nconst d = $('Code in JavaScript').first().json;\nconst vtData = item.json;\n\nlet vt_dominio = null;\n\ntry {\n  if (!item.error && !vtData.error) {\n    const attrs = vtData.data?.attributes || {};\n    const stats = attrs.last_analysis_stats || {};\n    const results = attrs.last_analysis_results || {};\n\n    const malicioso = stats.malicious || 0;\n    const sospechoso = stats.suspicious || 0;\n    const inofensivo = stats.undetected || 0;\n    const inofensivo2 = stats.harmless || 0;\n    const timeout = stats.timeout || 0;\n    const total = malicioso + sospechoso + inofensivo + inofensivo2 + timeout;\n\n    const motores_maliciosos = Object.entries(results)\n      .filter(([_, v]) => v && v.category === 'malicious')\n      .map(([motor, v]) => ({ motor, resultado: v.result || null }));\n\n    vt_dominio = {\n      dominio: vtData.data?.id || null,\n      reputacion: attrs.reputation || null,\n      categorias: attrs.categories || null,\n      malicioso,\n      sospechoso,\n      inofensivo: inofensivo + inofensivo2,\n      total_motores: total,\n      detecciones_resumen: `${malicioso}/${total}`,\n      motores_maliciosos,\n      fecha_analisis: attrs.last_analysis_date || null\n    };\n  }\n} catch (e) {\n  vt_dominio = null;\n}\n\nreturn {\n  json: {\n    ip_atacante: d.ip_atacante || null,\n    hash_archivo: d.hash_archivo || null,\n    archivo: d.archivo || null,\n    dominio: d.dominio || null,\n    ips: d.ips || [],\n    hashes: d.hashes || [],\n    emails: d.emails || [],\n    urls: d.urls || [],\n    dominios: d.dominios || [],\n    windows_paths: d.windows_paths || [],\n    file_names: d.file_names || [],\n    processes: d.processes || [],\n    powershell_commands: d.powershell_commands || [],\n    bash_commands: d.bash_commands || [],\n    users: d.users || [],\n    ports: d.ports || [],\n    cves: d.cves || [],\n    hostname: d.hostname || null,\n    ip_origen: d.ip_origen || null,\n    ip_destino: d.ip_destino || null,\n    raw_log: d.raw_log || null,\n    _tiene: d._tiene || {},\n    enriquecimiento: {\n      abuseip: $('Normalise AbuseIP').first().json?.enriquecimiento?.abuseip || null,\n      vt_ip: $('Normalizador VT IP').first().json?.enriquecimiento?.vt_ip || null,\n      vt_hash: $('Normalizador hashes').first().json?.enriquecimiento?.vt_hash || null,\n      vt_archivo: $('Normalizador Archivos').first().json?.enriquecimiento?.vt_archivo || null,\n      vt_dominio\n    }\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        112,
+        304
+      ],
+      "id": "1c67f524-7442-4aa6-90ff-1857774a43ed",
+      "name": "Normalizador Dominios"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "modelsAI Analysis Service",
+          "mode": "list",
+          "cachedResultName": "modelsAI Analysis Service"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Responde ÚNICAMENTE en español con este formato exacto:\n\nFormatea tu respuesta usando sintaxis de Slack: usa *texto* para negrita, _texto_ para cursiva, y emoji para los títulos de sección. No uses ## , ** , ni ningún markdown estándar.\n\nEres un analista experto en ciberseguridad. Analiza el siguiente log de seguridad y los datos de enriquecimiento obtenidos de fuentes como VirusTotal y AbuseIPDB.\n\n═══════════════════════════════════════\n📋 LOG ORIGINAL\n═══════════════════════════════════════\n{{ $json.raw_log }}\n\n═══════════════════════════════════════\n🔎 IOCs DETECTADOS\n═══════════════════════════════════════\n- IP atacante:        {{ $json.iocs.ip_atacante }}\n- Motores de deteccion{{ $json.enriquecimiento.vt_ip.detecciones_resumen }}\n- Dominio malicioso:  {{ $json.iocs.dominio }}\n- Archivo:            {{ $json.iocs.archivo }}\n- Hash SHA256:        {{ $json.iocs.hash_archivo }}\n- IPs adicionales:    {{ $json.iocs.ips }}\n- Dominios adicionales: {{ $json.iocs.dominios }}\n- URLs:               {{ $json.iocs.urls }}\n- Procesos:           {{ $json.iocs.processes }}\n- Comandos PowerShell: {{ $json.iocs.powershell_commands }}\n- Comandos Bash:      {{ $json.iocs.bash_commands }}\n- Usuarios:           {{ $json.iocs.users }}\n- Puertos:            {{ $json.iocs.ports }}\n\n═══════════════════════════════════════\n🛡️ ENRIQUECIMIENTO — AbuseIPDB\n═══════════════════════════════════════\n- IP:               {{ $json.enriquecimiento.abuseip.ip }}\n- País:             {{ $json.enriquecimiento.abuseip.pais }}\n- ISP:              {{ $json.enriquecimiento.abuseip.isp }}\n- Puntaje de abuso: {{ $json.enriquecimiento.abuseip.puntaje_abuso }}/100\n- Total reportes:   {{ $json.enriquecimiento.abuseip.total_reportes }}\n- Último reporte:   {{ $json.enriquecimiento.abuseip.ultimo_reporte }}\n\n═══════════════════════════════════════\n🦠 ENRIQUECIMIENTO — VirusTotal (Hash)\n═══════════════════════════════════════\n- SHA256:            {{ $json.enriquecimiento.vt_hash.sha256 }}\n- Nombre del archivo: {{ $json.enriquecimiento.vt_hash.nombre }}\n- Tipo:              {{ $json.enriquecimiento.vt_hash.tipo }}\n- Detecciones:       {{ $json.enriquecimiento.vt_hash.detecciones_resumen }} motores\n- Malicioso:         {{ $json.enriquecimiento.vt_hash.malicioso }}\n- Sospechoso:        {{ $json.enriquecimiento.vt_hash.sospechoso }}\n- Inofensivo:        {{ $json.enriquecimiento.vt_hash.inofensivo }}\n- Motores que lo detectaron:\n{{ $json.enriquecimiento.vt_hash.motores_maliciosos }}\n\n═══════════════════════════════════════\n📁 ENRIQUECIMIENTO — VirusTotal (Archivo)\n═══════════════════════════════════════\n- Nombre:       {{ $json.enriquecimiento.vt_archivo.nombre }}\n- Detecciones:  {{ $json.enriquecimiento.vt_archivo.detecciones_resumen }} motores\n- Malicioso:    {{ $json.enriquecimiento.vt_archivo.malicioso }}\n\n═══════════════════════════════════════\n🌐 ENRIQUECIMIENTO — VirusTotal (Dominio)\n═══════════════════════════════════════\n- Dominio:      {{ $json.enriquecimiento.vt_dominio.dominio }}\n- Reputación:   {{ $json.enriquecimiento.vt_dominio.reputacion }}\n- Detecciones:  {{ $json.enriquecimiento.vt_dominio.detecciones_resumen }} motores\n- Malicioso:    {{ $json.enriquecimiento.vt_dominio.malicioso }}\n- Categorías:   {{ $json.enriquecimiento.vt_dominio.categorias }}\n\n═══════════════════════════════════════\n🖥️ CONTEXTO DEL SISTEMA\n═══════════════════════════════════════\n- Hostname:     {{ $json.iocs.hostname }}\n- IP origen:    {{ $json.iocs.ip_origen }}\n- IP destino:   {{ $json.iocs.ip_destino }}\n- CVEs:         {{ $json.iocs.cves }}\n- Comandos:     {{ $json.iocs.bash_commands }}\n- Puertos:      {{ $json.iocs.ports }}\n\nCon base en toda esta información responde ÚNICAMENTE en español con este formato exacto:\n\n:mag: *¿Qué ocurrió?*\nExplica en lenguaje claro y directo qué sucedió, qué técnicas usó el atacante, qué sistemas fueron afectados y cuál fue el objetivo. Menciona los IOCs clave y los datos de enriquecimiento relevantes. Menciona siempre los motores detectados (si hay), pais, y que clasificacion le da (malware, malisioso, phishing, etc).\n\n:warning: *Nivel de severidad: [CRÍTICO / ALTO / MEDIO / BAJO]*\nJustifica brevemente el nivel asignado basándote en los datos concretos obtenidos.\n\n## 🎯 MITRE ATT&CK\nIdentifica las tácticas y técnicas de MITRE ATT&CK presentes basándote \nen los IOCs, procesos y comportamientos detectados. Formato:\n- *Táctica:* [nombre] | *Técnica:* [ID] — [nombre]\n\n## Datos adicionales:\nMenciona si encontraste, procesos, rutas (linux o windows), comandos o algun dato que sean importantes a tomanr en cuenta dentro del log original y que sea importante tomar en cuenta, da una explicacion corta de que es, que hace. No inventes nada, solo datos reales.  Si no tienes contexto de algo, o no sabes, pero crees importante revisar, mencionalo.\n\n:hammer_and_wrench: *Acciones recomendadas*\nLista 3 a 5 acciones concretas e inmediatas que debe tomar el analista SOC.\n\nSi los datos de enriquecimiento no muestran detecciones maliciosas y no hay evidencia clara de amenaza, indica al final:\n:white_check_mark: *Posible falso positivo* — Se recomienda revisión manual antes de tomar acciones.\n\nNo agregues secciones adicionales ni texto fuera de este formato.\n\nNo agregues secciones adicionales ni texto fuera de este formato."
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.AI Service",
+      "typeVersion": 1.1,
+      "position": [
+        1024,
+        304
+      ],
+      "id": "f45540e4-c015-477c-89f5-a638ed6c75d4",
+      "name": "Message a model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "iwuO2XM0ElPVZ5FY",
+          "name": "AI Analysis Service Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const d = $('Code in JavaScript').first().json;\n\nlet abuseip = null;\nlet vt_ip = null;\nlet vt_hash = null;\nlet vt_archivo = null;\nlet vt_dominio = null;\n\ntry { abuseip = $('Normalise AbuseIP').first().json?.enriquecimiento?.abuseip || null; } catch {}\ntry { vt_ip = $('Normalizador VT IP').first().json?.enriquecimiento?.vt_ip || null; } catch {}\ntry { vt_hash = $('Normalizador hashes').first().json?.enriquecimiento?.vt_hash || null; } catch {}\ntry { vt_archivo = $('Normalizador Archivos').first().json?.enriquecimiento?.vt_archivo || null; } catch {}\ntry { vt_dominio = $('Normalizador Dominios').first().json?.enriquecimiento?.vt_dominio || null; } catch {}\n\nreturn {\n  json: {\n    iocs: {\n      ip_atacante: d.ip_atacante || null,\n      hash_archivo: d.hash_archivo || null,\n      archivo: d.archivo || null,\n      dominio: d.dominio || null,\n      ips: d.ips || [],\n      hashes: d.hashes || [],\n      emails: d.emails || [],\n      urls: d.urls || [],\n      dominios: d.dominios || [],\n      hostname: d.hostname || null,\n      ip_origen: d.ip_origen || null,\n      ip_destino: d.ip_destino || null,\n      cves: d.cves || [],\n      windows_paths: d.windows_paths || [],\n      file_names: d.file_names || [],\n      processes: d.processes || [],\n      powershell_commands: d.powershell_commands || [],\n      bash_commands: d.bash_commands || [],\n      users: d.users || [],\n      ports: d.ports || []\n    },\n    enriquecimiento: {\n      abuseip,\n      vt_ip,\n      vt_hash,\n      vt_archivo,\n      vt_dominio\n    },\n    raw_log: d.raw_log || null\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        400,
+        304
+      ],
+      "id": "ad7a2a28-087c-4760-8443-c9ca547743a7",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "#analisis-logs",
+          "mode": "name"
+        },
+        "text": "={{ $json.content.parts[0].text }}",
+        "otherOptions": {}
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.4,
+      "position": [
+        1456,
+        304
+      ],
+      "id": "9ef65ef2-2aef-46e7-8414-51a5ac6c6947",
+      "name": "Send a message",
+      "webhookId": "4191b2ad-4d93-42a5-b15f-385b8b192221",
+      "credentials": {
+        "slackApi": {
+          "id": "3zY8IeefZxhIDBLU",
+          "name": "Messaging Platform"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const d = $input.first().json;\n\nconst abuseip_score = d.enriquecimiento?.abuseip?.puntaje_abuso || 0;\nconst vt_ip = d.enriquecimiento?.vt_ip?.detecciones_resumen || 0;\nconst vt_hash_malicioso = d.enriquecimiento?.vt_hash?.malicioso || 0;\nconst vt_archivo_malicioso = d.enriquecimiento?.vt_archivo?.malicioso || 0;\nconst vt_dominio_malicioso = d.enriquecimiento?.vt_dominio?.malicioso || 0;\n\n// Es amenaza real si cualquiera de estas condiciones se cumple\nconst es_amenaza = (\n  vt_hash_malicioso >= 1 ||\n  vt_archivo_malicioso >= 1 ||\n  vt_dominio_malicioso >= 1 ||\n  abuseip_score >= 50\n);\n\nreturn {\n  json: {\n    ...d,\n    es_falso_positivo: !es_amenaza\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        608,
+        304
+      ],
+      "id": "bb20fe9c-460f-46a1-8fb3-68343d0ca12f",
+      "name": "Code in JavaScript2"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "models/AI Analysis Service",
+          "mode": "list",
+          "cachedResultName": "models/AI Analysis Service"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Eres un extractor de IOCs de seguridad. Analiza el siguiente log y extrae todos los indicadores de compromiso que encuentres sin importar el formato del log.\n\nDevuelve ÚNICAMENTE un objeto JSON válido, sin explicaciones, sin markdown, sin bloques de código, sin texto adicional. Solo el JSON puro.\n\n{\n  \"ips\": [],\n  \"ip_origen\": null,\n  \"ip_destino\": null,\n  \"dominios\": [],\n  \"urls\": [],\n  \"hashes\": [],\n  \"archivos\": [],\n  \"cves\": [],\n  \"comandos\": [],\n  \"usuarios\": [],\n  \"puertos\": [],\n  \"hostname\": null,\n  \"raw_log\": \"\"\n}\n\nLOG A ANALIZAR:\n{{ $json.text }}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain."AI Service"",
+      "typeVersion": 1.1,
+      "position": [
+        -800,
+        -576
+      ],
+      "id": "e2e29b4c-7f0f-49e8-8d73-e3d1b59adf68",
+      "name": "Message a model1"
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.first().json;\n\n// Extrae el texto del output de Gemini\nconst rawText = item.content?.parts?.[0]?.text || \"\";\n\nlet iocs = {};\n\ntry {\n  // Limpia el texto por si viene con markdown\n  const clean = rawText.replace(/```json|```/g, '').trim();\n  iocs = JSON.parse(clean);\n} catch (e) {\n  iocs = {};\n}\n\nreturn {\n  json: {\n    ip_atacante: iocs.ip_origen || iocs.ips?.[0] || null,\n    hash_archivo: iocs.hashes?.[0] || null,\n    archivo: iocs.archivos?.[0] || null,\n    dominio: iocs.dominios?.[0] || null,\n    ips: iocs.ips || [],\n    hashes: iocs.hashes || [],\n    emails: [],\n    urls: iocs.urls || [],\n    dominios: iocs.dominios || [],\n    windows_paths: [],\n    file_names: iocs.archivos || [],\n    processes: [],\n    powershell_commands: [],\n    bash_commands: iocs.comandos || [],\n    users: iocs.usuarios || [],\n    ports: iocs.puertos || [],\n    cves: iocs.cves || [],\n    hostname: iocs.hostname || null,\n    ip_origen: iocs.ip_origen || null,\n    ip_destino: iocs.ip_destino || null,\n    raw_log: iocs.raw_log || null,\n    _tiene: {\n      ip: (iocs.ips || []).length > 0,\n      hash: (iocs.hashes || []).length > 0,\n      archivo: (iocs.archivos || []).length > 0,\n      dominio: (iocs.dominios || []).length > 0\n    }\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -448,
+        -576
+      ],
+      "id": "c1d010ea-f92c-482d-82e3-f2c5f0add1d4",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "curlImport": "",
+        "httpVariantWarning": "",
+        "method": "GET",
+        "url": "=https://www.virustotal.com/api/v3/ip_addresses/{{ $json.ip_atacante }}",
+        "": "",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "virusTotalApi",
+        "provideSslCertificates": false,
+        "sendQuery": false,
+        "sendHeaders": false,
+        "sendBody": false,
+        "options": {},
+        "infoMessage": ""
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -176,
+        -352
+      ],
+      "id": "7c9c392d-2a6e-4884-bd74-f755de0d615a",
+      "name": "VirusTotal HTTP IP",
+      "extendsCredential": "virusTotalApi",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.first();\nconst d = $('Code in JavaScript').first().json;\nconst vtData = item.json;\n\nlet vt_hash = null;\n\ntry {\n  if (!item.error && !vtData.error) {\n    const attrs = vtData.data?.attributes || {};\n    const stats = attrs.last_analysis_stats || {};\n    const results = attrs.last_analysis_results || {};\n\n    const malicioso = stats.malicious || 0;\n    const sospechoso = stats.suspicious || 0;\n    const inofensivo = stats.undetected || 0;\n    const inofensivo2 = stats.harmless || 0;\n    const timeout = stats.timeout || 0;\n    const total = malicioso + sospechoso + inofensivo + inofensivo2 + timeout;\n\n    const motores_maliciosos = Object.entries(results)\n      .filter(([_, v]) => v && v.category === 'malicious')\n      .map(([motor, v]) => ({ motor, resultado: v.result || null }));\n\n    vt_hash = {\n      sha256: vtData.data?.id || null,\n      nombre: attrs.meaningful_name || null,\n      tipo: attrs.type_description || null,\n      malicioso,\n      sospechoso,\n      inofensivo: inofensivo + inofensivo2,\n      total_motores: total,\n      detecciones_resumen: `${malicioso}/${total}`,\n      motores_maliciosos,\n      fecha_analisis: attrs.last_analysis_date || null\n    };\n  }\n} catch (e) {\n  vt_hash = null;\n}\n\nreturn {\n  json: {\n    ip_atacante: d.ip_atacante || null,\n    hash_archivo: d.hash_archivo || null,\n    archivo: d.archivo || null,\n    dominio: d.dominio || null,\n    ips: d.ips || [],\n    hashes: d.hashes || [],\n    emails: d.emails || [],\n    urls: d.urls || [],\n    dominios: d.dominios || [],\n    windows_paths: d.windows_paths || [],\n    file_names: d.file_names || [],\n    processes: d.processes || [],\n    powershell_commands: d.powershell_commands || [],\n    bash_commands: d.bash_commands || [],\n    users: d.users || [],\n    ports: d.ports || [],\n    cves: d.cves || [],\n    hostname: d.hostname || null,\n    ip_origen: d.ip_origen || null,\n    ip_destino: d.ip_destino || null,\n    raw_log: d.raw_log || null,\n    _tiene: d._tiene || {},\n    enriquecimiento: {\n      abuseip: $('Normalise AbuseIP').first().json?.enriquecimiento?.abuseip || null,\n      vt_ip: $('Normalizador VT IP').first().json?.enriquecimiento?.vt_ip || null,\n      vt_hash\n    }\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        112,
+        -128
+      ],
+      "id": "0ab1e741-8f20-490b-9a91-a4972aaea76c",
+      "name": "Normalizador hashes"
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.first();\nconst d = $('Code in JavaScript').first().json;\nconst vtData = item.json;\n\nlet vt_ip = null;\n\ntry {\n  if (!item.error && !vtData.error) {\n    const attrs = vtData.data?.attributes || {};\n    const stats = attrs.last_analysis_stats || {};\n    const results = attrs.last_analysis_results || {};\n\n    const malicioso = stats.malicious || 0;\n    const sospechoso = stats.suspicious || 0;\n    const inofensivo = stats.undetected || 0;\n    const inofensivo2 = stats.harmless || 0;\n    const timeout = stats.timeout || 0;\n    const total = malicioso + sospechoso + inofensivo + inofensivo2 + timeout;\n\n    const motores_maliciosos = Object.entries(results)\n      .filter(([_, v]) => v && v.category === 'malicious')\n      .map(([motor, v]) => ({ motor, resultado: v.result || null }));\n\n    vt_ip = {\n      ip: vtData.data?.id || null,\n      pais: attrs.country || null,\n      reputacion: attrs.reputation || null,\n      malicioso,\n      sospechoso,\n      inofensivo: inofensivo + inofensivo2,\n      total_motores: total,\n      detecciones_resumen: `${malicioso}/${total}`,\n      motores_maliciosos,\n      asn: attrs.asn || null,\n      isp: attrs.as_owner || null\n    };\n  }\n} catch (e) {\n  vt_ip = null;\n}\n\nreturn {\n  json: {\n    ip_atacante: d.ip_atacante || null,\n    hash_archivo: d.hash_archivo || null,\n    archivo: d.archivo || null,\n    dominio: d.dominio || null,\n    ips: d.ips || [],\n    hashes: d.hashes || [],\n    emails: d.emails || [],\n    urls: d.urls || [],\n    dominios: d.dominios || [],\n    windows_paths: d.windows_paths || [],\n    file_names: d.file_names || [],\n    processes: d.processes || [],\n    powershell_commands: d.powershell_commands || [],\n    bash_commands: d.bash_commands || [],\n    users: d.users || [],\n    ports: d.ports || [],\n    cves: d.cves || [],\n    hostname: d.hostname || null,\n    ip_origen: d.ip_origen || null,\n    ip_destino: d.ip_destino || null,\n    raw_log: d.raw_log || null,\n    _tiene: d._tiene || {},\n    enriquecimiento: {\n      abuseip: $('Normalise AbuseIP').first().json?.enriquecimiento?.abuseip || null,\n      vt_ip\n    }\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        112,
+        -352
+      ],
+      "id": "953ecc75-47a1-4cb8-ab20-6d80255296ca",
+      "name": "Normalizador VT IP"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Slack Trigger": {
+      "main": [
+        [
+          {
+            "node": "Message a model1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AbuseIP": {
+      "main": [
+        [
+          {
+            "node": "Normalise AbuseIP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "VirusTotal HTTP Hashes": {
+      "main": [
+        [
+          {
+            "node": "Normalizador hashes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "VirusTotal HTTP Dominios": {
+      "main": [
+        [
+          {
+            "node": "Normalizador Dominios",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "VirusTotal HTTP archivos": {
+      "main": [
+        [
+          {
+            "node": "Normalizador Archivos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalizador Dominios": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalise AbuseIP": {
+      "main": [
+        [
+          {
+            "node": "VirusTotal HTTP IP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalizador Archivos": {
+      "main": [
+        [
+          {
+            "node": "VirusTotal HTTP Dominios",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript2": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model1": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "AbuseIP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "VirusTotal HTTP IP": {
+      "main": [
+        [
+          {
+            "node": "Normalizador VT IP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalizador hashes": {
+      "main": [
+        [
+          {
+            "node": "VirusTotal HTTP archivos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalizador VT IP": {
+      "main": [
+        [
+          {
+            "node": "VirusTotal HTTP Hashes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "540cd192-1643-4500-a069-c41d2da92b97",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "165f576faa2cbdbcdee345412117bcc98536ca42aff1ba969a153b3fa69b000e"
+  },
+  "id": "iaO2OsT8hHiRTOtP",
+  "tags": []
+}
