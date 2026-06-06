@@ -36,6 +36,8 @@ The objective was to achieve enterprise-style visibility using minimal resources
 ## Architecture
 ![Homelab Architecture](screenshots/estructura_homelab.png)  
 
+![Homelab Architecture](screenshots/setup-wazuh.jpeg) 
+
 
 ---
 
