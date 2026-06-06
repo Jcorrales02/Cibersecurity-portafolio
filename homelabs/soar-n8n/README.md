@@ -75,7 +75,7 @@ Since n8n was running on a homelab environment and exposed only through localhos
 To solve this issue, ngrok was used to create a secure public tunnel between the Internet and the local n8n instance.
 
 <p align="center">
-  <img src="screenshots/home-lab-ngork.png" width="900">
+  <img src="screenshots/home-lab-ngrok.png" width="900">
 </p>
 
 ### Benefits
