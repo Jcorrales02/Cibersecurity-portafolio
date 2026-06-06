@@ -59,10 +59,43 @@ The final workflow consists of 13 sequential nodes designed for stability and pr
 |------------|----------|
 | n8n | SOAR Platform |
 | Slack | Input & Output Channel |
+| ngrok | Public Tunnel for Webhooks |
 | Gemini 2.0 Flash | IOC Extraction & Threat Analysis |
 | AbuseIPDB | IP Reputation |
 | VirusTotal | IOC Enrichment |
 | JavaScript | Data Normalization |
+---
+
+## External Connectivity Challenge
+
+One of the main implementation challenges was enabling Slack to communicate with a locally hosted n8n instance.
+
+Since n8n was running on a homelab environment and exposed only through localhost, Slack webhooks could not directly reach the workflow endpoint.
+
+To solve this issue, ngrok was used to create a secure public tunnel between the Internet and the local n8n instance.
+
+### Benefits
+
+* Allowed Slack Event Subscriptions to reach local workflows.
+* Enabled external webhook testing without deploying to a public server.
+* Simplified development and validation of the SOAR workflow.
+
+### Architecture
+
+```text
+Slack
+   ↓
+Internet
+   ↓
+ngrok Tunnel
+   ↓
+Local n8n Instance
+   ↓
+SOAR Workflow
+```
+
+This approach enabled end-to-end testing while maintaining the workflow within the local homelab environment.
+
 
 ---
 
@@ -81,7 +114,7 @@ Gemini receives the raw log and extracts:
 - Usernames
 - Hostnames
 
-This allows the workflow to process multiple log formats without custom parsers. :contentReference[oaicite:3]{index=3}
+This allows the workflow to process multiple log formats without custom parsers.
 
 ### Threat Intelligence Enrichment
 
@@ -137,7 +170,7 @@ Results:
 - Error handling is essential when working with external intelligence APIs.
 - SOAR automation can significantly reduce manual triage workload.
 
-:contentReference[oaicite:8]{index=8}
+
 
 ---
 
