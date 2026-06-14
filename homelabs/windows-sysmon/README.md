@@ -27,7 +27,7 @@ Ataque de fuerza bruta SSH simulado con Hydra desde Kali Linux contra endpoint W
 
 ## Evidencia Visual
 
-![Ataque en curso — Hydra en Kali, tail de Wazuh en Zorin, PowerShell en HP x360](img/home-lab-w01.jpg)
+![Ataque en curso — Hydra en Kali, tail de Wazuh en Zorin, PowerShell en HP x360](../img/home-lab-w01.jpg)
 
 *Fig. 1 — Captura en tiempo real del ataque. Izquierda: Wazuh tail mostrando eventos 4625. Centro: Hydra corriendo en Kali Linux. Derecha: PowerShell en la máquina víctima.*
 
