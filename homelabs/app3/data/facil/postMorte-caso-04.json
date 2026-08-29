@@ -1,0 +1,40 @@
+{
+  "fases": [
+    {
+      "nombre": "Ingreso inicial",
+      "descripcion": "Usuario abre documento de Word con macro maliciosa desde correo phishing.",
+      "logId": 4,
+      "pista": "Busca proceso WINWORD.EXE ejecutado por lgomez fuera de horario laboral."
+    },
+    {
+      "nombre": "Ejecución de payload",
+      "descripcion": "La macro ejecuta PowerShell que descarga y ejecuta código desde dominio C2.",
+      "logId": 5,
+      "pista": "Busca proceso powershell.exe con línea de comandos que incluye DownloadString y dominio sospechoso."
+    },
+    {
+      "nombre": "Resolución DNS",
+      "descripcion": "El equipo consulta el dominio C2 para obtener la IP del servidor.",
+      "logId": 6,
+      "pista": "Busca consulta DNS (Sysmon 22) para office-verify-tenant.com."
+    },
+    {
+      "nombre": "Conexión C2",
+      "descripcion": "Se establece conexión HTTPS con el servidor C2.",
+      "logId": 7,
+      "pista": "Busca conexión de red (Sysmon 3) hacia 185.215.113.89:443."
+    },
+    {
+      "nombre": "Persistencia",
+      "descripcion": "Se crea una tarea programada para ejecutar el payload cada 5 minutos.",
+      "logId": 8,
+      "pista": "Busca proceso schtasks.exe con parámetro /create y /tn UpdateTask."
+    },
+    {
+      "nombre": "Beaconing",
+      "descripcion": "El sistema se comunica periódicamente con el C2 para mantener persistencia.",
+      "logId": 9,
+      "pista": "Busca segunda conexión de red (Sysmon 3) al mismo C2 minutos después de la primera."
+    }
+  ]
+}

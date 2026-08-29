@@ -1,0 +1,181 @@
+{
+"C:\\DevTools\\deploy.dll": {
+"nombre": "Deploy Tool - Registro de componentes COM",
+"departamento": "Desarrollo",
+"descripcion": "Registra y desregistra componentes COM para aplicaciones internas, usado durante despliegues y pruebas.",
+"scriptAsociado": "C:\\DevTools\\build_deploy.bat",
+"firmado": true,
+"responsable": "fortiz (DevOps)"
+},
+"C:\\DevTools\\build_deploy.bat": {
+"nombre": "Script de compilación y despliegue",
+"departamento": "Desarrollo",
+"descripcion": "Compila el código fuente, ejecuta pruebas unitarias y despliega el paquete en el entorno de integración.",
+"scriptAsociado": null,
+"firmado": false,
+"responsable": "fortiz (DevOps)"
+},
+"C:\\Scripts\\backup_system.ps1": {
+"nombre": "Backup de sistemas críticos",
+"departamento": "IT",
+"descripcion": "Realiza copias de seguridad incrementales de bases de datos y archivos de configuración, con cifrado y envío a almacenamiento remoto.",
+"scriptAsociado": null,
+"firmado": false,
+"responsable": "jperez (IT)"
+},
+"/opt/backup/backup.sh": {
+"nombre": "Backup de servidores Linux",
+"departamento": "IT",
+"descripcion": "Script de respaldo de discos, logs y configuraciones de servidores críticos, con rotación y compresión.",
+"scriptAsociado": null,
+"firmado": false,
+"responsable": "jperez (IT)"
+},
+"/usr/local/bin/monitor_agent": {
+"nombre": "Agente de monitoreo de infraestructura",
+"departamento": "IT",
+"descripcion": "Recopila métricas de CPU, memoria, disco y red y las envía al panel central de monitoreo.",
+"scriptAsociado": null,
+"firmado": true,
+"responsable": "equipo IT"
+},
+"C:\\Deploy\\soft_installer.exe": {
+"nombre": "Instalador silencioso de software estándar",
+"departamento": "IT",
+"descripcion": "Instala paquetes de software corporativo (Office, antivirus, VPN) sin intervención, usado por soporte técnico.",
+"scriptAsociado": null,
+"firmado": true,
+"responsable": "equipo Soporte IT"
+},
+"/opt/hr/payroll_sync.py": {
+"nombre": "Sincronización de nómina con proveedor externo",
+"departamento": "RRHH",
+"descripcion": "Extrae datos de empleados desde el sistema HR y los envía de forma cifrada al proveedor de nómina (Payroll Corp) vía API.",
+"scriptAsociado": null,
+"firmado": false,
+"responsable": "mrodriguez (RRHH)"
+},
+"C:\\HR\\docgen.ps1": {
+"nombre": "Generador de documentos de contratación",
+"departamento": "RRHH",
+"descripcion": "Crea contratos, anexos y cartas oferta en formato PDF a partir de plantillas y datos de candidatos.",
+"scriptAsociado": null,
+"firmado": false,
+"responsable": "mrodriguez (RRHH)"
+},
+"C:\\Finance\\report_macro.xlsm": {
+"nombre": "Macro de consolidación financiera",
+"departamento": "Finanzas",
+"descripcion": "Macro de Excel que consolida estados financieros de distintas unidades, aplica conversión de moneda y genera reportes mensuales.",
+"scriptAsociado": null,
+"firmado": false,
+"responsable": "lfernandez (Finanzas)"
+},
+"/opt/finance/reconcile.pl": {
+"nombre": "Herramienta de conciliación bancaria",
+"departamento": "Finanzas",
+"descripcion": "Compara movimientos bancarios contra registros contables internos, detecta discrepancias y genera alertas.",
+"scriptAsociado": null,
+"firmado": false,
+"responsable": "lfernandez (Finanzas)"
+},
+"C:\\Inventory\\inv_scan.exe": {
+"nombre": "Agente de inventario de activos",
+"departamento": "IT",
+"descripcion": "Escanea hardware y software instalado en estaciones de trabajo, actualiza la base de datos de inventario corporativo.",
+"scriptAsociado": null,
+"firmado": true,
+"responsable": "equipo IT"
+},
+"/opt/marketing/analytics.R": {
+"nombre": "Análisis de campañas de marketing",
+"departamento": "Marketing",
+"descripcion": "Script en R que procesa datos de Google Analytics, redes sociales y CRM para generar dashboards de rendimiento.",
+"scriptAsociado": null,
+"firmado": false,
+"responsable": "sramirez (Marketing)"
+},
+"C:\\Sales\\crm_sync.exe": {
+"nombre": "Sincronizador de CRM con ERP",
+"departamento": "Ventas",
+"descripcion": "Sincroniza clientes, oportunidades y pedidos entre Salesforce y el ERP interno, ejecutándose cada hora.",
+"scriptAsociado": null,
+"firmado": true,
+"responsable": "equipo Ventas"
+},
+"/usr/local/bin/net_scan": {
+"nombre": "Escáner de red y detección de dispositivos",
+"departamento": "IT",
+"descripcion": "Realiza barridos de red para detectar dispositivos conectados, puertos abiertos y servicios activos, usado en auditorías.",
+"scriptAsociado": null,
+"firmado": true,
+"responsable": "equipo IT"
+},
+"C:\\Logs\\aggregator.exe": {
+"nombre": "Agregador de logs de aplicaciones",
+"departamento": "IT",
+"descripcion": "Recolecta logs de diferentes servidores y aplicaciones, los normaliza y envía al SIEM central.",
+"scriptAsociado": null,
+"firmado": true,
+"responsable": "equipo IT"
+},
+"/opt/security/compliance_check": {
+"nombre": "Verificador de cumplimiento de seguridad",
+"departamento": "IT",
+"descripcion": "Evalúa configuraciones de servidores contra benchmarks CIS y políticas internas, genera reporte de hallazgos.",
+"scriptAsociado": null,
+"firmado": false,
+"responsable": "equipo Seguridad IT"
+},
+
+  "backupcloud.io": {
+    "tipo": "saas_autorizado",
+    "nombre": "BackupCloud",
+    "categoria": "Backup en la nube",
+    "descripcion": "Proveedor de backups en la nube aprobado por la empresa. Usado por la cuenta de servicio svc_backup para sincronización incremental de SRV-FS01 y SRV-NAS01.",
+    "departamentoResponsable": "IT"
+  },
+  "login.microsoftonline.com": {
+    "tipo": "saas_autorizado",
+    "nombre": "Microsoft 365",
+    "categoria": "Colaboración y productividad",
+    "descripcion": "Plataforma de productividad en la nube que incluye Office, Exchange, Teams, etc. Usada por toda la empresa para correo, documentos y comunicación.",
+    "departamentoResponsable": "IT"
+  },
+  "slack.com": {
+    "tipo": "saas_autorizado",
+    "nombre": "Slack",
+    "categoria": "Comunicación interna",
+    "descripcion": "Herramienta de mensajería y colaboración en equipo, utilizada para canales de proyectos y comunicación diaria.",
+    "departamentoResponsable": "IT"
+  },
+  "salesforce.com": {
+    "tipo": "saas_autorizado",
+    "nombre": "Salesforce",
+    "categoria": "CRM",
+    "descripcion": "Sistema de gestión de relaciones con clientes, utilizado por Ventas y Marketing para seguimiento de oportunidades y campañas.",
+    "departamentoResponsable": "Ventas"
+  },
+  "aws.amazon.com": {
+    "tipo": "saas_autorizado",
+    "nombre": "Amazon Web Services",
+    "categoria": "Infraestructura en la nube",
+    "descripcion": "Plataforma de servicios en la nube para hosting, almacenamiento, bases de datos y más. Utilizada por desarrollo y TI.",
+    "departamentoResponsable": "IT"
+  },
+  "azure.microsoft.com": {
+    "tipo": "saas_autorizado",
+    "nombre": "Microsoft Azure",
+    "categoria": "Infraestructura en la nube",
+    "descripcion": "Plataforma de servicios en la nube de Microsoft, utilizada para máquinas virtuales, bases de datos y servicios de integración.",
+    "departamentoResponsable": "IT"
+  },
+  "nomina-panama.com": {
+    "tipo": "saas_autorizado",
+    "nombre": "Proveedor de Nómina Panameño",
+    "categoria": "Recursos Humanos",
+    "descripcion": "Proveedor externo para el procesamiento de nómina y cumplimiento fiscal en Panamá. Integración con el sistema HR vía API.",
+    "departamentoResponsable": "RRHH"
+  }
+
+}

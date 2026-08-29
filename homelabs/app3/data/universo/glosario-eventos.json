@@ -1,0 +1,142 @@
+{
+  "4624": {
+    "sistema": "Windows Security",
+    "nombre": "Inicio de sesión exitoso",
+    "descripcion": "Se ha iniciado sesión correctamente. Indica acceso legítimo o exitoso a un sistema, útil para identificar actividad normal y posibles accesos no autorizados si ocurre fuera de horario."
+  },
+  "4625": {
+    "sistema": "Windows Security",
+    "nombre": "Fallo de inicio de sesión",
+    "descripcion": "Intento de inicio de sesión fallido. Puede indicar fuerza bruta, uso de credenciales incorrectas o error de usuario. Múltiples fallos consecutivos son sospechosos."
+  },
+  "4634": {
+    "sistema": "Windows Security",
+    "nombre": "Cierre de sesión",
+    "descripcion": "Se ha cerrado una sesión de usuario. Normalmente acompaña a un 4624, útil para mapear duración de sesiones."
+  },
+  "4648": {
+    "sistema": "Windows Security",
+    "nombre": "Inicio de sesión con credenciales explícitas",
+    "descripcion": "Un proceso ha iniciado sesión usando credenciales explícitas (ej. runas). Puede indicar movimiento lateral o ejecución de tareas administrativas."
+  },
+  "4672": {
+    "sistema": "Windows Security",
+    "nombre": "Privilegios especiales asignados",
+    "descripcion": "Se han asignado privilegios administrativos a un usuario. Indica que la cuenta tiene acceso elevado, relevante para detectar escalación de privilegios."
+  },
+  "4688": {
+    "sistema": "Windows Security",
+    "nombre": "Creación de proceso (Security)",
+    "descripcion": "Se ha creado un nuevo proceso. Proporciona información sobre el ejecutable y el usuario que lo lanzó. Útil para detectar ejecución de malware."
+  },
+  "4720": {
+    "sistema": "Windows Security",
+    "nombre": "Creación de cuenta de usuario",
+    "descripcion": "Se ha creado una nueva cuenta de usuario. Puede ser legítima (nuevo empleado) o maliciosa (persistencia)."
+  },
+  "4732": {
+    "sistema": "Windows Security",
+    "nombre": "Usuario agregado a grupo local",
+    "descripcion": "Un usuario ha sido agregado a un grupo de seguridad local. Importante para detectar escalación de privilegios o movimiento lateral."
+  },
+  "4738": {
+    "sistema": "Windows Security",
+    "nombre": "Cuenta de usuario modificada",
+    "descripcion": "Se han modificado atributos de una cuenta de usuario (ej. cambio de contraseña, habilitación). Puede indicar actividad maliciosa."
+  },
+  "4663": {
+    "sistema": "Windows Security",
+    "nombre": "Acceso a objeto (archivo)",
+    "descripcion": "Se ha accedido a un objeto del sistema (archivo, carpeta, registro). Útil para monitorear exfiltración o modificación de datos sensibles."
+  },
+  "5140": {
+    "sistema": "Windows Security",
+    "nombre": "Acceso a recurso compartido de red",
+    "descripcion": "Se ha accedido a un recurso compartido de red. Puede indicar movimiento lateral o exfiltración de archivos."
+  },
+  "1": {
+    "sistema": "Sysmon",
+    "nombre": "Creación de proceso",
+    "descripcion": "Registra cada proceso creado, incluyendo línea de comandos y hash. Fundamental para detectar ejecución de malware y scripts."
+  },
+  "2": {
+    "sistema": "Sysmon",
+    "nombre": "Cambio de timestamp de archivo",
+    "descripcion": "Se ha modificado la fecha/hora de creación de un archivo. Puede indicar intentos de ocultar actividad (timestomping)."
+  },
+  "3": {
+    "sistema": "Sysmon",
+    "nombre": "Conexión de red",
+    "descripcion": "Registra conexiones de red salientes y entrantes, con IP y puerto. Esencial para identificar C2, exfiltración y tráfico malicioso."
+  },
+  "5": {
+    "sistema": "Sysmon",
+    "nombre": "Proceso terminado",
+    "descripcion": "Registra la terminación de un proceso. Útil para identificar procesos que se cierran abruptamente o finalizan después de ejecutar comandos."
+  },
+  "6": {
+    "sistema": "Sysmon",
+    "nombre": "Driver cargado",
+    "descripcion": "Registra la carga de un driver en el sistema. Puede indicar persistencia a bajo nivel o instalación de rootkits."
+  },
+  "7": {
+    "sistema": "Sysmon",
+    "nombre": "Imagen/DLL cargada",
+    "descripcion": "Registra la carga de una DLL en un proceso. Útil para detectar inyección de DLL y técnicas de living-off-the-land."
+  },
+  "8": {
+    "sistema": "Sysmon",
+    "nombre": "CreateRemoteThread",
+    "descripcion": "Registra la creación de un hilo remoto en otro proceso. Indicador clave de inyección de código y malware."
+  },
+  "10": {
+    "sistema": "Sysmon",
+    "nombre": "ProcessAccess",
+    "descripcion": "Registra acceso a la memoria de otro proceso. Asociado a dumping de credenciales (ej. acceso a lsass.exe)."
+  },
+  "11": {
+    "sistema": "Sysmon",
+    "nombre": "Creación de archivo",
+    "descripcion": "Registra la creación de un archivo. Útil para detectar descarga de payloads, creación de scripts o escritura de malware."
+  },
+  "12": {
+    "sistema": "Sysmon",
+    "nombre": "Evento de registro (creación de clave)",
+    "descripcion": "Registra la creación de una clave de registro. Puede indicar persistencia o modificación de configuración del sistema."
+  },
+  "13": {
+    "sistema": "Sysmon",
+    "nombre": "Evento de registro (modificación de valor)",
+    "descripcion": "Registra la modificación de un valor en el registro. Común en técnicas de persistencia (ej. Run keys)."
+  },
+  "14": {
+    "sistema": "Sysmon",
+    "nombre": "Evento de registro (eliminación de clave)",
+    "descripcion": "Registra la eliminación de una clave de registro. Puede indicar limpieza de rastros o desactivación de seguridad."
+  },
+  "15": {
+    "sistema": "Sysmon",
+    "nombre": "FileCreateStreamHash",
+    "descripcion": "Registra la creación de streams alternativos (ADS) en archivos. Puede ocultar datos maliciosos."
+  },
+  "17": {
+    "sistema": "Sysmon",
+    "nombre": "Named pipe creado",
+    "descripcion": "Registra la creación de un named pipe. Utilizado en movimiento lateral y comunicación entre procesos."
+  },
+  "18": {
+    "sistema": "Sysmon",
+    "nombre": "Named pipe conectado",
+    "descripcion": "Registra una conexión a un named pipe. Asociado a movimiento lateral y ejecución remota."
+  },
+  "22": {
+    "sistema": "Sysmon",
+    "nombre": "Consulta DNS",
+    "descripcion": "Registra consultas DNS realizadas por el sistema. Útil para detectar C2, dominios maliciosos y exfiltración por DNS."
+  },
+  "23": {
+    "sistema": "Sysmon",
+    "nombre": "Archivo eliminado",
+    "descripcion": "Registra la eliminación de un archivo. Puede indicar limpieza de rastros o eliminación de herramientas maliciosas."
+  }
+}

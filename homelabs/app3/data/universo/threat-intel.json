@@ -1,0 +1,720 @@
+{
+  "185.220.101.7": {
+    "tipo": "malicious",
+    "categoria": "C2 / SSH brute",
+    "actor": null,
+    "detecciones": "68/90",
+    "primeraVezVisto": "hace 142 días"
+  },
+  "203.0.113.45": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": null,
+    "detecciones": "52/90",
+    "primeraVezVisto": "hace 87 días"
+  },
+  "91.240.118.4": {
+    "tipo": "malicious",
+    "categoria": "Pool de minería",
+    "actor": null,
+    "detecciones": "44/90",
+    "primeraVezVisto": "hace 203 días"
+  },
+  "45.33.22.11": {
+    "tipo": "malicious",
+    "categoria": "C2 / Exfiltración",
+    "actor": null,
+    "detecciones": "71/90",
+    "primeraVezVisto": "hace 56 días"
+  },
+  "104.21.16.1": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": null,
+    "detecciones": "39/90",
+    "primeraVezVisto": "hace 312 días"
+  },
+  "172.67.200.1": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": null,
+    "detecciones": "58/90",
+    "primeraVezVisto": "hace 178 días"
+  },
+  "198.51.100.10": {
+    "tipo": "malicious",
+    "categoria": "Phishing / Descarga",
+    "actor": null,
+    "detecciones": "63/90",
+    "primeraVezVisto": "hace 94 días"
+  },
+  "192.0.2.55": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Phantasm",
+    "detecciones": "47/90",
+    "primeraVezVisto": "hace 215 días"
+  },
+  "198.51.100.88": {
+    "tipo": "malicious",
+    "categoria": "Pool de minería",
+    "actor": null,
+    "detecciones": "33/90",
+    "primeraVezVisto": "hace 267 días"
+  },
+  "203.0.113.100": {
+    "tipo": "malicious",
+    "categoria": "Servidor de exfiltración",
+    "actor": null,
+    "detecciones": "76/90",
+    "primeraVezVisto": "hace 41 días"
+  },
+  "198.51.100.200": {
+    "tipo": "malicious",
+    "categoria": "C2 / Phishing",
+    "actor": null,
+    "detecciones": "55/90",
+    "primeraVezVisto": "hace 129 días"
+  },
+  "185.220.101.89": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": null,
+    "detecciones": "62/90",
+    "primeraVezVisto": "hace 186 días"
+  },
+  "149.28.99.200": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": null,
+    "detecciones": "49/90",
+    "primeraVezVisto": "hace 333 días"
+  },
+  "193.122.80.100": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": null,
+    "detecciones": "57/90",
+    "primeraVezVisto": "hace 72 días"
+  },
+  "206.189.45.200": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": null,
+    "detecciones": "41/90",
+    "primeraVezVisto": "hace 254 días"
+  },
+  "update-cloud.xyz": {
+    "tipo": "malicious",
+    "categoria": "C2 / Exfiltración",
+    "actor": null,
+    "detecciones": "73/90",
+    "primeraVezVisto": "hace 98 días"
+  },
+  "cdn-delivery.net": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": null,
+    "detecciones": "46/90",
+    "primeraVezVisto": "hace 167 días"
+  },
+  "secure-docs.xyz": {
+    "tipo": "malicious",
+    "categoria": "Phishing / Descarga",
+    "actor": null,
+    "detecciones": "61/90",
+    "primeraVezVisto": "hace 113 días"
+  },
+  "cloudsync.services": {
+    "tipo": "malicious",
+    "categoria": "C2 / Exfiltración",
+    "actor": null,
+    "detecciones": "54/90",
+    "primeraVezVisto": "hace 205 días"
+  },
+  "telemetry-update.org": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": null,
+    "detecciones": "38/90",
+    "primeraVezVisto": "hace 289 días"
+  },
+  "c2.triagerange.co": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": null,
+    "detecciones": "80/90",
+    "primeraVezVisto": "hace 17 días"
+  },
+  "portal-update.com": {
+    "tipo": "malicious",
+    "categoria": "Phishing / C2",
+    "actor": null,
+    "detecciones": "66/90",
+    "primeraVezVisto": "hace 134 días"
+  },
+  "backup-service.cloud": {
+    "tipo": "malicious",
+    "categoria": "Exfiltración",
+    "actor": null,
+    "detecciones": "43/90",
+    "primeraVezVisto": "hace 221 días"
+  },
+  "analytics-collect.net": {
+    "tipo": "malicious",
+    "categoria": "C2 / Exfiltración",
+    "actor": null,
+    "detecciones": "59/90",
+    "primeraVezVisto": "hace 77 días"
+  },
+  "sync-files.net": {
+    "tipo": "malicious",
+    "categoria": "Exfiltración",
+    "actor": null,
+    "detecciones": "48/90",
+    "primeraVezVisto": "hace 146 días"
+  },
+  "45.155.205.33": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Dust Devil",
+    "detecciones": "35/90",
+    "primeraVezVisto": "hace 245 días"
+  },
+  "89.46.100.12": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Dust Devil",
+    "detecciones": "42/90",
+    "primeraVezVisto": "hace 198 días"
+  },
+  "exploit-db-check.net": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Dust Devil",
+    "detecciones": "30/90",
+    "primeraVezVisto": "hace 276 días"
+  },
+  "free-vps-zone.xyz": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Dust Devil",
+    "detecciones": "37/90",
+    "primeraVezVisto": "hace 312 días"
+  },
+  "192.3.88.120": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Silk Roadie",
+    "detecciones": "65/90",
+    "primeraVezVisto": "hace 88 días"
+  },
+  "185.165.29.88": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Silk Roadie",
+    "detecciones": "53/90",
+    "primeraVezVisto": "hace 121 días"
+  },
+  "cdn-pay-static.com": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Silk Roadie",
+    "detecciones": "70/90",
+    "primeraVezVisto": "hace 62 días"
+  },
+  "font-awesome-min.xyz": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Silk Roadie",
+    "detecciones": "44/90",
+    "primeraVezVisto": "hace 193 días"
+  },
+  "jquery-ui-cdn.top": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Silk Roadie",
+    "detecciones": "56/90",
+    "primeraVezVisto": "hace 157 días"
+  },
+  "mail-transfer.pw": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Fog Bank",
+    "detecciones": "22/90",
+    "primeraVezVisto": "hace 345 días"
+  },
+  "secure-note.space": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Fog Bank",
+    "detecciones": "28/90",
+    "primeraVezVisto": "hace 289 días"
+  },
+  "10.0.0.10": {
+    "tipo": "malicious",
+    "categoria": "C2 interno",
+    "actor": "Iron Forge",
+    "detecciones": "15/90",
+    "primeraVezVisto": "hace 400 días"
+  },
+  "37.120.210.44": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Red Echo",
+    "detecciones": "51/90",
+    "primeraVezVisto": "hace 104 días"
+  },
+  "185.165.29.7": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Red Echo",
+    "detecciones": "60/90",
+    "primeraVezVisto": "hace 79 días"
+  },
+  "defend-democracy.org": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Red Echo",
+    "detecciones": "67/90",
+    "primeraVezVisto": "hace 95 días"
+  },
+  "press-leaks.net": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Red Echo",
+    "detecciones": "49/90",
+    "primeraVezVisto": "hace 132 días"
+  },
+  "free-speech.io": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Red Echo",
+    "detecciones": "55/90",
+    "primeraVezVisto": "hace 118 días"
+  },
+  "88.198.10.55": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Echo Chamber",
+    "detecciones": "34/90",
+    "primeraVezVisto": "hace 231 días"
+  },
+  "193.23.244.100": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Echo Chamber",
+    "detecciones": "40/90",
+    "primeraVezVisto": "hace 259 días"
+  },
+  "resist-global.net": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Echo Chamber",
+    "detecciones": "45/90",
+    "primeraVezVisto": "hace 183 días"
+  },
+  "leak-union.org": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Echo Chamber",
+    "detecciones": "31/90",
+    "primeraVezVisto": "hace 297 días"
+  },
+  "192.0.2.88": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Phantasm",
+    "detecciones": "74/90",
+    "primeraVezVisto": "hace 36 días"
+  },
+  "203.0.113.15": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Phantasm",
+    "detecciones": "69/90",
+    "primeraVezVisto": "hace 53 días"
+  },
+  "198.51.100.77": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Phantasm",
+    "detecciones": "72/90",
+    "primeraVezVisto": "hace 28 días"
+  },
+  "cdn-update.azureedge.net": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Phantasm",
+    "detecciones": "78/90",
+    "primeraVezVisto": "hace 19 días"
+  },
+  "google-analytics-legit.com": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Phantasm",
+    "detecciones": "64/90",
+    "primeraVezVisto": "hace 67 días"
+  },
+  "windowsupdate-service.top": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Phantasm",
+    "detecciones": "81/90",
+    "primeraVezVisto": "hace 12 días"
+  },
+  "api-verify.tech": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Phantasm",
+    "detecciones": "75/90",
+    "primeraVezVisto": "hace 44 días"
+  },
+  "telemetry-collect.net": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Phantasm",
+    "detecciones": "70/90",
+    "primeraVezVisto": "hace 58 días"
+  },
+  "154.16.170.40": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Velvet Needle",
+    "detecciones": "50/90",
+    "primeraVezVisto": "hace 149 días"
+  },
+  "91.121.88.10": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Velvet Needle",
+    "detecciones": "47/90",
+    "primeraVezVisto": "hace 164 días"
+  },
+  "secure-doc-process.com": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Velvet Needle",
+    "detecciones": "62/90",
+    "primeraVezVisto": "hace 91 días"
+  },
+  "invoice-approval.tech": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Velvet Needle",
+    "detecciones": "58/90",
+    "primeraVezVisto": "hace 107 días"
+  },
+  "microsoft-verify.info": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Velvet Needle",
+    "detecciones": "65/90",
+    "primeraVezVisto": "hace 82 días"
+  },
+  "185.220.100.33": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Quantum Leak",
+    "detecciones": "77/90",
+    "primeraVezVisto": "hace 23 días"
+  },
+  "194.36.110.77": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Quantum Leak",
+    "detecciones": "68/90",
+    "primeraVezVisto": "hace 48 días"
+  },
+  "5.161.76.100": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Quantum Leak",
+    "detecciones": "73/90",
+    "primeraVezVisto": "hace 35 días"
+  },
+  "leak-squad.biz": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Quantum Leak",
+    "detecciones": "79/90",
+    "primeraVezVisto": "hace 14 días"
+  },
+  "decrypt-supply.top": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Quantum Leak",
+    "detecciones": "71/90",
+    "primeraVezVisto": "hace 39 días"
+  },
+  "ransom-panel.co": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Quantum Leak",
+    "detecciones": "66/90",
+    "primeraVezVisto": "hace 55 días"
+  },
+  "62.210.38.99": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Shadow Hand",
+    "detecciones": "46/90",
+    "primeraVezVisto": "hace 187 días"
+  },
+  "149.28.18.200": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Shadow Hand",
+    "detecciones": "54/90",
+    "primeraVezVisto": "hace 142 días"
+  },
+  "docs-internal.tech": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Shadow Hand",
+    "detecciones": "60/90",
+    "primeraVezVisto": "hace 115 días"
+  },
+  "updates-azure.com": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Shadow Hand",
+    "detecciones": "52/90",
+    "primeraVezVisto": "hace 128 días"
+  },
+  "research-preview.org": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Shadow Hand",
+    "detecciones": "57/90",
+    "primeraVezVisto": "hace 136 días"
+  },
+  "203.0.113.88": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Night Forge",
+    "detecciones": "63/90",
+    "primeraVezVisto": "hace 73 días"
+  },
+  "198.51.100.44": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Night Forge",
+    "detecciones": "59/90",
+    "primeraVezVisto": "hace 99 días"
+  },
+  "jenkins-updates.internal": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Night Forge",
+    "detecciones": "67/90",
+    "primeraVezVisto": "hace 64 días"
+  },
+  "artifactory-backup.tech": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Night Forge",
+    "detecciones": "61/90",
+    "primeraVezVisto": "hace 84 días"
+  },
+  "108.61.166.10": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Cobalt Rain",
+    "detecciones": "56/90",
+    "primeraVezVisto": "hace 108 días"
+  },
+  "45.77.250.99": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Cobalt Rain",
+    "detecciones": "48/90",
+    "primeraVezVisto": "hace 175 días"
+  },
+  "azure-stats.net": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Cobalt Rain",
+    "detecciones": "53/90",
+    "primeraVezVisto": "hace 122 días"
+  },
+  "cdn-cloud-svc.com": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Cobalt Rain",
+    "detecciones": "64/90",
+    "primeraVezVisto": "hace 92 días"
+  },
+  "msteams-update.top": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Cobalt Rain",
+    "detecciones": "72/90",
+    "primeraVezVisto": "hace 45 días"
+  },
+  "185.215.113.89": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Phantom Hook",
+    "detecciones": "69/90",
+    "primeraVezVisto": "hace 51 días"
+  },
+  "45.155.168.22": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Phantom Hook",
+    "detecciones": "44/90",
+    "primeraVezVisto": "hace 206 días"
+  },
+  "5.189.200.10": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Phantom Hook",
+    "detecciones": "50/90",
+    "primeraVezVisto": "hace 158 días"
+  },
+  "office-verify-tenant.com": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Phantom Hook",
+    "detecciones": "76/90",
+    "primeraVezVisto": "hace 30 días"
+  },
+  "docs-sharepoint-preview.top": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Phantom Hook",
+    "detecciones": "70/90",
+    "primeraVezVisto": "hace 42 días"
+  },
+  "login-helpdesk-support.net": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Phantom Hook",
+    "detecciones": "65/90",
+    "primeraVezVisto": "hace 68 días"
+  },
+  "teams-auth-web.com": {
+    "tipo": "malicious",
+    "categoria": "C2",
+    "actor": "Phantom Hook",
+    "detecciones": "72/90",
+    "primeraVezVisto": "hace 37 días"
+  },
+  "43.240.100.77": { "tipo": "unknown" },
+  "104.21.44.55": { "tipo": "unknown" },
+  "172.67.188.22": { "tipo": "unknown" },
+  "51.89.200.10": { "tipo": "unknown" },
+  "52.48.100.22": { "tipo": "unknown" },
+  "54.78.50.33": { "tipo": "unknown" },
+  "55.90.120.44": { "tipo": "unknown" },
+  "56.120.80.55": { "tipo": "unknown" },
+  "57.200.150.66": { "tipo": "unknown" },
+  "58.180.100.77": { "tipo": "unknown" },
+  "1.2.3.4": { "tipo": "unknown" },
+  "8.8.8.9": { "tipo": "unknown" },
+  "23.21.45.67": { "tipo": "unknown" },
+  "34.120.88.12": { "tipo": "unknown" },
+  "45.76.123.88": { "tipo": "unknown" },
+  "52.17.45.200": { "tipo": "unknown" },
+  "54.234.101.55": { "tipo": "unknown" },
+  "64.233.160.4": { "tipo": "unknown" },
+  "66.96.128.77": { "tipo": "unknown" },
+  "74.125.200.100": { "tipo": "unknown" },
+  "77.88.55.11": { "tipo": "unknown" },
+  "79.124.67.33": { "tipo": "unknown" },
+  "85.25.100.44": { "tipo": "unknown" },
+  "87.98.200.66": { "tipo": "unknown" },
+  "88.198.50.99": { "tipo": "unknown" },
+  "91.121.100.22": { "tipo": "unknown" },
+  "94.23.200.88": { "tipo": "unknown" },
+  "95.211.150.77": { "tipo": "unknown" },
+  "98.139.180.200": { "tipo": "unknown" },
+  "101.99.88.44": { "tipo": "unknown" },
+  "103.224.182.33": { "tipo": "unknown" },
+  "104.131.50.77": { "tipo": "unknown" },
+  "107.170.200.100": { "tipo": "unknown" },
+  "108.61.200.88": { "tipo": "unknown" },
+  "109.123.100.55": { "tipo": "unknown" },
+  "111.90.150.66": { "tipo": "unknown" },
+  "112.78.200.44": { "tipo": "unknown" },
+  "113.20.100.33": { "tipo": "unknown" },
+  "114.134.88.77": { "tipo": "unknown" },
+  "115.124.200.99": { "tipo": "unknown" },
+  "116.203.150.22": { "tipo": "unknown" },
+  "117.18.200.11": { "tipo": "unknown" },
+  "118.193.100.88": { "tipo": "unknown" },
+  "119.81.200.44": { "tipo": "unknown" },
+  "120.138.150.66": { "tipo": "unknown" },
+  "121.127.100.77": { "tipo": "unknown" },
+  "122.248.200.33": { "tipo": "unknown" },
+  "123.100.88.44": { "tipo": "unknown" },
+  "124.150.200.55": { "tipo": "unknown" },
+  "125.200.150.66": { "tipo": "unknown" },
+  "128.199.100.77": { "tipo": "unknown" },
+  "129.151.200.88": { "tipo": "unknown" },
+  "130.211.150.99": { "tipo": "unknown" },
+  "131.186.100.11": { "tipo": "unknown" },
+  "132.148.200.22": { "tipo": "unknown" },
+  "133.167.150.33": { "tipo": "unknown" },
+  "134.209.100.44": { "tipo": "unknown" },
+  "135.181.200.55": { "tipo": "unknown" },
+  "136.244.150.66": { "tipo": "unknown" },
+  "137.74.100.77": { "tipo": "unknown" },
+  "update-checker.net": { "tipo": "unknown" },
+  "cloud-sync-backup.com": { "tipo": "unknown" },
+  "portal-admin-panel.org": { "tipo": "unknown" },
+  "analytics-collector.io": { "tipo": "unknown" },
+  "secure-vpn-access.top": { "tipo": "unknown" },
+  "telemetry-service.xyz": { "tipo": "unknown" },
+  "api-status-check.net": { "tipo": "unknown" },
+  "backup-sync-service.com": { "tipo": "unknown" },
+  "cdn-assets-delivery.org": { "tipo": "unknown" },
+  "cloud-telemetry-collector.io": { "tipo": "unknown" },
+  "config-update-service.tech": { "tipo": "unknown" },
+  "data-aggregator-api.com": { "tipo": "unknown" },
+  "devops-pipeline-tools.net": { "tipo": "unknown" },
+  "dns-resolver-alternative.org": { "tipo": "unknown" },
+  "docs-collaboration-hub.com": { "tipo": "unknown" },
+  "edge-compute-nodes.io": { "tipo": "unknown" },
+  "enterprise-monitoring-suite.net": { "tipo": "unknown" },
+  "file-transfer-relay.org": { "tipo": "unknown" },
+  "global-load-balancer.tech": { "tipo": "unknown" },
+  "helpdesk-ticketing-portal.com": { "tipo": "unknown" },
+  "infrastructure-status-page.net": { "tipo": "unknown" },
+  "internal-auth-gateway.org": { "tipo": "unknown" },
+  "iot-device-manager.io": { "tipo": "unknown" },
+  "logging-aggregator-service.net": { "tipo": "unknown" },
+  "mail-relay-filter.com": { "tipo": "unknown" },
+  "metrics-collector-agent.org": { "tipo": "unknown" },
+  "microservice-registry-api.io": { "tipo": "unknown" },
+  "network-probe-collector.tech": { "tipo": "unknown" },
+  "ntp-sync-pool-global.com": { "tipo": "unknown" },
+  "package-mirror-repository.net": { "tipo": "unknown" },
+  "patch-management-dashboard.org": { "tipo": "unknown" },
+  "performance-testing-suite.io": { "tipo": "unknown" },
+  "private-registry-storage.com": { "tipo": "unknown" },
+  "proxy-rotation-service.net": { "tipo": "unknown" },
+  "public-api-gateway.org": { "tipo": "unknown" },
+  "real-time-analytics-engine.io": { "tipo": "unknown" },
+  "remote-desktop-gateway.tech": { "tipo": "unknown" },
+  "reporting-dashboard-view.com": { "tipo": "unknown" },
+  "repository-cache-service.net": { "tipo": "unknown" },
+  "secure-file-exchange.org": { "tipo": "unknown" },
+  "security-scanner-api.io": { "tipo": "unknown" },
+  "service-discovery-registry.com": { "tipo": "unknown" },
+  "shared-storage-cluster.net": { "tipo": "unknown" },
+  "smtp-relay-filter.org": { "tipo": "unknown" },
+  "ssh-key-manager-api.io": { "tipo": "unknown" },
+  "static-content-delivery.tech": { "tipo": "unknown" },
+  "status-notification-service.com": { "tipo": "unknown" },
+  "telemetry-forwarder-agent.net": { "tipo": "unknown" },
+  "time-sync-pool-global.org": { "tipo": "unknown" },
+  "update-distribution-network.io": { "tipo": "unknown" },
+  "user-session-manager.tech": { "tipo": "unknown" },
+  "validation-service-api.com": { "tipo": "unknown" },
+  "vpn-gateway-pool.net": { "tipo": "unknown" },
+  "web-hook-relay-service.org": { "tipo": "unknown" },
+  "web-proxy-filter-api.io": { "tipo": "unknown" },
+  "workflow-orchestration-engine.com": { "tipo": "unknown" }
+}

@@ -1,0 +1,28 @@
+{
+  "fases": [
+    {
+      "nombre": "Preparación del payload",
+      "descripcion": "El atacante crea el script malicioso en el escritorio del usuario.",
+      "logId": 4,
+      "pista": "Busca creación de archivo script.ps1 en IT-WS-07."
+    },
+    {
+      "nombre": "Persistencia en registro",
+      "descripcion": "Se modifica la clave Run para ejecutar el script al inicio del sistema.",
+      "logId": 5,
+      "pista": "Busca modificación de valor de registro en la clave Run (Sysmon 13)."
+    },
+    {
+      "nombre": "Ejecución de comando",
+      "descripcion": "Se ejecuta reg.exe para añadir el valor de persistencia.",
+      "logId": 7,
+      "pista": "Busca proceso reg.exe con línea de comandos que incluya la clave Run."
+    },
+    {
+      "nombre": "Comunicación externa",
+      "descripcion": "El equipo consulta el dominio malicioso y establece conexión.",
+      "logId": 9,
+      "pista": "Busca consulta DNS a malicious.com (Sysmon 22) o conexión a IP 185.165.29.88."
+    }
+  ]
+}

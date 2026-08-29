@@ -1,0 +1,28 @@
+{
+  "fases": [
+    {
+      "nombre": "Ingreso inicial",
+      "descripcion": "El atacante inicia el ataque de fuerza bruta contra el servidor proxy.",
+      "logId": 4,
+      "pista": "Busca el primer evento de 'Invalid user' desde una IP externa (185.220.101.7)."
+    },
+    {
+      "nombre": "Ejecución de payload",
+      "descripcion": "El atacante logra autenticarse exitosamente con el usuario 'mgarcia'.",
+      "logId": 11,
+      "pista": "Busca un evento con rule.id 5715 y 'Accepted password' para mgarcia."
+    },
+    {
+      "nombre": "Persistencia",
+      "descripcion": "El atacante abre una sesión interactiva en el sistema.",
+      "logId": 12,
+      "pista": "Inmediatamente después del éxito, busca un evento 'PAM: session opened'."
+    },
+    {
+      "nombre": "Exfiltración",
+      "descripcion": "No se evidencia exfiltración en este caso.",
+      "logId": null,
+      "pista": "No hay log asociado; se considera completada si se han identificado las anteriores."
+    }
+  ]
+}

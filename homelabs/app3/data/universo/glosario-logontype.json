@@ -1,0 +1,38 @@
+{
+  "2": {
+    "nombre": "Interactive",
+    "descripcion": "Inicio de sesión local directo (en la consola física del equipo). Esperado en estaciones de trabajo durante la jornada laboral. Alertante si ocurre en servidores sin consola o fuera de horario."
+  },
+  "3": {
+    "nombre": "Network",
+    "descripcion": "Acceso a recursos compartidos de red (SMB, autenticación a través de la red). Común en tráfico SMB y en movimiento lateral. Múltiples LogonType 3 desde un mismo origen pueden indicar uso de credenciales robadas."
+  },
+  "4": {
+    "nombre": "Batch",
+    "descripcion": "Inicio de sesión programado (tareas programadas, procesos batch). Legítimo en tareas de mantenimiento automatizadas. Sospechoso si el usuario no tiene tareas programadas conocidas."
+  },
+  "5": {
+    "nombre": "Service",
+    "descripcion": "Inicio de sesión de un servicio de Windows. Propio de cuentas de servicio (svc_*). Normales en entornos de producción. Anómalo si es una cuenta de usuario estándar o si el servicio es desconocido."
+  },
+  "7": {
+    "nombre": "Unlock",
+    "descripcion": "Desbloqueo de una sesión que estaba bloqueada (ej. después de presionar Ctrl+Alt+Supr). No implica un nuevo inicio de sesión completo; se genera cuando la estación de trabajo se desbloquea."
+  },
+  "8": {
+    "nombre": "NetworkCleartext",
+    "descripcion": "Autenticación de red con credenciales en texto claro (ej. autenticación básica HTTP en IIS). Riesgo alto porque las credenciales pueden ser capturadas. Es raro en entornos modernos y debería ser investigado."
+  },
+  "9": {
+    "nombre": "NewCredentials",
+    "descripcion": "Inicio de sesión con credenciales alternativas (RunAs con /netonly). Usado para ejecutar procesos con credenciales de otro usuario sin cambiar el contexto interactivo. Común en administradores que usan una cuenta de servicio."
+  },
+  "10": {
+    "nombre": "RemoteInteractive",
+    "descripcion": "Inicio de sesión remoto interactivo (RDP). LogonType por excelencia en ataques de movimiento lateral y compromiso de servidores. Alertante si ocurre en un servidor que no debería tener RDP habilitado."
+  },
+  "11": {
+    "nombre": "CachedInteractive",
+    "descripcion": "Inicio de sesión con credenciales cacheadas (sin contactar al controlador de dominio). Ocurre cuando el equipo no tiene conectividad de red para validar el login. Puede indicar credenciales almacenadas en el sistema."
+  }
+}

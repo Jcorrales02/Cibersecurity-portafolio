@@ -1,0 +1,28 @@
+{
+  "fases": [
+    {
+      "nombre": "Ingreso inicial",
+      "descripcion": "El atacante se conecta al servidor de aplicaciones mediante RDP desde una IP externa (192.0.2.55).",
+      "logId": 1,
+      "pista": "Busca el evento 4624 con LogonType=10 y la IP externa indicada."
+    },
+    {
+      "nombre": "Ejecución de payload",
+      "descripcion": "El atacante instala un servicio malicioso 'UpdateService' (EventID 4697).",
+      "logId": 3,
+      "pista": "Localiza el evento 4697 de instalación de servicio."
+    },
+    {
+      "nombre": "Persistencia",
+      "descripcion": "El servicio queda configurado para iniciarse automáticamente (mismo evento 4697).",
+      "logId": 3,
+      "pista": "El mismo evento 4697 contiene la información de inicio automático."
+    },
+    {
+      "nombre": "Exfiltración",
+      "descripcion": "No se evidencia exfiltración en este caso.",
+      "logId": null,
+      "pista": "No hay log asociado."
+    }
+  ]
+}

@@ -1,0 +1,692 @@
+{
+  "logs": [
+    {
+      "id": 1,
+      "timestamp": "2026-08-18T01:15:00.000+0000",
+      "agent": {
+        "id": "001",
+        "name": "FIN-DESK-22",
+        "ip": "10.20.4.22"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 3,
+        "description": "Windows: Logon success (4624)",
+        "id": "4624",
+        "groups": ["windows", "authentication_success"]
+      },
+      "decoder": { "name": "windows_eventchannel" },
+      "location": "EventChannel",
+      "full_log": "LogName=Security, EventCode=4624, Account Name=lgomez, Source Network Address=10.20.6.3, Logon Type=2",
+      "data": {
+        "win": {
+          "system": { "EventID": 4624, "Computer": "FIN-DESK-22" },
+          "eventdata": {
+            "SubjectUserName": "SYSTEM",
+            "TargetUserName": "lgomez",
+            "TargetDomainName": "TRIAGERANGE",
+            "LogonType": "2",
+            "IpAddress": "10.20.6.3",
+            "IpPort": "49153",
+            "WorkstationName": "IT-ADMIN-03",
+            "LogonProcessName": "User32"
+          }
+        }
+      }
+    },
+    {
+      "id": 2,
+      "timestamp": "2026-08-18T01:20:00.000+0000",
+      "agent": {
+        "id": "003",
+        "name": "DEV-WS-01",
+        "ip": "10.20.20.101"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 3,
+        "description": "sudo: Command executed by user",
+        "id": "5402",
+        "groups": ["sudo"]
+      },
+      "decoder": { "name": "sudo" },
+      "location": "/var/log/secure",
+      "full_log": "dmendoza : TTY=pts/0 ; PWD=/home/dmendoza ; USER=root ; COMMAND=/usr/bin/systemctl restart docker",
+      "data": {
+        "srcuser": "dmendoza",
+        "dstuser": "root",
+        "command": "/usr/bin/systemctl restart docker",
+        "program": "sudo"
+      }
+    },
+    {
+      "id": 3,
+      "timestamp": "2026-08-18T01:30:00.000+0000",
+      "agent": {
+        "id": "005",
+        "name": "MKT-LT-002",
+        "ip": "10.20.7.202"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 3,
+        "description": "sshd: authentication success",
+        "id": "5715",
+        "groups": ["authentication_success"]
+      },
+      "decoder": { "name": "sshd" },
+      "location": "/var/log/secure",
+      "full_log": "sshd[1230]: Accepted password for cvargas from 10.20.7.201 port 49152 ssh2",
+      "data": {
+        "srcip": "10.20.7.201",
+        "srcport": "49152",
+        "dstuser": "cvargas",
+        "program": "sshd"
+      }
+    },
+    {
+      "id": 4,
+      "timestamp": "2026-08-18T02:10:00.000+0000",
+      "agent": {
+        "id": "006",
+        "name": "SRV-PROXY01",
+        "ip": "10.20.30.1"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 5,
+        "description": "sshd: Invalid user",
+        "id": "5710",
+        "groups": ["authentication_failed", "invalid_login"],
+        "mitre": {
+          "id": ["T1110.001"],
+          "tactic": ["Credential Access"],
+          "technique": ["Brute Force"]
+        }
+      },
+      "decoder": { "name": "sshd" },
+      "location": "/var/log/secure",
+      "full_log": "sshd[1234]: Invalid user test from 185.220.101.7 port 54321",
+      "data": {
+        "srcip": "185.220.101.7",
+        "srcport": "54321",
+        "dstuser": "test",
+        "program": "sshd"
+      },
+      "geoip": {
+        "country": "Bulgaria",
+        "city": "Sofia"
+      }
+    },
+    {
+      "id": 5,
+      "timestamp": "2026-08-18T02:10:30.000+0000",
+      "agent": {
+        "id": "006",
+        "name": "SRV-PROXY01",
+        "ip": "10.20.30.1"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 5,
+        "description": "sshd: Failed password",
+        "id": "5711",
+        "groups": ["authentication_failed"],
+        "mitre": {
+          "id": ["T1110.001"],
+          "tactic": ["Credential Access"],
+          "technique": ["Brute Force"]
+        }
+      },
+      "decoder": { "name": "sshd" },
+      "location": "/var/log/secure",
+      "full_log": "sshd[1235]: Failed password for mgarcia from 185.220.101.7 port 54322 ssh2",
+      "data": {
+        "srcip": "185.220.101.7",
+        "srcport": "54322",
+        "dstuser": "mgarcia",
+        "program": "sshd"
+      },
+      "geoip": {
+        "country": "Bulgaria",
+        "city": "Sofia"
+      }
+    },
+    {
+      "id": 6,
+      "timestamp": "2026-08-18T02:11:00.000+0000",
+      "agent": {
+        "id": "006",
+        "name": "SRV-PROXY01",
+        "ip": "10.20.30.1"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 5,
+        "description": "sshd: Invalid user",
+        "id": "5710",
+        "groups": ["authentication_failed", "invalid_login"],
+        "mitre": {
+          "id": ["T1110.001"],
+          "tactic": ["Credential Access"],
+          "technique": ["Brute Force"]
+        }
+      },
+      "decoder": { "name": "sshd" },
+      "location": "/var/log/secure",
+      "full_log": "sshd[1236]: Invalid user admin from 45.33.22.11 port 49321",
+      "data": {
+        "srcip": "45.33.22.11",
+        "srcport": "49321",
+        "dstuser": "admin",
+        "program": "sshd"
+      },
+      "geoip": {
+        "country": "Russia",
+        "city": "Moscow"
+      }
+    },
+    {
+      "id": 7,
+      "timestamp": "2026-08-18T02:11:30.000+0000",
+      "agent": {
+        "id": "006",
+        "name": "SRV-PROXY01",
+        "ip": "10.20.30.1"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 5,
+        "description": "sshd: Failed password",
+        "id": "5711",
+        "groups": ["authentication_failed"],
+        "mitre": {
+          "id": ["T1110.001"],
+          "tactic": ["Credential Access"],
+          "technique": ["Brute Force"]
+        }
+      },
+      "decoder": { "name": "sshd" },
+      "location": "/var/log/secure",
+      "full_log": "sshd[1237]: Failed password for root from 185.220.101.7 port 54323 ssh2",
+      "data": {
+        "srcip": "185.220.101.7",
+        "srcport": "54323",
+        "dstuser": "root",
+        "program": "sshd"
+      },
+      "geoip": {
+        "country": "Bulgaria",
+        "city": "Sofia"
+      }
+    },
+    {
+      "id": 8,
+      "timestamp": "2026-08-18T02:12:00.000+0000",
+      "agent": {
+        "id": "006",
+        "name": "SRV-PROXY01",
+        "ip": "10.20.30.1"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 5,
+        "description": "sshd: Failed password",
+        "id": "5711",
+        "groups": ["authentication_failed"],
+        "mitre": {
+          "id": ["T1110.001"],
+          "tactic": ["Credential Access"],
+          "technique": ["Brute Force"]
+        }
+      },
+      "decoder": { "name": "sshd" },
+      "location": "/var/log/secure",
+      "full_log": "sshd[1238]: Failed password for mgarcia from 185.220.101.7 port 54324 ssh2",
+      "data": {
+        "srcip": "185.220.101.7",
+        "srcport": "54324",
+        "dstuser": "mgarcia",
+        "program": "sshd"
+      },
+      "geoip": {
+        "country": "Bulgaria",
+        "city": "Sofia"
+      }
+    },
+    {
+      "id": 9,
+      "timestamp": "2026-08-18T02:12:30.000+0000",
+      "agent": {
+        "id": "006",
+        "name": "SRV-PROXY01",
+        "ip": "10.20.30.1"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 5,
+        "description": "sshd: Invalid user",
+        "id": "5710",
+        "groups": ["authentication_failed", "invalid_login"],
+        "mitre": {
+          "id": ["T1110.001"],
+          "tactic": ["Credential Access"],
+          "technique": ["Brute Force"]
+        }
+      },
+      "decoder": { "name": "sshd" },
+      "location": "/var/log/secure",
+      "full_log": "sshd[1239]: Invalid user oracle from 185.220.101.7 port 54325",
+      "data": {
+        "srcip": "185.220.101.7",
+        "srcport": "54325",
+        "dstuser": "oracle",
+        "program": "sshd"
+      },
+      "geoip": {
+        "country": "Bulgaria",
+        "city": "Sofia"
+      }
+    },
+    {
+      "id": 10,
+      "timestamp": "2026-08-18T02:13:00.000+0000",
+      "agent": {
+        "id": "006",
+        "name": "SRV-PROXY01",
+        "ip": "10.20.30.1"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 5,
+        "description": "sshd: Failed password",
+        "id": "5711",
+        "groups": ["authentication_failed"],
+        "mitre": {
+          "id": ["T1110.001"],
+          "tactic": ["Credential Access"],
+          "technique": ["Brute Force"]
+        }
+      },
+      "decoder": { "name": "sshd" },
+      "location": "/var/log/secure",
+      "full_log": "sshd[1240]: Failed password for mgarcia from 45.33.22.11 port 49322 ssh2",
+      "data": {
+        "srcip": "45.33.22.11",
+        "srcport": "49322",
+        "dstuser": "mgarcia",
+        "program": "sshd"
+      },
+      "geoip": {
+        "country": "Russia",
+        "city": "Moscow"
+      }
+    },
+    {
+      "id": 11,
+      "timestamp": "2026-08-18T02:13:30.000+0000",
+      "agent": {
+        "id": "006",
+        "name": "SRV-PROXY01",
+        "ip": "10.20.30.1"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 3,
+        "description": "sshd: authentication success",
+        "id": "5715",
+        "groups": ["authentication_success"],
+        "mitre": {
+          "id": ["T1078"],
+          "tactic": ["Defense Evasion", "Persistence"],
+          "technique": ["Valid Accounts"]
+        }
+      },
+      "decoder": { "name": "sshd" },
+      "location": "/var/log/secure",
+      "full_log": "sshd[1241]: Accepted password for mgarcia from 185.220.101.7 port 54326 ssh2",
+      "data": {
+        "srcip": "185.220.101.7",
+        "srcport": "54326",
+        "dstuser": "mgarcia",
+        "program": "sshd"
+      },
+      "geoip": {
+        "country": "Bulgaria",
+        "city": "Sofia"
+      }
+    },
+    {
+      "id": 12,
+      "timestamp": "2026-08-18T02:13:35.000+0000",
+      "agent": {
+        "id": "006",
+        "name": "SRV-PROXY01",
+        "ip": "10.20.30.1"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 3,
+        "description": "PAM: session opened",
+        "id": "5501",
+        "groups": ["pam"]
+      },
+      "decoder": { "name": "pam" },
+      "location": "/var/log/secure",
+      "full_log": "sshd[1241]: pam_unix(sshd:session): session opened for user mgarcia by (uid=0)",
+      "data": {
+        "dstuser": "mgarcia",
+        "uid": "0",
+        "program": "pam"
+      }
+    },
+    {
+      "id": 13,
+      "timestamp": "2026-08-18T02:30:00.000+0000",
+      "agent": {
+        "id": "007",
+        "name": "HR-WS-03",
+        "ip": "10.20.5.3"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 3,
+        "description": "Windows: Logon success (4624)",
+        "id": "4624",
+        "groups": ["windows", "authentication_success"]
+      },
+      "decoder": { "name": "windows_eventchannel" },
+      "location": "EventChannel",
+      "full_log": "LogName=Security, EventCode=4624, Account Name=erojas, Source Network Address=10.20.5.14, Logon Type=2",
+      "data": {
+        "win": {
+          "system": { "EventID": 4624, "Computer": "HR-WS-03" },
+          "eventdata": {
+            "SubjectUserName": "SYSTEM",
+            "TargetUserName": "erojas",
+            "TargetDomainName": "TRIAGERANGE",
+            "LogonType": "2",
+            "IpAddress": "10.20.5.14",
+            "IpPort": "49154",
+            "WorkstationName": "HR-LT-014",
+            "LogonProcessName": "User32"
+          }
+        }
+      }
+    },
+    {
+      "id": 14,
+      "timestamp": "2026-08-18T02:45:00.000+0000",
+      "agent": {
+        "id": "008",
+        "name": "SRV-WEB01",
+        "ip": "10.20.10.20"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 3,
+        "description": "sudo: Command executed by user",
+        "id": "5402",
+        "groups": ["sudo"]
+      },
+      "decoder": { "name": "sudo" },
+      "location": "/var/log/secure",
+      "full_log": "jcorrales : TTY=pts/1 ; PWD=/var/www/html ; USER=root ; COMMAND=/usr/bin/systemctl reload nginx",
+      "data": {
+        "srcuser": "jcorrales",
+        "dstuser": "root",
+        "command": "/usr/bin/systemctl reload nginx",
+        "program": "sudo"
+      }
+    },
+    {
+      "id": 15,
+      "timestamp": "2026-08-18T03:00:00.000+0000",
+      "agent": {
+        "id": "009",
+        "name": "SALES-LT-09",
+        "ip": "10.20.7.109"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 3,
+        "description": "sshd: authentication success",
+        "id": "5715",
+        "groups": ["authentication_success"]
+      },
+      "decoder": { "name": "sshd" },
+      "location": "/var/log/secure",
+      "full_log": "sshd[1242]: Accepted password for pherrera from 10.20.7.110 port 49155 ssh2",
+      "data": {
+        "srcip": "10.20.7.110",
+        "srcport": "49155",
+        "dstuser": "pherrera",
+        "program": "sshd"
+      }
+    },
+    {
+      "id": 16,
+      "timestamp": "2026-08-18T03:10:00.000+0000",
+      "agent": {
+        "id": "010",
+        "name": "DEV-LT-02",
+        "ip": "10.20.20.102"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 3,
+        "description": "sudo: Command executed by user",
+        "id": "5402",
+        "groups": ["sudo"]
+      },
+      "decoder": { "name": "sudo" },
+      "location": "/var/log/secure",
+      "full_log": "srivera : TTY=pts/2 ; PWD=/home/srivera ; USER=root ; COMMAND=/usr/bin/apt update",
+      "data": {
+        "srcuser": "srivera",
+        "dstuser": "root",
+        "command": "/usr/bin/apt update",
+        "program": "sudo"
+      }
+    },
+    {
+      "id": 17,
+      "timestamp": "2026-08-18T03:20:00.000+0000",
+      "agent": {
+        "id": "006",
+        "name": "SRV-PROXY01",
+        "ip": "10.20.30.1"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 5,
+        "description": "sshd: Failed password",
+        "id": "5711",
+        "groups": ["authentication_failed"],
+        "mitre": {
+          "id": ["T1110.001"],
+          "tactic": ["Credential Access"],
+          "technique": ["Brute Force"]
+        }
+      },
+      "decoder": { "name": "sshd" },
+      "location": "/var/log/secure",
+      "full_log": "sshd[1243]: Failed password for mgarcia from 185.220.101.7 port 54327 ssh2",
+      "data": {
+        "srcip": "185.220.101.7",
+        "srcport": "54327",
+        "dstuser": "mgarcia",
+        "program": "sshd"
+      },
+      "geoip": {
+        "country": "Bulgaria",
+        "city": "Sofia"
+      }
+    },
+    {
+      "id": 18,
+      "timestamp": "2026-08-18T03:25:00.000+0000",
+      "agent": {
+        "id": "011",
+        "name": "MKT-DESK-01",
+        "ip": "10.20.7.201"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 3,
+        "description": "Windows: Logon success (4624)",
+        "id": "4624",
+        "groups": ["windows", "authentication_success"]
+      },
+      "decoder": { "name": "windows_eventchannel" },
+      "location": "EventChannel",
+      "full_log": "LogName=Security, EventCode=4624, Account Name=vcastro, Source Network Address=10.20.7.110, Logon Type=2",
+      "data": {
+        "win": {
+          "system": { "EventID": 4624, "Computer": "MKT-DESK-01" },
+          "eventdata": {
+            "SubjectUserName": "SYSTEM",
+            "TargetUserName": "vcastro",
+            "TargetDomainName": "TRIAGERANGE",
+            "LogonType": "2",
+            "IpAddress": "10.20.7.110",
+            "IpPort": "49156",
+            "WorkstationName": "SALES-LT-09",
+            "LogonProcessName": "User32"
+          }
+        }
+      }
+    },
+    {
+      "id": 19,
+      "timestamp": "2026-08-18T03:45:00.000+0000",
+      "agent": {
+        "id": "006",
+        "name": "SRV-PROXY01",
+        "ip": "10.20.30.1"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 3,
+        "description": "PAM: session closed",
+        "id": "5502",
+        "groups": ["pam"]
+      },
+      "decoder": { "name": "pam" },
+      "location": "/var/log/secure",
+      "full_log": "sshd[1241]: pam_unix(sshd:session): session closed for user mgarcia",
+      "data": {
+        "dstuser": "mgarcia",
+        "program": "pam"
+      }
+    },
+    {
+      "id": 20,
+      "timestamp": "2026-08-18T04:00:00.000+0000",
+      "agent": {
+        "id": "012",
+        "name": "IT-ADMIN-05",
+        "ip": "10.20.6.5"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 3,
+        "description": "sudo: Command executed by user",
+        "id": "5402",
+        "groups": ["sudo"]
+      },
+      "decoder": { "name": "sudo" },
+      "location": "/var/log/secure",
+      "full_log": "amorales : TTY=pts/3 ; PWD=/home/amorales ; USER=root ; COMMAND=/usr/bin/systemctl status sshd",
+      "data": {
+        "srcuser": "amorales",
+        "dstuser": "root",
+        "command": "/usr/bin/systemctl status sshd",
+        "program": "sudo"
+      }
+    }
+  ],
+
+  "questions": [
+    {
+      "text": "¿Cuál es la dirección IP del atacante que realizó la fuerza bruta y logró autenticarse exitosamente?",
+      "answer": "185.220.101.7",
+      "acceptable": [],
+      "hint": "Busca la IP que aparece en múltiples fallos (5710/5711) y también en el éxito (5715)."
+    },
+    {
+      "text": "¿Qué usuario válido fue comprometido tras el ataque de fuerza bruta?",
+      "answer": "mgarcia",
+      "acceptable": [],
+      "hint": "Revisa el evento de éxito (5715) y observa el campo dstuser; ese usuario también aparece en varios fallos desde la IP atacante."
+    },
+    {
+      "text": "¿Qué host fue el objetivo principal del ataque de fuerza bruta SSH?",
+      "answer": "SRV-PROXY01",
+      "acceptable": ["srv-proxy01"],
+      "hint": "Filtra por logs con decoder sshd y ubicación /var/log/secure; el agente que concentra la mayoría de estos eventos es el objetivo."
+    },
+    {
+      "text": "¿Qué técnica MITRE ATT&CK corresponde al ataque principal?",
+      "answer": "T1110",
+      "acceptable": ["t1110", "Brute Force", "fuerza bruta", "1110"],
+      "hint": "Los fallos repetidos de autenticación desde una misma IP corresponden a la técnica de fuerza bruta."
+    },
+    {
+      "text": "¿Cuál fue el primer intento fallido de autenticación registrado contra el servidor proxy?",
+      "answer": "test",
+      "acceptable": [],
+      "hint": "Busca el primer log con rule.id 5710 (Invalid user) en orden cronológico y revisa el campo dstuser."
+    },
+    {
+      "text": "¿Qué ID de regla de Wazuh se dispara al detectar un intento de autenticación SSH exitosa en este caso?",
+      "answer": "5715",
+      "acceptable": [],
+      "hint": "Identifica el log que contiene 'Accepted password' y observa su rule.id."
+    },
+    {
+      "text": "¿Cuántos intentos fallidos de autenticación para el usuario 'mgarcia' se registraron desde la IP atacante antes del éxito?",
+      "answer": "3",
+      "acceptable": ["tres", "3 intentos", "tres intentos"],
+      "hint": "Cuenta los eventos con rule.id 5711 (Failed password) donde dstuser=mgarcia y srcip=185.220.101.7, antes del evento 5715."
+    },
+    {
+      "text": "¿Qué evento marca el inicio de la sesión exitosa del atacante después de la autenticación?",
+      "answer": "PAM: session opened",
+      "acceptable": ["session opened", "5501"],
+      "hint": "Inmediatamente después del éxito (5715), busca un evento que confirme la apertura de sesión (decoder pam)."
+    },
+    {
+      "text": "¿Cuál es la IP de la segunda fuente de ataque que también intentó acceder a SRV-PROXY01 en la misma franja horaria?",
+      "answer": "45.33.22.11",
+      "acceptable": [],
+      "hint": "Busca otro srcip diferente a 185.220.101.7 que también aparezca en logs de fallo contra SRV-PROXY01."
+    },
+    {
+      "text": "¿Qué usuario legítimo ejecutó un comando sudo en SRV-WEB01 durante la misma madrugada?",
+      "answer": "jcorrales",
+      "acceptable": [],
+      "hint": "Filtra por agent.name:SRV-WEB01 y decoder sudo; observa el campo srcuser."
+    }
+  ]
+}

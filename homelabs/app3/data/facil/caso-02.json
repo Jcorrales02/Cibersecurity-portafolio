@@ -1,0 +1,688 @@
+{
+  "logs": [
+    {
+      "id": 1,
+      "timestamp": "2026-08-19T03:15:00.000+0000",
+      "agent": {
+        "id": "008",
+        "name": "SRV-DC01",
+        "ip": "10.20.10.10"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 3,
+        "description": "Windows: Logon success (4624)",
+        "id": "4624",
+        "groups": ["windows", "authentication_success"]
+      },
+      "decoder": { "name": "windows_eventchannel" },
+      "location": "EventChannel",
+      "full_log": "LogName=Security, EventCode=4624, Account Name=jcorrales, Source Network Address=198.51.100.10, Logon Type=10",
+      "data": {
+        "win": {
+          "system": { "EventID": 4624, "Computer": "SRV-DC01" },
+          "eventdata": {
+            "SubjectUserName": "SYSTEM",
+            "TargetUserName": "jcorrales",
+            "TargetDomainName": "TRIAGERANGE",
+            "LogonType": "10",
+            "IpAddress": "198.51.100.10",
+            "IpPort": "49152",
+            "WorkstationName": "WORKSTATION",
+            "LogonProcessName": "User32"
+          }
+        },
+        "geoip": { "country": "United States", "city": "New York" }
+      }
+    },
+    {
+      "id": 2,
+      "timestamp": "2026-08-19T03:15:10.000+0000",
+      "agent": {
+        "id": "008",
+        "name": "SRV-DC01",
+        "ip": "10.20.10.10"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 3,
+        "description": "Windows: Special privileges assigned to new logon (4672)",
+        "id": "4672",
+        "groups": ["windows", "privilege_use"]
+      },
+      "decoder": { "name": "windows_eventchannel" },
+      "location": "EventChannel",
+      "full_log": "LogName=Security, EventCode=4672, Account Name=jcorrales",
+      "data": {
+        "win": {
+          "system": { "EventID": 4672, "Computer": "SRV-DC01" },
+          "eventdata": {
+            "SubjectUserName": "jcorrales",
+            "PrivilegeList": "SeSecurityPrivilege, SeBackupPrivilege, SeRestorePrivilege, SeTakeOwnershipPrivilege, SeDebugPrivilege, SeSystemEnvironmentPrivilege, SeLoadDriverPrivilege"
+          }
+        }
+      }
+    },
+    {
+      "id": 3,
+      "timestamp": "2026-08-19T03:15:20.000+0000",
+      "agent": {
+        "id": "008",
+        "name": "SRV-DC01",
+        "ip": "10.20.10.10"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 5,
+        "description": "Windows: User account created (4720)",
+        "id": "4720",
+        "groups": ["windows", "account_management"],
+        "mitre": {
+          "id": ["T1136.001"],
+          "tactic": ["Persistence"],
+          "technique": ["Create Account: Local Account"]
+        }
+      },
+      "decoder": { "name": "windows_eventchannel" },
+      "location": "EventChannel",
+      "full_log": "LogName=Security, EventCode=4720, Account Name=jcorrales, Target Account=svc_backup_pro",
+      "data": {
+        "win": {
+          "system": { "EventID": 4720, "Computer": "SRV-DC01" },
+          "eventdata": {
+            "SubjectUserName": "jcorrales",
+            "TargetUserName": "svc_backup_pro",
+            "SamAccountName": "svc_backup_pro",
+            "DisplayName": "svc_backup_pro",
+            "UserPrincipalName": "svc_backup_pro@triagerange.local",
+            "HomeDirectory": "C:\\Users\\svc_backup_pro"
+          }
+        }
+      }
+    },
+    {
+      "id": 4,
+      "timestamp": "2026-08-19T03:15:30.000+0000",
+      "agent": {
+        "id": "008",
+        "name": "SRV-DC01",
+        "ip": "10.20.10.10"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 5,
+        "description": "Windows: Member added to a security-enabled local group (4732)",
+        "id": "4732",
+        "groups": ["windows", "account_management"],
+        "mitre": {
+          "id": ["T1098"],
+          "tactic": ["Persistence", "Privilege Escalation"],
+          "technique": ["Account Manipulation"]
+        }
+      },
+      "decoder": { "name": "windows_eventchannel" },
+      "location": "EventChannel",
+      "full_log": "LogName=Security, EventCode=4732, Account Name=jcorrales, Member=svc_backup_pro, Group=Domain Admins",
+      "data": {
+        "win": {
+          "system": { "EventID": 4732, "Computer": "SRV-DC01" },
+          "eventdata": {
+            "SubjectUserName": "jcorrales",
+            "MemberName": "svc_backup_pro",
+            "TargetUserName": "Domain Admins"
+          }
+        }
+      }
+    },
+    {
+      "id": 5,
+      "timestamp": "2026-08-19T03:15:40.000+0000",
+      "agent": {
+        "id": "008",
+        "name": "SRV-DC01",
+        "ip": "10.20.10.10"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 3,
+        "description": "Windows: Logoff (4634)",
+        "id": "4634",
+        "groups": ["windows", "authentication"]
+      },
+      "decoder": { "name": "windows_eventchannel" },
+      "location": "EventChannel",
+      "full_log": "LogName=Security, EventCode=4634, Account Name=jcorrales, Logon Type=10",
+      "data": {
+        "win": {
+          "system": { "EventID": 4634, "Computer": "SRV-DC01" },
+          "eventdata": {
+            "TargetUserName": "jcorrales",
+            "LogonType": "10"
+          }
+        }
+      }
+    },
+    {
+      "id": 6,
+      "timestamp": "2026-08-19T08:15:00.000+0000",
+      "agent": {
+        "id": "001",
+        "name": "FIN-DESK-22",
+        "ip": "10.20.4.22"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 3,
+        "description": "Windows: Logon success (4624)",
+        "id": "4624",
+        "groups": ["windows", "authentication_success"]
+      },
+      "decoder": { "name": "windows_eventchannel" },
+      "location": "EventChannel",
+      "full_log": "LogName=Security, EventCode=4624, Account Name=lgomez, Source Network Address=10.20.6.3, Logon Type=2",
+      "data": {
+        "win": {
+          "system": { "EventID": 4624, "Computer": "FIN-DESK-22" },
+          "eventdata": {
+            "SubjectUserName": "SYSTEM",
+            "TargetUserName": "lgomez",
+            "TargetDomainName": "TRIAGERANGE",
+            "LogonType": "2",
+            "IpAddress": "10.20.6.3",
+            "IpPort": "49153",
+            "WorkstationName": "IT-ADMIN-03",
+            "LogonProcessName": "User32"
+          }
+        }
+      }
+    },
+    {
+      "id": 7,
+      "timestamp": "2026-08-19T08:30:00.000+0000",
+      "agent": {
+        "id": "003",
+        "name": "HR-LT-014",
+        "ip": "10.20.5.14"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 5,
+        "description": "Windows: Logon failure (4625)",
+        "id": "4625",
+        "groups": ["windows", "authentication_failed"]
+      },
+      "decoder": { "name": "windows_eventchannel" },
+      "location": "EventChannel",
+      "full_log": "LogName=Security, EventCode=4625, Account Name=tpineda, Source Network Address=10.20.5.1, Logon Type=2",
+      "data": {
+        "win": {
+          "system": { "EventID": 4625, "Computer": "HR-LT-014" },
+          "eventdata": {
+            "TargetUserName": "tpineda",
+            "LogonType": "2",
+            "IpAddress": "10.20.5.1",
+            "FailureReason": "%%2313",
+            "Status": "0xC000006D",
+            "SubStatus": "0xC000006A"
+          }
+        }
+      }
+    },
+    {
+      "id": 8,
+      "timestamp": "2026-08-19T09:00:00.000+0000",
+      "agent": {
+        "id": "006",
+        "name": "SRV-PROXY01",
+        "ip": "10.20.30.1"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 3,
+        "description": "sudo: Command executed by user",
+        "id": "5402",
+        "groups": ["sudo"]
+      },
+      "decoder": { "name": "sudo" },
+      "location": "/var/log/secure",
+      "full_log": "amorales : TTY=pts/0 ; PWD=/home/amorales ; USER=root ; COMMAND=/usr/bin/whoami",
+      "data": {
+        "srcuser": "amorales",
+        "dstuser": "root",
+        "command": "/usr/bin/whoami",
+        "program": "sudo"
+      }
+    },
+    {
+      "id": 9,
+      "timestamp": "2026-08-19T09:30:00.000+0000",
+      "agent": {
+        "id": "006",
+        "name": "SRV-PROXY01",
+        "ip": "10.20.30.1"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 3,
+        "description": "sshd: authentication success",
+        "id": "5715",
+        "groups": ["authentication_success"]
+      },
+      "decoder": { "name": "sshd" },
+      "location": "/var/log/secure",
+      "full_log": "sshd[1234]: Accepted password for cvargas from 10.20.7.201 port 49155 ssh2",
+      "data": {
+        "srcip": "10.20.7.201",
+        "srcport": "49155",
+        "dstuser": "cvargas",
+        "program": "sshd"
+      }
+    },
+    {
+      "id": 10,
+      "timestamp": "2026-08-19T10:00:00.000+0000",
+      "agent": {
+        "id": "006",
+        "name": "SRV-PROXY01",
+        "ip": "10.20.30.1"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 5,
+        "description": "sshd: Invalid user",
+        "id": "5710",
+        "groups": ["authentication_failed", "invalid_login"]
+      },
+      "decoder": { "name": "sshd" },
+      "location": "/var/log/secure",
+      "full_log": "sshd[1235]: Invalid user test from 10.20.7.202 port 49156",
+      "data": {
+        "srcip": "10.20.7.202",
+        "srcport": "49156",
+        "dstuser": "test",
+        "program": "sshd"
+      }
+    },
+    {
+      "id": 11,
+      "timestamp": "2026-08-19T10:15:00.000+0000",
+      "agent": {
+        "id": "004",
+        "name": "HR-WS-03",
+        "ip": "10.20.5.3"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 3,
+        "description": "Windows: Logon success (4624)",
+        "id": "4624",
+        "groups": ["windows", "authentication_success"]
+      },
+      "decoder": { "name": "windows_eventchannel" },
+      "location": "EventChannel",
+      "full_log": "LogName=Security, EventCode=4624, Account Name=erojas, Source Network Address=10.20.5.14, Logon Type=2",
+      "data": {
+        "win": {
+          "system": { "EventID": 4624, "Computer": "HR-WS-03" },
+          "eventdata": {
+            "SubjectUserName": "SYSTEM",
+            "TargetUserName": "erojas",
+            "TargetDomainName": "TRIAGERANGE",
+            "LogonType": "2",
+            "IpAddress": "10.20.5.14",
+            "IpPort": "49157",
+            "WorkstationName": "HR-LT-014",
+            "LogonProcessName": "User32"
+          }
+        }
+      }
+    },
+    {
+      "id": 12,
+      "timestamp": "2026-08-19T10:30:00.000+0000",
+      "agent": {
+        "id": "004",
+        "name": "HR-WS-03",
+        "ip": "10.20.5.3"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 3,
+        "description": "Windows: Logoff (4634)",
+        "id": "4634",
+        "groups": ["windows", "authentication"]
+      },
+      "decoder": { "name": "windows_eventchannel" },
+      "location": "EventChannel",
+      "full_log": "LogName=Security, EventCode=4634, Account Name=erojas, Logon Type=2",
+      "data": {
+        "win": {
+          "system": { "EventID": 4634, "Computer": "HR-WS-03" },
+          "eventdata": {
+            "TargetUserName": "erojas",
+            "LogonType": "2"
+          }
+        }
+      }
+    },
+    {
+      "id": 13,
+      "timestamp": "2026-08-19T11:00:00.000+0000",
+      "agent": {
+        "id": "007",
+        "name": "SRV-WEB01",
+        "ip": "10.20.10.20"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 3,
+        "description": "sudo: Command executed by user",
+        "id": "5402",
+        "groups": ["sudo"]
+      },
+      "decoder": { "name": "sudo" },
+      "location": "/var/log/secure",
+      "full_log": "jcorrales : TTY=pts/1 ; PWD=/var/www/html ; USER=root ; COMMAND=/usr/bin/systemctl reload nginx",
+      "data": {
+        "srcuser": "jcorrales",
+        "dstuser": "root",
+        "command": "/usr/bin/systemctl reload nginx",
+        "program": "sudo"
+      }
+    },
+    {
+      "id": 14,
+      "timestamp": "2026-08-19T11:30:00.000+0000",
+      "agent": {
+        "id": "009",
+        "name": "DEV-WS-01",
+        "ip": "10.20.20.101"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 3,
+        "description": "Windows: Logon success (4624)",
+        "id": "4624",
+        "groups": ["windows", "authentication_success"]
+      },
+      "decoder": { "name": "windows_eventchannel" },
+      "location": "EventChannel",
+      "full_log": "LogName=Security, EventCode=4624, Account Name=dmendoza, Source Network Address=10.20.20.101, Logon Type=2",
+      "data": {
+        "win": {
+          "system": { "EventID": 4624, "Computer": "DEV-WS-01" },
+          "eventdata": {
+            "SubjectUserName": "SYSTEM",
+            "TargetUserName": "dmendoza",
+            "TargetDomainName": "TRIAGERANGE",
+            "LogonType": "2",
+            "IpAddress": "10.20.20.101",
+            "IpPort": "49158",
+            "WorkstationName": "DEV-WS-01",
+            "LogonProcessName": "User32"
+          }
+        }
+      }
+    },
+    {
+      "id": 15,
+      "timestamp": "2026-08-19T11:30:10.000+0000",
+      "agent": {
+        "id": "009",
+        "name": "DEV-WS-01",
+        "ip": "10.20.20.101"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 3,
+        "description": "Windows: Special privileges assigned to new logon (4672)",
+        "id": "4672",
+        "groups": ["windows", "privilege_use"]
+      },
+      "decoder": { "name": "windows_eventchannel" },
+      "location": "EventChannel",
+      "full_log": "LogName=Security, EventCode=4672, Account Name=dmendoza",
+      "data": {
+        "win": {
+          "system": { "EventID": 4672, "Computer": "DEV-WS-01" },
+          "eventdata": {
+            "SubjectUserName": "dmendoza",
+            "PrivilegeList": "SeSecurityPrivilege, SeBackupPrivilege, SeRestorePrivilege"
+          }
+        }
+      }
+    },
+    {
+      "id": 16,
+      "timestamp": "2026-08-19T12:00:00.000+0000",
+      "agent": {
+        "id": "008",
+        "name": "SRV-APP01",
+        "ip": "10.20.10.40"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 5,
+        "description": "Windows: Logon failure (4625)",
+        "id": "4625",
+        "groups": ["windows", "authentication_failed"]
+      },
+      "decoder": { "name": "windows_eventchannel" },
+      "location": "EventChannel",
+      "full_log": "LogName=Security, EventCode=4625, Account Name=Administrator, Source Network Address=10.20.30.1, Logon Type=10",
+      "data": {
+        "win": {
+          "system": { "EventID": 4625, "Computer": "SRV-APP01" },
+          "eventdata": {
+            "TargetUserName": "Administrator",
+            "LogonType": "10",
+            "IpAddress": "10.20.30.1",
+            "FailureReason": "%%2313",
+            "Status": "0xC000006D",
+            "SubStatus": "0xC000006A"
+          }
+        }
+      }
+    },
+    {
+      "id": 17,
+      "timestamp": "2026-08-19T12:30:00.000+0000",
+      "agent": {
+        "id": "005",
+        "name": "SRV-FS01",
+        "ip": "10.20.10.30"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 3,
+        "description": "Windows: Network share object accessed (5140)",
+        "id": "5140",
+        "groups": ["windows", "object_access"]
+      },
+      "decoder": { "name": "windows_eventchannel" },
+      "location": "EventChannel",
+      "full_log": "LogName=Security, EventCode=5140, Account Name=pherrera, Share Name=Sales",
+      "data": {
+        "win": {
+          "system": { "EventID": 5140, "Computer": "SRV-FS01" },
+          "eventdata": {
+            "SubjectUserName": "pherrera",
+            "ShareName": "\\\\*\\Sales",
+            "ShareLocalPath": "C:\\Shares\\Sales",
+            "IpAddress": "10.20.7.109"
+          }
+        }
+      }
+    },
+    {
+      "id": 18,
+      "timestamp": "2026-08-19T13:00:00.000+0000",
+      "agent": {
+        "id": "006",
+        "name": "SRV-PROXY01",
+        "ip": "10.20.30.1"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 3,
+        "description": "sshd: authentication success",
+        "id": "5715",
+        "groups": ["authentication_success"]
+      },
+      "decoder": { "name": "sshd" },
+      "location": "/var/log/secure",
+      "full_log": "sshd[1236]: Accepted password for amorales from 10.20.6.5 port 49159 ssh2",
+      "data": {
+        "srcip": "10.20.6.5",
+        "srcport": "49159",
+        "dstuser": "amorales",
+        "program": "sshd"
+      }
+    },
+    {
+      "id": 19,
+      "timestamp": "2026-08-19T13:30:00.000+0000",
+      "agent": {
+        "id": "002",
+        "name": "SALES-LT-09",
+        "ip": "10.20.7.109"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 3,
+        "description": "Windows: Logoff (4634)",
+        "id": "4634",
+        "groups": ["windows", "authentication"]
+      },
+      "decoder": { "name": "windows_eventchannel" },
+      "location": "EventChannel",
+      "full_log": "LogName=Security, EventCode=4634, Account Name=pherrera, Logon Type=2",
+      "data": {
+        "win": {
+          "system": { "EventID": 4634, "Computer": "SALES-LT-09" },
+          "eventdata": {
+            "TargetUserName": "pherrera",
+            "LogonType": "2"
+          }
+        }
+      }
+    },
+    {
+      "id": 20,
+      "timestamp": "2026-08-19T14:00:00.000+0000",
+      "agent": {
+        "id": "010",
+        "name": "MKT-DESK-01",
+        "ip": "10.20.7.201"
+      },
+      "manager": { "name": "wazuh-manager" },
+      "cluster": { "node": "node01" },
+      "rule": {
+        "level": 3,
+        "description": "Windows: Logon success (4624)",
+        "id": "4624",
+        "groups": ["windows", "authentication_success"]
+      },
+      "decoder": { "name": "windows_eventchannel" },
+      "location": "EventChannel",
+      "full_log": "LogName=Security, EventCode=4624, Account Name=vcastro, Source Network Address=10.20.7.110, Logon Type=2",
+      "data": {
+        "win": {
+          "system": { "EventID": 4624, "Computer": "MKT-DESK-01" },
+          "eventdata": {
+            "SubjectUserName": "SYSTEM",
+            "TargetUserName": "vcastro",
+            "TargetDomainName": "TRIAGERANGE",
+            "LogonType": "2",
+            "IpAddress": "10.20.7.110",
+            "IpPort": "49160",
+            "WorkstationName": "SALES-LT-09",
+            "LogonProcessName": "User32"
+          }
+        }
+      }
+    }
+  ],
+
+  "questions": [
+    {
+      "text": "¿Cuál es la dirección IP externa desde la que se realizó la creación de usuario?",
+      "answer": "198.51.100.10",
+      "acceptable": [],
+      "hint": "Busca el evento 4624 de logon exitoso en SRV-DC01 y revisa el campo IpAddress en eventdata."
+    },
+    {
+      "text": "¿Qué usuario del dominio creó la nueva cuenta (SubjectUserName)?",
+      "answer": "jcorrales",
+      "acceptable": [],
+      "hint": "Revisa el evento 4720 (creación de usuario) y observa el campo SubjectUserName."
+    },
+    {
+      "text": "¿Cuál es el nombre de la nueva cuenta de usuario creada (TargetUserName)?",
+      "answer": "svc_backup_pro",
+      "acceptable": [],
+      "hint": "En el mismo evento 4720, mira el campo TargetUserName."
+    },
+    {
+      "text": "¿A qué grupo de seguridad fue agregada la nueva cuenta inmediatamente después de su creación?",
+      "answer": "Domain Admins",
+      "acceptable": ["domain admins", "Domain Admins", "Administradores del dominio"],
+      "hint": "Busca el evento 4732 que ocurre justo después de la creación y revisa el campo TargetUserName."
+    },
+    {
+      "text": "¿Qué EventID de Windows Security corresponde a la creación de una cuenta de usuario?",
+      "answer": "4720",
+      "acceptable": [],
+      "hint": "Observa el rule.id o el win.system.EventID del evento que crea la cuenta."
+    },
+    {
+      "text": "¿Qué EventID de Windows Security corresponde a la adición de un miembro a un grupo con privilegios?",
+      "answer": "4732",
+      "acceptable": [],
+      "hint": "Revisa el evento que agrega la cuenta al grupo Domain Admins."
+    },
+    {
+      "text": "¿A qué hora exacta (timestamp) ocurrió la creación de la cuenta de usuario?",
+      "answer": "03:15:20",
+      "acceptable": ["03:15", "3:15", "03:15:20"],
+      "hint": "El timestamp del evento 4720 te dará la hora exacta."
+    },
+    {
+      "text": "¿Qué técnica MITRE ATT&CK se asocia a la creación de una cuenta de dominio para persistencia?",
+      "answer": "T1136.001",
+      "acceptable": ["t1136.001", "T1136", "Create Account", "creación de cuenta"],
+      "hint": "Busca en el evento 4720 la sección mitre.id."
+    },
+    {
+      "text": "¿Qué usuario legítimo ejecutó el comando 'whoami' en el servidor proxy durante la mañana?",
+      "answer": "amorales",
+      "acceptable": [],
+      "hint": "Filtra por logs de sudo en SRV-PROXY01 y busca el comando whoami."
+    },
+    {
+      "text": "¿Cuál fue el LogonType del acceso exitoso que precedió a la creación de la cuenta (inicio de sesión del atacante)?",
+      "answer": "10",
+      "acceptable": ["10 (RDP)", "RDP", "10"],
+      "hint": "Revisa el evento 4624 de logon exitoso en SRV-DC01 y mira el campo LogonType."
+    }
+  ]
+}
