@@ -1,0 +1,389 @@
+{
+  "logs": [
+    {
+      "id": 11,
+      "timestamp": "2026-08-17T02:30:00.000-05:00",
+      "rule": {
+        "id": "6012",
+        "level": 5,
+        "description": "Explicit Credential Logon",
+        "firedtimes": 1,
+        "groups": ["authentication_success", "credential"]
+      },
+      "agent": {
+        "id": "001",
+        "name": "FIN-DESK-22",
+        "ip": "10.20.4.22"
+      },
+      "manager": {
+        "name": "wazuh-manager"
+      },
+      "full_log": "A logon was attempted using explicit credentials.\nSubject: Security ID: S-1-5-18\nAccount Name: IT-ADMIN-03$\nAccount Domain: TRIAGERANGE\nLogon ID: 0x12345\nLogon GUID: {00000000-0000-0000-0000-000000000000}\nAccount Whose Credentials Were Used: Account Name: lgomez\nAccount Domain: TRIAGERANGE\nLogon GUID: {00000000-0000-0000-0000-000000000000}\nTarget Server: Server Name: FIN-DESK-22.triagerange.local\nAdditional Information: ...\nProcess Information: Process ID: 0x1234\nProcess Name: C:\\Windows\\System32\\svchost.exe\nNetwork Information: Workstation Name: IT-ADMIN-03\nSource Network Address: 10.20.6.3\nSource Port: 54321",
+      "predecoder": {
+        "program_name": "Microsoft-Windows-Security-Auditing",
+        "hostname": "FIN-DESK-22",
+        "timestamp": "Aug 17 02:30:00"
+      },
+      "decoder": {
+        "name": "windows"
+      },
+      "data": {
+        "win": {
+          "system": {
+            "EventID": 4648,
+            "Computer": "FIN-DESK-22.triagerange.local"
+          },
+          "eventdata": {
+            "TargetUserName": "lgomez",
+            "SourceNetworkAddress": "10.20.6.3",
+            "WorkstationName": "IT-ADMIN-03"
+          }
+        }
+      },
+      "location": "EventLog"
+    },
+    {
+      "id": 12,
+      "timestamp": "2026-08-17T02:30:05.000-05:00",
+      "rule": {
+        "id": "6010",
+        "level": 3,
+        "description": "Windows Logon Success",
+        "firedtimes": 1,
+        "groups": ["authentication_success"]
+      },
+      "agent": {
+        "id": "001",
+        "name": "FIN-DESK-22",
+        "ip": "10.20.4.22"
+      },
+      "manager": {
+        "name": "wazuh-manager"
+      },
+      "full_log": "An account was successfully logged on.\nSubject: Security ID: S-1-0-0\nAccount Name: -\nAccount Domain: -\nLogon ID: 0x0\nLogon Type: 10\nNew Logon: Security ID: triagerange\\lgomez\nAccount Name: lgomez\nAccount Domain: triagerange\nLogon ID: 0x67890\nLogon GUID: {00000000-0000-0000-0000-000000000000}\nProcess Information: Process ID: 0x0\nProcess Name: -\nNetwork Information: Workstation Name: IT-ADMIN-03\nSource Network Address: 10.20.6.3\nSource Port: 54321\nDetailed Authentication Information: Logon Process: User32\nAuthentication Package: Negotiate\nTransited Services: -\nPackage Name (NTLM only): -\nKey Length: 0",
+      "predecoder": {
+        "program_name": "Microsoft-Windows-Security-Auditing",
+        "hostname": "FIN-DESK-22",
+        "timestamp": "Aug 17 02:30:05"
+      },
+      "decoder": {
+        "name": "windows"
+      },
+      "data": {
+        "win": {
+          "system": {
+            "EventID": 4624,
+            "Computer": "FIN-DESK-22.triagerange.local"
+          },
+          "eventdata": {
+            "TargetUserName": "lgomez",
+            "SourceNetworkAddress": "10.20.6.3",
+            "LogonType": "10"
+          }
+        }
+      },
+      "location": "EventLog"
+    },
+    {
+      "id": 13,
+      "timestamp": "2026-08-17T02:30:05.500-05:00",
+      "rule": {
+        "id": "6013",
+        "level": 4,
+        "description": "Special Privileges Assigned",
+        "firedtimes": 1,
+        "groups": ["privilege"]
+      },
+      "agent": {
+        "id": "001",
+        "name": "FIN-DESK-22",
+        "ip": "10.20.4.22"
+      },
+      "manager": {
+        "name": "wazuh-manager"
+      },
+      "full_log": "Special privileges assigned to new logon.\nSubject: Security ID: S-1-5-18\nAccount Name: FIN-DESK-22$\nAccount Domain: TRIAGERANGE\nLogon ID: 0x12345\nLogon GUID: {00000000-0000-0000-0000-000000000000}\nPrivileges: SeBackupPrivilege, SeRestorePrivilege\nProcess Information: ...",
+      "predecoder": {
+        "program_name": "Microsoft-Windows-Security-Auditing",
+        "hostname": "FIN-DESK-22",
+        "timestamp": "Aug 17 02:30:05"
+      },
+      "decoder": {
+        "name": "windows"
+      },
+      "data": {
+        "win": {
+          "system": {
+            "EventID": 4672,
+            "Computer": "FIN-DESK-22.triagerange.local"
+          },
+          "eventdata": {
+            "TargetUserName": "lgomez"
+          }
+        }
+      },
+      "location": "EventLog"
+    },
+    {
+      "id": 14,
+      "timestamp": "2026-08-17T02:20:00.000-05:00",
+      "rule": {
+        "id": "5715",
+        "level": 3,
+        "description": "sshd: Authentication success",
+        "firedtimes": 1,
+        "groups": ["authentication_success", "sshd"]
+      },
+      "agent": {
+        "id": "002",
+        "name": "SRV-PROXY01",
+        "ip": "10.20.30.1"
+      },
+      "manager": {
+        "name": "wazuh-manager"
+      },
+      "full_log": "Accepted password for afernandez from 10.20.4.5 port 22 ssh2",
+      "predecoder": {
+        "program_name": "sshd",
+        "hostname": "SRV-PROXY01",
+        "timestamp": "Aug 17 02:20:00"
+      },
+      "decoder": {
+        "name": "sshd"
+      },
+      "data": {
+        "srcip": "10.20.4.5",
+        "dstuser": "afernandez"
+      },
+      "location": "sshd"
+    },
+    {
+      "id": 15,
+      "timestamp": "2026-08-17T02:25:00.000-05:00",
+      "rule": {
+        "id": "8910",
+        "level": 3,
+        "description": "Process Creation (Sysmon)",
+        "firedtimes": 1,
+        "groups": ["sysmon", "process"]
+      },
+      "agent": {
+        "id": "006",
+        "name": "SALES-PC-07",
+        "ip": "10.20.7.7"
+      },
+      "manager": {
+        "name": "wazuh-manager"
+      },
+      "full_log": "Process Create:\nRuleName: -\nUtcTime: 2026-08-17 02:25:00.000\nProcessGuid: ...\nProcessId: 5678\nImage: C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\nCommandLine: chrome.exe\nCurrentDirectory: C:\\Users\\rlopez\\Desktop\nUser: TRIAGERANGE\\rlopez\n...",
+      "predecoder": {
+        "program_name": "Microsoft-Windows-Sysmon",
+        "hostname": "SALES-PC-07",
+        "timestamp": "Aug 17 02:25:00"
+      },
+      "decoder": {
+        "name": "sysmon"
+      },
+      "data": {
+        "process": "chrome.exe",
+        "user": "rlopez"
+      },
+      "location": "Sysmon"
+    },
+    {
+      "id": 16,
+      "timestamp": "2026-08-17T02:35:00.000-05:00",
+      "rule": {
+        "id": "6010",
+        "level": 3,
+        "description": "Windows Logon Success",
+        "firedtimes": 1,
+        "groups": ["authentication_success"]
+      },
+      "agent": {
+        "id": "007",
+        "name": "IT-ADMIN-03",
+        "ip": "10.20.6.3"
+      },
+      "manager": {
+        "name": "wazuh-manager"
+      },
+      "full_log": "An account was successfully logged on.\n... Source Network Address: 10.20.6.3 ... TargetUserName: amorales ...",
+      "predecoder": {
+        "program_name": "Microsoft-Windows-Security-Auditing",
+        "hostname": "IT-ADMIN-03",
+        "timestamp": "Aug 17 02:35:00"
+      },
+      "decoder": {
+        "name": "windows"
+      },
+      "data": {
+        "win": {
+          "system": {
+            "EventID": 4624,
+            "Computer": "IT-ADMIN-03.triagerange.local"
+          },
+          "eventdata": {
+            "TargetUserName": "amorales",
+            "SourceNetworkAddress": "10.20.6.3"
+          }
+        }
+      },
+      "location": "EventLog"
+    },
+    {
+      "id": 17,
+      "timestamp": "2026-08-17T02:40:00.000-05:00",
+      "rule": {
+        "id": "8920",
+        "level": 3,
+        "description": "Network Connection (Sysmon)",
+        "firedtimes": 1,
+        "groups": ["sysmon", "network"]
+      },
+      "agent": {
+        "id": "008",
+        "name": "DEV-WS-01",
+        "ip": "10.20.20.101"
+      },
+      "manager": {
+        "name": "wazuh-manager"
+      },
+      "full_log": "Network connection detected: ... DestinationIp: 8.8.8.8 ...",
+      "predecoder": {
+        "program_name": "Microsoft-Windows-Sysmon",
+        "hostname": "DEV-WS-01",
+        "timestamp": "Aug 17 02:40:00"
+      },
+      "decoder": {
+        "name": "sysmon"
+      },
+      "data": {
+        "srcip": "10.20.20.101",
+        "dstip": "8.8.8.8"
+      },
+      "location": "Sysmon"
+    },
+    {
+      "id": 18,
+      "timestamp": "2026-08-17T02:45:00.000-05:00",
+      "rule": {
+        "id": "6011",
+        "level": 5,
+        "description": "Windows Logon Failure",
+        "firedtimes": 1,
+        "groups": ["authentication_failed"]
+      },
+      "agent": {
+        "id": "001",
+        "name": "FIN-DESK-22",
+        "ip": "10.20.4.22"
+      },
+      "manager": {
+        "name": "wazuh-manager"
+      },
+      "full_log": "An account failed to log on. ... TargetUserName: test ... Source Network Address: 10.20.4.22 ...",
+      "predecoder": {
+        "program_name": "Microsoft-Windows-Security-Auditing",
+        "hostname": "FIN-DESK-22",
+        "timestamp": "Aug 17 02:45:00"
+      },
+      "decoder": {
+        "name": "windows"
+      },
+      "data": {
+        "win": {
+          "system": {
+            "EventID": 4625,
+            "Computer": "FIN-DESK-22.triagerange.local"
+          },
+          "eventdata": {
+            "TargetUserName": "test",
+            "SourceNetworkAddress": "10.20.4.22"
+          }
+        }
+      },
+      "location": "EventLog"
+    },
+    {
+      "id": 19,
+      "timestamp": "2026-08-17T02:50:00.000-05:00",
+      "rule": {
+        "id": "5710",
+        "level": 5,
+        "description": "sshd: Invalid user",
+        "firedtimes": 1,
+        "groups": ["authentication_failed", "sshd"]
+      },
+      "agent": {
+        "id": "002",
+        "name": "SRV-PROXY01",
+        "ip": "10.20.30.1"
+      },
+      "manager": {
+        "name": "wazuh-manager"
+      },
+      "full_log": "Invalid user admin from 192.0.2.55 port 54321",
+      "predecoder": {
+        "program_name": "sshd",
+        "hostname": "SRV-PROXY01",
+        "timestamp": "Aug 17 02:50:00"
+      },
+      "decoder": {
+        "name": "sshd"
+      },
+      "data": {
+        "srcip": "192.0.2.55",
+        "srcuser": "admin"
+      },
+      "location": "sshd"
+    },
+    {
+      "id": 20,
+      "timestamp": "2026-08-17T02:55:00.000-05:00",
+      "rule": {
+        "id": "8930",
+        "level": 3,
+        "description": "Image Loaded (Sysmon)",
+        "firedtimes": 1,
+        "groups": ["sysmon", "dll"]
+      },
+      "agent": {
+        "id": "001",
+        "name": "FIN-DESK-22",
+        "ip": "10.20.4.22"
+      },
+      "manager": {
+        "name": "wazuh-manager"
+      },
+      "full_log": "Image loaded: ... Image: C:\\Windows\\System32\\kernel32.dll ...",
+      "predecoder": {
+        "program_name": "Microsoft-Windows-Sysmon",
+        "hostname": "FIN-DESK-22",
+        "timestamp": "Aug 17 02:55:00"
+      },
+      "decoder": {
+        "name": "sysmon"
+      },
+      "data": {
+        "image": "kernel32.dll"
+      },
+      "location": "Sysmon"
+    }
+  ],
+  "questions": [
+    {
+      "text": "¿Qué usuario inició sesión de forma sospechosa en FIN-DESK-22 en horario nocturno?",
+      "answer": "lgomez",
+      "acceptable": ["lgomez"],
+      "hint": "Busca eventos de inicio de sesión (4624) en FIN-DESK-22 fuera del horario laboral."
+    },
+    {
+      "text": "¿Desde qué equipo se originó ese inicio de sesión?",
+      "answer": "IT-ADMIN-03",
+      "acceptable": ["IT-ADMIN-03", "10.20.6.3"],
+      "hint": "Revisa el campo 'Workstation Name' o 'Source Network Address' en los eventos."
+    }
+  ],
+  "analysis_guide": "Filtra los eventos de FIN-DESK-22 con EventID 4624 y 4648. Observa que el inicio de sesión se realiza con el usuario lgomez desde una máquina de IT (IT-ADMIN-03) a las 02:30, fuera del horario laboral. Eso es sospechoso. La combinación de usuario y origen inusual indica posible movimiento lateral."
+}

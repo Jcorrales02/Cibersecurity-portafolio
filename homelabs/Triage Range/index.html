@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TriageRange — Wazuh DQL Lab</title>
+
+<!-- ====== FUENTES ====== -->
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- ====== FAVICON ====== -->
+<link rel="icon" type="image/x-icon" href="img/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+
+<!-- ====== CSS EXTERNO ====== -->
+<link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+
+<div class="shell" id="appShell">
+
+  <!-- ====== SIDEBAR ====== -->
+  <aside class="sidebar" id="sidebar">
+    <button class="sidebar-toggle" id="sidebarToggle" title="Colapsar/Expandir panel lateral">◀</button>
+    
+    <div class="sidebar-content">
+      
+      <!-- ====== BRAND CON LOGO + TEXTO ====== -->
+      <div class="brand-container">
+        <img src="img/logo-192.png" alt="TriageRange" class="brand-logo">
+        <div class="brand-text">
+          <div class="brand-title">TriageRange</div>
+          <div class="brand-subtitle">Wazuh DQL Lab</div>
+        </div>
+      </div>
+      
+      <div>
+        <div class="challenge-label">Casos</div>
+        
+        <!-- ====== SELECTOR DE DIFICULTAD ====== -->
+        <div class="difficulty-selector" id="difficultySelector">
+          <button class="diff-btn Fácil active" data-diff="Fácil">
+            <span class="icon">🟢</span> Fácil
+          </button>
+          <button class="diff-btn medio" data-diff="medio">
+            <span class="icon">🟡</span> Medio
+          </button>
+          <button class="diff-btn dificil" data-diff="dificil">
+            <span class="icon">🔴</span> Difícil
+          </button>
+        </div>
+        
+        <div class="challenge-list" id="challengeList"></div>
+      </div>
+      <div class="progress-line" id="progressLine">0 / 30 resueltos</div>
+    </div>
+  </aside>
+
+  <!-- ====== MAIN ====== -->
+  <main class="main">
+    <div class="topbar">
+      <div class="scenario-box">
+        <div class="scenario-eyebrow" id="scenarioEyebrow">Caso 01</div>
+        <h2 class="scenario-title" id="scenarioTitle">—</h2>
+        <div class="context-text" id="contextText"></div>
+        <p class="scenario-text" id="scenarioText">—</p>
+        <div class="hint-badge" id="hintBadge">💡 Usa filtros laterales o escribe tu query DQL</div>
+      </div>
+      <div class="topbar-actions">
+        <button class="questions-toggle-btn" id="questionsToggleBtn">
+          📋 Ver preguntas del caso <span class="badge" id="questionsBadge">0</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="query-panel">
+      <div class="query-row">
+        <span class="query-lang-tag">DQL</span>
+        <input id="queryInput" type="text" placeholder='data.win.eventdata.image:*powershell*' autocomplete="off">
+        <button class="run-btn" id="runBtn">Ejecutar</button>
+        <button class="run-btn" id="clearBtn" style="background:var(--panel);color:var(--muted);border:1px solid var(--hairline);">Limpiar</button>
+      </div>
+      <div class="query-error" id="queryError">⚠️ Error de sintaxis DQL</div>
+      <div class="query-hint">
+        <span>📖 Sintaxis:</span>
+        <span class="clickable" data-query='data.win.eventdata.image:*powershell*'>campo:*valor*</span>
+        <span class="clickable" data-query='data.win.eventdata.image:"powershell.exe"'>campo:"valor"</span>
+        <span class="clickable" data-query='rule.level:>=10'>campo:>=num</span>
+        <span class="clickable" data-query='rule.level:<=5'>campo:<=num</span>
+        <span class="clickable" data-query='data.win.eventdata.destinationIp:"185.220.101.7"'>campo:"IP"</span>
+        <span class="clickable" data-query='data.win.eventdata.image:*powershell* AND agent.name:"FIN-DESK-22"'>AND</span>
+        <span class="clickable" data-query='data.win.eventdata.image:chrome.exe OR data.win.eventdata.image:WINWORD.EXE'>OR</span>
+        <span class="clickable" data-query='agent.name:"FIN-DESK-22" AND NOT data.win.eventdata.image:svchost.exe'>AND NOT</span>
+        <span class="clickable" data-query='(data.win.eventdata.image:chrome.exe OR data.win.eventdata.image:WINWORD.EXE) AND agent.name:"FIN-DESK-22"'>( )</span>
+        <span class="clickable" data-query='-data.win.eventdata.image:svchost.exe'>- (negación)</span>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <span>Eventos totales: <b id="statTotal">0</b></span>
+      <span>Coincidencias: <b id="statMatch">0</b></span>
+      <span>Ruido descartado: <b id="statNoise">0</b></span>
+      <span id="streamStats">📋 0 logs en cola</span>
+      <div class="stream-controls" id="streamControls" style="display:none;">
+        <button class="stream-btn pause" onclick="pauseLogStream()">⏸ Pausar</button>
+        <button class="stream-btn resume" onclick="resumeLogStream()" style="display:none;">▶ Reanudar</button>
+      </div>
+    </div>
+
+    <div class="content-grid">
+      <div class="filters-panel" id="filtersPanel">
+        <div class="filters-title">🔍 Campos</div>
+        <div class="panel-content" id="panelContent">
+          
+          <!-- ====== CAMPOS SELECCIONADOS ====== -->
+          <div class="fields-section" id="selectedFieldsSection">
+            <div class="section-title">✓ Campos seleccionados</div>
+            <div id="selectedFieldsList">
+              <div style="color:var(--muted-2);font-size:9.5px;padding:3px 4px;font-family:monospace;">Selecciona un caso y presiona "Iniciar turno"</div>
+            </div>
+          </div>
+
+          <hr class="fields-divider">
+
+          <!-- ====== CAMPOS DISPONIBLES ====== -->
+          <div class="fields-section">
+            <div class="section-title">⊕ Campos disponibles</div>
+            <div id="fieldsContainer">
+              <div style="color:var(--muted-2);font-size:9.5px;padding:3px 4px;font-family:monospace;">Selecciona un caso y presiona "Iniciar turno"</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====== TABLA CON BOTÓN "INICIAR TURNO" ====== -->
+      <div class="table-panel" id="tablePanel">
+        <div id="startShiftOverlay" class="start-shift-overlay">
+          <img src="img/logo-512.png" alt="Triage Range" class="start-logo">
+          <div class="empty-message">📋 Listo para el turno</div>
+          <button class="start-btn" id="startShiftBtn">▶ Iniciar turno</button>
+        </div>
+        <table id="logTable" style="display:none;">
+          <thead id="tableHead"></thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="feedback" id="feedback"></div>
+  </main>
+
+  <!-- ====== PANEL DE PREGUNTAS CON WRAPPER ====== -->
+  <aside class="questions-panel-wrapper" id="questionsPanelWrapper">
+    <div class="questions-panel" id="questionsPanel">
+      <div class="panel-header">
+        <h3>📝 Preguntas del caso</h3>
+        <button class="close-btn" id="questionsCloseBtn">✕</button>
+      </div>
+      <div id="questionsContainer">
+        <p style="color:var(--muted-2);font-size:12px;">Selecciona un caso para ver las preguntas.</p>
+      </div>
+      <div class="questions-progress" id="questionsProgress">Progreso: 0/0</div>
+    </div>
+  </aside>
+
+</div>
+
+<!-- ====== ARCHIVOS JS ====== -->
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

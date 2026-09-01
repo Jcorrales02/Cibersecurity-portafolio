@@ -1,0 +1,31 @@
+{
+  "casos": [
+    {
+      "id": "caso-01",
+      "title": "Fuerza bruta SSH contra servidor proxy",
+      "difficulty": "Fácil",
+      "category": "Autenticación",
+      "context": "Un atacante externo intenta acceder al servidor proxy mediante fuerza bruta.",
+      "hint": "Revisa los logs de SSH en el servidor proxy.",
+      "target": [2, 3, 5, 6, 8]
+    },
+    {
+      "id": "caso-02",
+      "title": "Inicio de sesión RDP sospechoso en horario nocturno",
+      "difficulty": "Fácil",
+      "category": "Movimiento lateral",
+      "context": "Un usuario de finanzas inicia sesión desde un equipo de IT en horario no laboral.",
+      "hint": "Busca eventos de inicio de sesión en el equipo de finanzas.",
+      "target": [11, 12, 13]
+    },
+    {
+      "id": "caso-03",
+      "title": "Descarga de malware mediante PowerShell",
+      "difficulty": "Fácil",
+      "category": "Ejecución de código",
+      "context": "Se observa actividad anómala en un equipo de desarrollo que descarga un ejecutable sospechoso.",
+      "hint": "Examina los eventos de Sysmon en el equipo de desarrollo.",
+      "target": [21, 22, 23]
+    }
+  ]
+}

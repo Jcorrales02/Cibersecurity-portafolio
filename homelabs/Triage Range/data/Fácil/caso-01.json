@@ -1,0 +1,381 @@
+{
+  "logs": [
+    {
+      "id": 1,
+      "timestamp": "2026-08-17T01:30:00.000-05:00",
+      "rule": {
+        "id": "6010",
+        "level": 3,
+        "description": "Windows Logon Success",
+        "firedtimes": 1,
+        "groups": ["authentication_success"]
+      },
+      "agent": {
+        "id": "001",
+        "name": "FIN-DESK-22",
+        "ip": "10.20.4.22"
+      },
+      "manager": {
+        "name": "wazuh-manager"
+      },
+      "full_log": "An account was successfully logged on.\nSubject: Security ID: S-1-5-21-...\nAccount Name: -\nAccount Domain: -\nLogon ID: 0x0\nLogon Type: 2\nNew Logon: Security ID: triagerange\\lgomez\nAccount Name: lgomez\nAccount Domain: triagerange\nLogon ID: 0x12345\nLogon GUID: {00000000-0000-0000-0000-000000000000}\nProcess Information: Process ID: 0x0\nProcess Name: -\nNetwork Information: Workstation Name: FIN-DESK-22\nSource Network Address: 10.20.4.22\nSource Port: 0\nDetailed Authentication Information: Logon Process: User32\nAuthentication Package: Negotiate\nTransited Services: -\nPackage Name (NTLM only): -\nKey Length: 0",
+      "predecoder": {
+        "program_name": "Microsoft-Windows-Security-Auditing",
+        "hostname": "FIN-DESK-22",
+        "timestamp": "Aug 17 01:30:00"
+      },
+      "decoder": {
+        "name": "windows"
+      },
+      "data": {
+        "win": {
+          "system": {
+            "EventID": 4624,
+            "Computer": "FIN-DESK-22.triagerange.local"
+          },
+          "eventdata": {
+            "TargetUserName": "lgomez",
+            "TargetDomainName": "triagerange",
+            "SourceNetworkAddress": "10.20.4.22",
+            "LogonType": "2"
+          }
+        }
+      },
+      "location": "EventLog"
+    },
+    {
+      "id": 2,
+      "timestamp": "2026-08-17T02:02:15.123-05:00",
+      "rule": {
+        "id": "5710",
+        "level": 5,
+        "description": "sshd: Invalid user",
+        "firedtimes": 1,
+        "groups": ["authentication_failed", "sshd"]
+      },
+      "agent": {
+        "id": "002",
+        "name": "SRV-PROXY01",
+        "ip": "10.20.30.1"
+      },
+      "manager": {
+        "name": "wazuh-manager"
+      },
+      "full_log": "Invalid user test from 185.220.101.7 port 54321",
+      "predecoder": {
+        "program_name": "sshd",
+        "hostname": "SRV-PROXY01",
+        "timestamp": "Aug 17 02:02:15"
+      },
+      "decoder": {
+        "name": "sshd"
+      },
+      "data": {
+        "srcip": "185.220.101.7",
+        "srcport": "54321",
+        "srcuser": "test"
+      },
+      "location": "sshd"
+    },
+    {
+      "id": 3,
+      "timestamp": "2026-08-17T02:02:25.456-05:00",
+      "rule": {
+        "id": "5710",
+        "level": 5,
+        "description": "sshd: Invalid user",
+        "firedtimes": 2,
+        "groups": ["authentication_failed", "sshd"]
+      },
+      "agent": {
+        "id": "002",
+        "name": "SRV-PROXY01",
+        "ip": "10.20.30.1"
+      },
+      "manager": {
+        "name": "wazuh-manager"
+      },
+      "full_log": "Invalid user admin from 185.220.101.7 port 54321",
+      "predecoder": {
+        "program_name": "sshd",
+        "hostname": "SRV-PROXY01",
+        "timestamp": "Aug 17 02:02:25"
+      },
+      "decoder": {
+        "name": "sshd"
+      },
+      "data": {
+        "srcip": "185.220.101.7",
+        "srcport": "54321",
+        "srcuser": "admin"
+      },
+      "location": "sshd"
+    },
+    {
+      "id": 4,
+      "timestamp": "2026-08-17T02:02:30.000-05:00",
+      "rule": {
+        "id": "8910",
+        "level": 3,
+        "description": "Process Creation (Sysmon)",
+        "firedtimes": 1,
+        "groups": ["sysmon", "process"]
+      },
+      "agent": {
+        "id": "003",
+        "name": "IT-ADMIN-05",
+        "ip": "10.20.6.5"
+      },
+      "manager": {
+        "name": "wazuh-manager"
+      },
+      "full_log": "Process Create:\nRuleName: -\nUtcTime: 2026-08-17 02:02:30.123\nProcessGuid: {a1b2c3d4-e5f6-7890-abcd-ef1234567890}\nProcessId: 1234\nImage: C:\\Windows\\System32\\notepad.exe\nCommandLine: notepad.exe\nCurrentDirectory: C:\\Users\\amorales\\Documents\nUser: TRIAGERANGE\\amorales\nLogonGuid: {a1b2c3d4-e5f6-7890-abcd-ef1234567890}\nLogonId: 0x12345\nTerminalSessionId: 1\nIntegrityLevel: Medium\nHashes: SHA1=...\nParentProcessGuid: {a1b2c3d4-e5f6-7890-abcd-ef1234567890}\nParentProcessId: 5678\nParentImage: C:\\Windows\\System32\\explorer.exe\nParentCommandLine: C:\\Windows\\explorer.exe",
+      "predecoder": {
+        "program_name": "Microsoft-Windows-Sysmon",
+        "hostname": "IT-ADMIN-05",
+        "timestamp": "Aug 17 02:02:30"
+      },
+      "decoder": {
+        "name": "sysmon"
+      },
+      "data": {
+        "process": {
+          "name": "notepad.exe",
+          "pid": 1234,
+          "command_line": "notepad.exe",
+          "user": "amorales"
+        }
+      },
+      "location": "Sysmon"
+    },
+    {
+      "id": 5,
+      "timestamp": "2026-08-17T02:02:35.789-05:00",
+      "rule": {
+        "id": "5710",
+        "level": 5,
+        "description": "sshd: Invalid user",
+        "firedtimes": 3,
+        "groups": ["authentication_failed", "sshd"]
+      },
+      "agent": {
+        "id": "002",
+        "name": "SRV-PROXY01",
+        "ip": "10.20.30.1"
+      },
+      "manager": {
+        "name": "wazuh-manager"
+      },
+      "full_log": "Invalid user user from 185.220.101.7 port 54321",
+      "predecoder": {
+        "program_name": "sshd",
+        "hostname": "SRV-PROXY01",
+        "timestamp": "Aug 17 02:02:35"
+      },
+      "decoder": {
+        "name": "sshd"
+      },
+      "data": {
+        "srcip": "185.220.101.7",
+        "srcport": "54321",
+        "srcuser": "user"
+      },
+      "location": "sshd"
+    },
+    {
+      "id": 6,
+      "timestamp": "2026-08-17T02:02:45.012-05:00",
+      "rule": {
+        "id": "5710",
+        "level": 5,
+        "description": "sshd: Invalid user",
+        "firedtimes": 4,
+        "groups": ["authentication_failed", "sshd"]
+      },
+      "agent": {
+        "id": "002",
+        "name": "SRV-PROXY01",
+        "ip": "10.20.30.1"
+      },
+      "manager": {
+        "name": "wazuh-manager"
+      },
+      "full_log": "Invalid user backup from 185.220.101.7 port 54321",
+      "predecoder": {
+        "program_name": "sshd",
+        "hostname": "SRV-PROXY01",
+        "timestamp": "Aug 17 02:02:45"
+      },
+      "decoder": {
+        "name": "sshd"
+      },
+      "data": {
+        "srcip": "185.220.101.7",
+        "srcport": "54321",
+        "srcuser": "backup"
+      },
+      "location": "sshd"
+    },
+    {
+      "id": 7,
+      "timestamp": "2026-08-17T02:03:00.000-05:00",
+      "rule": {
+        "id": "6011",
+        "level": 5,
+        "description": "Windows Logon Failure",
+        "firedtimes": 1,
+        "groups": ["authentication_failed"]
+      },
+      "agent": {
+        "id": "004",
+        "name": "HR-LT-014",
+        "ip": "10.20.5.14"
+      },
+      "manager": {
+        "name": "wazuh-manager"
+      },
+      "full_log": "An account failed to log on.\nSubject: Security ID: S-1-0-0\nAccount Name: -\nAccount Domain: -\nLogon ID: 0x0\nLogon Type: 2\nAccount For Which Logon Failed: Security ID: S-1-0-0\nAccount Name: tpineda\nAccount Domain: triagerange\nFailure Information: Failure Reason: %%2313\nStatus: 0xC000006D\nSub Status: 0xC000006A\nProcess Information: Caller Process ID: 0x0\nCaller Process Name: -\nNetwork Information: Workstation Name: HR-WS-03\nSource Network Address: 10.20.5.3\nSource Port: 0\nDetailed Authentication Information: Logon Process: User32\nAuthentication Package: Negotiate\nTransited Services: -\nPackage Name (NTLM only): -\nKey Length: 0",
+      "predecoder": {
+        "program_name": "Microsoft-Windows-Security-Auditing",
+        "hostname": "HR-LT-014",
+        "timestamp": "Aug 17 02:03:00"
+      },
+      "decoder": {
+        "name": "windows"
+      },
+      "data": {
+        "win": {
+          "system": {
+            "EventID": 4625,
+            "Computer": "HR-LT-014.triagerange.local"
+          },
+          "eventdata": {
+            "TargetUserName": "tpineda",
+            "SourceNetworkAddress": "10.20.5.3",
+            "LogonType": "2"
+          }
+        }
+      },
+      "location": "EventLog"
+    },
+    {
+      "id": 8,
+      "timestamp": "2026-08-17T02:03:10.234-05:00",
+      "rule": {
+        "id": "5715",
+        "level": 3,
+        "description": "sshd: Authentication success",
+        "firedtimes": 1,
+        "groups": ["authentication_success", "sshd"]
+      },
+      "agent": {
+        "id": "002",
+        "name": "SRV-PROXY01",
+        "ip": "10.20.30.1"
+      },
+      "manager": {
+        "name": "wazuh-manager"
+      },
+      "full_log": "Accepted password for mgarcia from 185.220.101.7 port 54322 ssh2",
+      "predecoder": {
+        "program_name": "sshd",
+        "hostname": "SRV-PROXY01",
+        "timestamp": "Aug 17 02:03:10"
+      },
+      "decoder": {
+        "name": "sshd"
+      },
+      "data": {
+        "srcip": "185.220.101.7",
+        "srcport": "54322",
+        "dstuser": "mgarcia"
+      },
+      "location": "sshd"
+    },
+    {
+      "id": 9,
+      "timestamp": "2026-08-17T02:10:00.000-05:00",
+      "rule": {
+        "id": "5715",
+        "level": 3,
+        "description": "sshd: Authentication success",
+        "firedtimes": 2,
+        "groups": ["authentication_success", "sshd"]
+      },
+      "agent": {
+        "id": "002",
+        "name": "SRV-PROXY01",
+        "ip": "10.20.30.1"
+      },
+      "manager": {
+        "name": "wazuh-manager"
+      },
+      "full_log": "Accepted password for amorales from 10.20.6.5 port 22 ssh2",
+      "predecoder": {
+        "program_name": "sshd",
+        "hostname": "SRV-PROXY01",
+        "timestamp": "Aug 17 02:10:00"
+      },
+      "decoder": {
+        "name": "sshd"
+      },
+      "data": {
+        "srcip": "10.20.6.5",
+        "srcport": "22",
+        "dstuser": "amorales"
+      },
+      "location": "sshd"
+    },
+    {
+      "id": 10,
+      "timestamp": "2026-08-17T02:15:00.000-05:00",
+      "rule": {
+        "id": "8920",
+        "level": 3,
+        "description": "Network Connection (Sysmon)",
+        "firedtimes": 1,
+        "groups": ["sysmon", "network"]
+      },
+      "agent": {
+        "id": "005",
+        "name": "FIN-WS-05",
+        "ip": "10.20.4.5"
+      },
+      "manager": {
+        "name": "wazuh-manager"
+      },
+      "full_log": "Network connection detected:\nRuleName: -\nUtcTime: 2026-08-17 02:15:00.000\nProcessGuid: {a1b2c3d4-e5f6-7890-abcd-ef1234567890}\nProcessId: 4567\nImage: C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\nUser: TRIAGERANGE\\afernandez\nProtocol: tcp\nInitiated: true\nSourceIsIpv6: false\nSourceIp: 10.20.4.5\nSourceHostname: FIN-WS-05.triagerange.local\nSourcePort: 54321\nDestinationIsIpv6: false\nDestinationIp: 8.8.8.8\nDestinationHostname: google.com\nDestinationPort: 443",
+      "predecoder": {
+        "program_name": "Microsoft-Windows-Sysmon",
+        "hostname": "FIN-WS-05",
+        "timestamp": "Aug 17 02:15:00"
+      },
+      "decoder": {
+        "name": "sysmon"
+      },
+      "data": {
+        "srcip": "10.20.4.5",
+        "dstip": "8.8.8.8",
+        "dstport": 443,
+        "process": "chrome.exe",
+        "user": "afernandez"
+      },
+      "location": "Sysmon"
+    }
+  ],
+  "questions": [
+    {
+      "text": "¿Cuál es la dirección IP del atacante que realizó la fuerza bruta?",
+      "answer": "185.220.101.7",
+      "acceptable": ["185.220.101.7"],
+      "hint": "Busca la IP que aparece en múltiples logs de fallos y luego en el éxito."
+    },
+    {
+      "text": "¿Qué técnica MITRE está utilizando el atacante en este incidente?",
+      "answer": "T1110",
+      "acceptable": ["T1110", "Brute Force", "Fuerza bruta"],
+      "hint": "La técnica consiste en probar múltiples contraseñas o nombres de usuario."
+    }
+  ],
+  "analysis_guide": "Para resolver este caso, filtra los logs por el agente 'SRV-PROXY01' y por las reglas de sshd (5710 y 5715). Observa que hay múltiples intentos fallidos con diferentes usuarios desde la misma IP, seguidos de un inicio de sesión exitoso. Eso indica un ataque de fuerza bruta (MITRE T1110). La IP del atacante es la que aparece en todos esos logs."
+}
